@@ -1,0 +1,78 @@
+@import url("../style.css");
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--whiteGray);
+
+  a {
+    text-decoration: none;
+    color: var(--lightBlue);
+    text-shadow: 0.5px 0px rgb(129, 200, 160);
+    cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 720px) and (min-width: 250px) {
+  .legalNoticeContent {
+    display: flex;
+    flex-direction: column;
+    margin: 5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+
+    p {
+      text-align: justify;
+    }
+
+    h2 {
+      margin-top: 2rem;
+    }
+
+    h3 {
+      margin-top: 1rem;
+    }
+  }
+
+  .legalNoticeBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 2560px) and (min-width: 721px) {
+  .legalNoticeContent {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+
+    p {
+      text-align: justify;
+    }
+
+    h2 {
+      margin-top: 2rem;
+    }
+
+    h3 {
+      margin-top: 1rem;
+    }
+  }
+
+  .legalNoticeBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}

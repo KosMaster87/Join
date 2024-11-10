@@ -1,0 +1,772 @@
+@import url("../style.css");
+
+body {
+  background-color: var(--whiteGray);
+}
+.switchTasksContainer{
+  display:none;
+}
+
+h1 {
+  font-size: 47px;
+}
+
+h2 {
+  font-size: 27px;
+}
+.font12400 {
+  font-size: 12px;
+  font-weight: 400;
+}
+.font16400 {
+  font-size: 16px;
+  font-weight: 400;
+}
+.font16700 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.boardMainContainer {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 48px;
+  gap: 26px;
+}
+
+.mobileSwitch {
+  padding: 1px 1px 1px 1px !important;
+}
+
+.boxesContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow-x: auto;
+  box-sizing: border-box !important;
+  margin-bottom: 16px;
+  gap: 10px;
+  padding: 3px;
+  border-radius: 10px;
+}
+
+.headlineFromTask {
+  padding: 4px 16px 4px 16px;
+  border-radius: 8px;
+  background-color: #0038ff;
+  color: var(--white);
+  display: inline-block;
+}
+
+.searchTaskInputField {
+  display: flex;
+  justify-content: center;
+  padding: 8px 16px 8px 16px;
+  border-radius: 10px;
+  border: 1px solid #2a3647;
+  gap: 10px;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.searchTaskInputField input {
+  width: 100%;
+  border: none;
+  font-size: 20px;
+}
+
+.searchTaskInputField input:focus {
+  outline: none;
+}
+
+.headContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 16px;
+  height: 40px;
+}
+.headContainer img {
+  padding: 5px;
+}
+
+.headContainer img:hover {
+  cursor: pointer;
+  background-color: var(--lighterGray);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.noTasksInThisSelection {
+  color: #a8a8a8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e7e7e7;
+  border-radius: 10px;
+  border: 1px dashed #a8a8a8;
+  gap: 10px;
+  padding: 8px 16px 8px 16px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+/*--In Progress--*/
+
+.boxSizeProgress {
+  cursor: pointer;
+  flex: 0 0 250px;
+  background-color: var(--white);
+  padding: 16px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 200px;
+  word-wrap: break-word;
+  box-shadow: 0px 0px 5px 3px #00000014;
+}
+
+.titleText {
+  color: var(--lightGray);
+}
+
+.descriptionText {
+  color: var(--fontGray);
+}
+
+.inProgressText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.progressMainContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.progress-container {
+  width: 60%;
+  background-color: #f4f4f4;
+  height: 8px;
+  position: relative;
+  border-radius: 8px;
+  margin-right: 11px;
+}
+
+.progress-bar {
+  height: 50%;
+  height: 8px;
+  width: 0;
+  background-color: #4589ff;
+  position: absolute;
+  border-radius: 8px;
+}
+
+.progressFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.IconBarClass {
+  margin-left: 10px;
+  max-width: 140px;
+  display: flex;
+}
+
+.iconstlye {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  background-color: var(--yellow);
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--white);
+  margin-left: -10px;
+}
+
+/*--await for Feedback--*/
+
+.boxSizeFeedback {
+  cursor: pointer;
+  background-color: var(--white);
+  padding: 16px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 200px;
+  word-wrap: break-word;
+  box-shadow: 0px 0px 5px 3px #00000014;
+}
+
+/*--done--*/
+
+.boxSizeDone {
+  flex: 0 0 250px;
+  background-color: var(--white);
+  padding: 16px;
+  border-radius: 24px;
+  margin-right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/*--done--*/
+
+.boxSizeToDo {
+  flex: 0 0 250px;
+  background-color: var(--white);
+  padding: 16px;
+  border-radius: 24px;
+  margin-right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/*-- open task window popup--*/
+.blurr {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0); /* Startwert für Transparenz */
+  z-index: 999; /* Sicherstellen, dass es über anderen Elementen liegt */
+  animation: blurIn 0.5s forwards; /* Name der Animation und Dauer festlegen */
+}
+
+@keyframes blurIn {
+  from {
+    background-color: rgba(0, 0, 0, 0); /* Startwert für Transparenz */
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5); /* Endwert für Transparenz */
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0; /* Startwert der Opazität */
+    right: -100%; /* Startposition außerhalb des sichtbaren Bereichs */
+    transform: translate(100%, -50%); /* Startposition außerhalb des sichtbaren Bereichs */
+  }
+  to {
+    opacity: 1; /* Endwert der Opazität */
+    right: calc(50% - 80px); /* Endposition mit 80px Abstand von rechts */
+    transform: translate(50%, -50%); /* Endposition zentriert */
+  }
+}
+
+.scroll {
+  overflow-y: auto; /* This makes the div vertically scrollable if content exceeds its height */
+  max-height: 70vh;
+  width: 310px;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.closeTask {
+  display: block !important;
+}
+
+.descriptionInputField {
+  max-width: 300px !important;
+}
+
+.closeEdit {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.closeEdit img {
+  padding: 5px;
+}
+
+.closeEdit img:hover {
+  cursor: pointer;
+  background-color: var(--lighterGray);
+  border-radius: 10px;
+}
+
+.boxSizePopUp {
+  flex: 0 0 250px;
+  background-color: var(--white);
+  padding: 16px;
+  border-radius: 24px;
+  margin-right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.boardMobilAddTask {
+  cursor: pointer;
+}
+
+.popUpHeadline {
+  color: #42526e;
+}
+
+.bordPopUptitleText {
+  font-size: 36px !important;
+}
+.popUpFooter {
+  margin-right: 4px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.footerBox {
+  cursor: pointer;
+  display: flex;
+  font-weight: 400;
+}
+.footerBox img {
+  margin-right: 8px;
+}
+.footerBox:hover img {
+  margin-right: 6px;
+}
+
+.footerBox:hover p {
+  color: var(--lightBlue);
+  font-weight: 700 !important;
+}
+
+.deleteBlue:hover img {
+  content: url(../assets/img/board/board_delete_blue.svg);
+}
+
+.editBlue:hover img {
+  content: url(../assets/img/board/board_edit_blue.svg);
+}
+
+.task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.task-info div {
+  display: flex;
+  align-items: center;
+}
+.label {
+  font-size: 18px;
+  color: #2a3647;
+  margin-right: 8px;
+  min-width: 100px;
+}
+.value {
+  margin-right: 8px;
+}
+.subtaskDetail {
+  display: flex;
+  align-items: center;
+}
+.subtaskDetail img {
+  margin-right: 16px;
+}
+.boardPopUpSubContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.popUpLine {
+  border: 1px solid #d1d1d1;
+  height: 24px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+#popUpAssignedToMainContainer {
+  margin-top: 8px;
+}
+
+.popUpAssignedToContainer {
+  display: flex;
+  align-items: center;
+  padding: 7px 16px 7px 16px;
+  border-radius: 10px;
+}
+.popUpIconstlye {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  background-color: var(--yellow);
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--white);
+  margin-right: 16px;
+}
+
+.popUpSubtaskDetail {
+  padding: 6px 16px 6px 16px;
+  gap: 16px;
+  display: flex;
+  align-items: center;
+}
+.popUpSubtaskDetail:hover {
+  background-color: var(--whiteGray);
+  border-radius: 10px;
+}
+.popUpSubtaskDetail img:hover {
+  cursor: pointer;
+  background-color: var(--lighterGray);
+  border-radius: 10px;
+}
+
+.boardEditButtonContainer {
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: -10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.boardEditButton {
+  background-color: var(--lightGray);
+  width: 90px;
+  height: 47px;
+  padding: 16;
+  gap: 4px;
+  border-radius: 10px;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.drag-area-highlight {
+  background-color: var(--lighterGray);
+  opacity: 0.4;
+}
+
+.boxSizeFeedback:active {
+  transform: rotate(2deg);
+}
+.boxSizeProgress:active {
+  transform: rotate(2deg);
+}
+
+.BoardDesktopAddTask {
+  display: none;
+}
+.mobileHead {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boardDesktopAddTask {
+  display: none;
+}
+
+.taskSelectButton {
+  min-width: 31% !important;
+  padding: 14px 10px 14px 10px !important;
+  gap: 0px !important;
+}
+
+@media (min-width: 1125px) {
+  .selectionContainer {
+    width: 225px;
+  }
+  .taskBox {
+    display: flex;
+    gap: 20px;
+    overflow: auto;
+  }
+  .boxesContainer {
+    padding-top: 5px;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 500px;
+    border-radius: 10px;
+    align-items: flex-start;
+  }
+  .boxSizeProgress {
+    margin: 0px;
+    gap: 10px;
+  }
+  .boxSizeFeedback {
+    gap: 10px;
+  }
+  .headContainer {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+  }
+  h1 {
+    width: 0px !important;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  .headBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+  }
+  .boardMobilAddTask {
+    display: none;
+  }
+  .boardDesktopAddTask {
+    display: flex;
+    align-items: center;
+    background-color: var(--lightGray);
+    color: var(--white);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .boardDesktopAddTaskText {
+    font-size: 21px;
+    font-weight: 700;
+  }
+  .boardDesktopHeadRight {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .searchTaskInputField input {
+    width: 250px;
+  }
+}
+
+@media (min-width: 1125px) {
+  .selectionContainer {
+    width: 225px;
+  }
+  .boxSizeFeedback {
+    width: 210px;
+    flex: 0;
+  }
+
+  .boxSizeProgress {
+    width: 200px;
+    flex: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .closeEdit {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+
+  .selectionContainer {
+    width: 240px;
+  }
+  .boxSizeFeedback {
+    width: 225px;
+  }
+
+  .descriptionInputField {
+    max-width: 100% !important;
+  }
+  .boxSizeProgress {
+    width: 225px;
+  }
+  .leftAndRightMainContainer {
+    display: flex;
+    justify-content: center;
+  }
+  .divColumn {
+    overflow: auto;
+    background-color: white;
+    border-radius: 15px;
+    width: 1040px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 1078px;
+    height: 670px;
+  }
+
+  .edith1 {
+    font-size: 61px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-left: 66px;
+    margin-top: 20px;
+  }
+  .editImg {
+    height: 24px;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 15px;
+    margin-right: 15px;
+  }
+  .boardEditButtonContainer {
+    margin-right: 60px;
+  }
+}
+
+@media (min-width: 1250px) {
+  .selectionContainer {
+    width: 275px;
+  }
+  .boxSizeFeedback {
+    width: 240px;
+  }
+
+  .boxSizeProgress {
+    width: 240px;
+  }
+}
+@media (min-width: 1300px) {
+  .boxSizeFeedback {
+    width: 252px;
+  }
+
+  .boxSizeProgress {
+    width: 252px;
+  }
+
+  .boardMainContainer {
+    justify-content: center;
+    align-items: center;
+  }
+  .headBox {
+    width: 1100px;
+  }
+}
+
+@media (min-width: 720px) {
+  .openwindow {
+    
+    margin-left: 80px;
+    z-index: 800;
+    position: fixed;
+    top: 50%;
+    right: -100%; /* Startposition außerhalb des sichtbaren Bereichs */
+    transform: translate(100%, -50%); /* Startposition außerhalb des sichtbaren Bereichs */
+    max-width: 480px;
+    min-width: 310px;
+    max-height: 90%;
+    animation: slideIn 1s forwards; /* Animation hinzufügen */
+    word-wrap: break-word;
+    overflow: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 30px;
+  }
+}
+
+@media (max-width: 719px) {
+  .divColumn {
+    padding-top: 0px !important;
+  }
+  .openwindow {
+    max-height: 600px;
+    word-wrap: break-word;
+    overflow: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #boardMainContainerId{
+    padding-top: 60px;
+    padding-bottom: 42px;
+  }
+}
+@media (max-width: 1125px) {
+  .switchTasksContainer{
+    display:block;
+  }
+
+  .boxSizeFeedback {
+    flex: 0 0 250px;
+  }
+  .headContainer {
+    align-items: center;
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  right: 0px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/**/
+
+.menu-options {
+  display: block;
+  background-color: var(--lightGray);
+  color: var(--white);
+  border-radius: 5px;
+  position: absolute;
+  z-index: 9999;
+  height: 130px;
+  width: 170px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: -140px;
+  border-radius: 15px;
+}
+
+.menu-options li {
+  padding-left: 9px;
+  padding-right: 9px;
+  list-style-type: none;
+  margin-bottom: 10px;
+  color: var(--white);
+}
+.menuForSwitchTaskMenu:hover {
+  background-color: var(--lighterGray);
+  cursor: pointer;
+  color: var(--lightGray);
+}
+.menuForSwitchTaskMenuHead {
+  border-bottom: 1px solid white;
+}

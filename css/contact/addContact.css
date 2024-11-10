@@ -1,0 +1,618 @@
+/* ADD CONTACT CONTAINER */
+#desktopAddContactContainer {
+  display: none;
+}
+
+input {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  outline: none; 
+}  
+
+#addContactContainer {
+  background-color: rgba(0, 0, 0, 0.25);
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  margin-left: -160px;
+  margin-top: -56px;
+}
+
+#addOverlayFrame {
+  display: none;
+  position: fixed;
+  top: 0;
+  /*right: -100%; Startposition außerhalb des sichtbaren Bereichs - vorübergehend ausgeschaltet */
+  width: 100%;
+  height: 100%;
+  transition: right 1.0s ease; /* Transition für die Animation: 0.5 Sekunden, einfacher Übergangseffekt */
+}
+
+.overlayVisible {
+  right: 0 !important; /* Zielposition für das Hereinsliden */
+}
+
+#contactCard {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: slideUp 1s forwards;
+  width: 100%;
+  z-index: 900;
+} 
+
+@keyframes slideUp {
+  from {
+    left: 150%; /* Startposition rechts außerhalb des Bildschirms */
+  }
+  to {
+    left: 50%; /* Endposition in der Mitte des Bildschirms */
+  }
+}
+
+.contactHeader {
+  background-color: var(--lightGray);
+  height: 356px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px 24px;
+  margin: 1px 12px 0 12px;
+}
+
+#contactHeaderCloseIcon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#contactHeaderCloseIcon:hover {
+  cursor: pointer;
+  background-color: var(--lightBlue) !important;
+}
+
+#contactHeaderCloseIcon:focus {
+  background-color: var(--lightBlue) !important;
+}
+
+.contactHeaderNav {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#contactBodyCloseIcon {
+  display: none;
+}
+
+#contactHeaderJoinLogo {
+  display: none;
+}
+
+.addContactHeaderSection {
+  margin-top: 56px;
+}
+
+.addContactHeadline {
+  color: var(--white);
+  font-weight: 700;
+  font-size: 47px;
+  line-height: 1.2;
+}
+
+.addContactSubtitle {
+  color: var(--white);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.contactHeaderBorder {
+  height: 2px;
+  width: 90px;
+  background-color: var(--lightBlue);
+  margin-top: 8px;
+}
+
+.addContactHeaderSignature {
+  width: 120px;
+  height: 120px;
+  background-color: var(--lighterGray);
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 92px;
+  left: calc(50% - 61px);
+}
+
+#contactBody {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  height: 414px;
+  padding: 16px;
+  border-radius: 0 0 20px 20px;
+  margin: 0 12px 1px 12px;
+}
+
+.contactBodySignatureContainer {
+  display: none;
+}
+
+.contactBodyInputSectionCol {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center; 
+}
+
+.contactInputContainer {
+  padding: 12px 16px 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  background-color: var(--white);
+  flex: 1;
+  gap: 8px;
+}
+
+.alertBorder {
+  border: solid 1px var(--wrongInputBorder) !important;
+}
+
+/* Zusammenfassen */
+#addContactInputContainerName {
+  border: solid 1px var(--lighterGray);
+}
+
+#addContactInputContainerEmail {
+  border: solid 1px var(--lighterGray);
+}
+
+#addContactInputContainerPhone {
+  border: solid 1px var(--lighterGray);
+}
+
+.alertBorder {
+  border: solid 1px var(--wrongInputBorder) !important;
+}
+
+.focus {
+  border: solid 1px var(--lightBlue) !important;
+}
+
+.textInputField {
+  width: 100%;
+  border: none;  
+}
+
+.addContactMessageContainer {
+  padding: 0;
+  margin: 3px 0;
+  height: 17px;
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Zusammenfassen */
+#addContactMessageName {
+  font-size: 11px;
+  color: red;
+}
+
+#addContactMessageEmail {
+  font-size: 11px;
+  color: red;
+}
+
+#addContactMessagePhone {
+  font-size: 11px;
+  color: red;
+}
+
+#contactFlexContainer {
+  display: inline-block;
+  flex: 1;
+}
+
+.contactInputContainer:hover {
+  cursor: pointer;
+}
+
+#addContactInputFieldName {
+  border: 1px solid var(--lighterGray);
+  width: 100%;
+}
+
+#addContactInputName {
+  width: 100%;
+}
+
+#addContactInputEmail {
+  width: 100%;
+}
+
+#addContactInputPhone {
+  width: 100%;
+}
+
+.contactBodyInputSectionCol { 
+  width: 100%;
+  margin-top: 66px;
+}
+
+#contactBtnSaveDesktop {
+  display: none; 
+}
+
+.contactBtnSave:hover {
+  cursor: pointer;
+  background-color: var(--lightBlue);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.contactBtnIcon {
+  margin-left: 8px;
+}
+
+
+input::placeholder {
+  color: var(--lighterGray);
+}
+
+.contactInputField {
+  width: 397px;
+}
+
+.contactInputField {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 41px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 21px;
+}
+
+.contactInputField:hover {
+  cursor: pointer;
+}
+
+.contactBodytBtnRow {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contactBtnSave {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--white);
+  background-color: var(--lightGray);
+  border-radius: 10px;
+  padding: 18px 10px;
+}
+
+.contactBtnSave:hover {
+  cursor: pointer;
+}
+
+#contactBodytBtnRowDesktop {
+  display: flex; /* ergänzen edit */
+  gap: 24px;
+  margin-top: 24px;
+}
+
+#addCancelBtnDesktop {
+  display: none;
+  border: 1px solid var(--lightGray);
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  padding: 18px 10px;
+}
+
+#addCancelBtnDesktop:hover {
+  border-color: var(--lightBlue);
+  color: var(--lightBlue);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+#addCancelBtnDesktop:hover img {
+content: url('../../assets/img/contact/vectorBlue.svg');
+}
+
+@media screen and (min-width: 300px) {
+  .contactInputContainer {
+    width: 100%;
+  }
+
+  #addContactContainer {
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+}
+
+@media screen and (min-width: 456px) {
+  #contactCard {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 721px) {
+  #contactCard {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 999px){
+  #addContactContainer {
+    left:0px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  #contactCard {
+    width: 900px;
+    z-index: 900;
+  }
+
+  #addContactContainer {
+    margin-left: -160px;
+    margin-top: -56px;
+  } 
+  
+}
+
+@media screen and (min-width: 1200px) {
+  .contactBodySignatureContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 43.35%; 
+  }
+
+  .contactBodytBtnRowDesktop {
+    margin-top: 36px;
+    display: flex;
+    gap: 25px;
+  }
+
+  #contactCard {
+    display: flex;
+    width: 1100px;
+    height: 592px;
+    flex-direction: row;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .contactHeader {
+    width: 467px;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+    padding: 47px;
+    margin: 0;
+  }
+
+  #contactHeaderCloseIcon {
+    display: none;
+  }
+
+  .addContactHeaderSignature {
+    display: none;
+  }
+
+  .addContactHeaderSection {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+    margin: 0;
+  }
+
+  .addContactHeadline {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 55px;
+    line-height: 1.2;
+  }
+  
+  .addContactSubtitle {
+    color: var(--white);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  #contactHeaderJoinLogo {
+    height: 66.48px;
+    display: block;
+  }
+
+  #contactBodyEmptySignature {
+    width: 120px;
+    height: 120px;
+    background-color: var(--lighterGray);
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  #contactBody {
+    width: 61.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: var(--white);
+    height: 100%;
+    padding: 46px 46px 46px 0;
+    border-radius: 0 20px 20px 0;
+    margin: 0;
+  }
+
+  .contactBodyFlexContainer {
+    margin-top: 40px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #contactBodyCloseIcon {
+    display: block;
+    position: relative;
+    top: -93px;
+    left: 590px;
+  }
+
+  #contactContainerFlexZwei {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .contactBodyInputSection {
+    width: 56.65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contactBodytBtnRow {
+    display: none; 
+  }
+
+  #contactBtnSaveDesktop {
+    display: flex;
+    align-items: center; 
+  }
+
+  #addCancelBtnDesktop {
+    display: flex; 
+  }
+
+  #addCancelBtnDesktop:hover {
+    border: 1px solid var(--lightBlue);
+    color: var(--lightBlue);
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  #contactCard {
+    display: flex;
+    width: 1212px;
+    height: 592px;
+    flex-direction: row;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+  }
+
+  #contactHeaderCloseIcon {
+    display: none;
+  }
+
+  .addContactHeaderSection {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+    margin: 0;
+  }
+
+  .addContactHeadline {
+    font-size: 61px;
+    line-height: 1.2;
+  }
+
+  .addContactSubtitle {
+    color: var(--white);
+    font-weight: 400;
+    font-size: 27px;
+
+    line-height: 1.2;
+  }
+
+  #contactHeaderJoinLogo {
+    height: 66.48px;
+    display: block;
+  }
+
+  #contactBody {
+    width: 61.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: var(--white);
+    height: 100%;
+    padding: 46px 46px 46px 0;
+    border-radius: 0 20px 20px 0;
+    margin: 0;
+  }
+
+  .contactBodyFlexContainer {
+    margin-top: 40px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #contactBodyCloseIcon {
+    display: block;
+    position: relative;
+    top: -93px;
+    left: 684px;
+  }
+
+  .contactBodyInputSection {
+    width: 56.65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contactBodytBtnRow {
+    display: none; 
+  }
+}

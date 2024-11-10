@@ -1,0 +1,205 @@
+/* MOBILE BUTTON STYLING BASICS */
+
+#mobileBtn:hover {
+  background-color: var(--lightGray);
+  cursor: pointer;
+}
+
+#mobileBtn.active {
+  background-color: var(--lightBlue);
+}
+
+/* ROUND */
+
+.mobileBtnRound {
+  background-color: var(--lightGray);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  justify-items: center;
+  z-index: 999;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+}
+
+.mobileBtnRound:active {
+  background-color: var(--lightBlue);
+}
+
+/** MOBILE BUTTON ADD CONTACT **/
+
+#mobileBtnAddContact {
+  display: block;
+}
+
+.mobileBtnAddContactItem {
+  width: 29.33px;
+  position: relative;
+  top: 14px;
+  left: 13px;
+  display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+/* MOBILE BUTTON THREE POINTS */
+
+#mobileBtnThreePoints {
+  display: none;
+  z-index: 999;
+}
+
+.mobileBtnThreePointsIcon {
+  height: 21.33px;
+  position: absolute;
+  top: 17px;
+  left: 25px;
+}
+
+/* MOBILE BUTTON SELECT OPTIONS */
+#mobileBtnSelectOptions {
+  width: 116px;
+  height: 116px;
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+}
+
+.mobileBtnSquare {
+  background-color: var(--white);
+  color: var(--black);
+  border-radius: 20px 20px 0 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+}
+
+.internBtnSquare {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+}
+
+.mobileBtnIconDelete {
+  height: 18px;
+}
+
+.mobileBtnIconEdit {
+  height: 18.25px;
+}
+
+.internBtnSquareLink {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 400;
+  background-color: transparent;
+  padding: 12px 8px;
+  border-radius: 10px;
+  width: 96px; 
+
+}
+
+#mobileBtnSquareEdit:hover {
+  color: var(--lightBlue);
+  background-color: var(--whiteGray);
+  border-radius: 10px;
+}
+
+#mobileBtnSquareDelete:hover img {
+  color: var(--lightBlue);
+  content: url('../../assets/img/contact/deleteBlue.svg');
+}
+
+#mobileBtnSquareDelete:hover {
+  color: var(--lightBlue);
+  background-color: var(--whiteGray);
+  border-radius: 10px;
+  width: 100%;
+
+}
+
+#mobileBtnSquareEdit:hover img {
+  color: var(--lightBlue);
+  content: url('../../assets/img/contact/editBlue.svg');
+}
+
+
+/* DESKTOP BUTTON ADD NEW CONTACT */
+
+.centerDesktopAdd {
+  display: flex;
+  justify-content: center;
+}
+
+#desktopBtnAddContact {
+  display: none;
+  background-color: var(--lightGray);
+  border-radius: 10px;
+  color: white;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.2;
+  width: 352px;
+  padding: 12px 0;
+}
+
+#desktopBtnAddContact:hover {
+  cursor: pointer;
+  background-color: var(--lightBlue);
+}
+
+.desktopBtnIntern {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+@media screen and (min-width: 300px) {
+}
+
+@media screen and (min-width: 456px) {
+}
+
+@media (max-width: 799px) {
+  #mobileBtnThreePoints {
+    display: none;
+  }
+}
+@media screen and (min-width: 721px) {
+  #mobileBtnSelectOptions {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+}
+
+@media screen and (min-width: 1200px) {
+  #desktopBtnAddContact {
+    display: block;
+  }
+
+  #mobileBtnAddContact {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+}

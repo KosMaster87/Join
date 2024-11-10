@@ -1,0 +1,1109 @@
+@import url("../style.css");
+
+.LogInBoxShadow {
+  box-shadow: 0px 0px 14px 3px #0000000a;
+}
+
+.RegisterBoxShadow {
+  box-shadow: 0px 0px 14px 3px #0000000a;
+}
+
+.nameRegistDevision.active {
+  border-color: var(--lightBlue);
+}
+
+.registerEmailDevision.active {
+  border-color: var(--lightBlue);
+}
+
+.registerPasswortDevision.active {
+  border-color: var(--lightBlue);
+}
+
+.registerConfirmPasswortDevision.active {
+  border-color: var(--lightBlue);
+}
+
+.loginError {
+  color: var(--wrongInput);
+}
+
+.loginPasswortDevision.wrong {
+  border-color: var(--wrongInputBorder);
+}
+
+.registerEmailDevision.wrong {
+  border-color: var(--wrongInputBorder);
+}
+
+.registerPasswortDevision.wrong {
+  border-color: var(--wrongInputBorder);
+}
+
+.registerConfirmPasswortDevision.wrong {
+  border-color: var(--wrongInputBorder);
+}
+
+.privacyCheck {
+  cursor: pointer;
+}
+
+.registerInputName {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.registerInputName:focus {
+  outline: none;
+}
+
+.registerInputName::placeholder {
+  color: var(--fontGray);
+}
+
+.registerInputMail {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.registerInputMail:focus {
+  outline: none;
+}
+
+.registerInputMail::placeholder {
+  color: var(--fontGray);
+}
+
+.registerInpPass {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.registerInpPass:focus {
+  outline: none;
+}
+
+.registerInpPass::placeholder {
+  color: var(--fontGray);
+}
+
+.confirmPasswort {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.confirmPasswort:focus {
+  outline: none;
+}
+
+.confirmPasswort::placeholder {
+  color: var(--fontGray);
+}
+
+.backToLoginMobile {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 720px) and (min-width: 250px) {
+  .signedUpSuccessfully {
+    animation: popUpSignUpMobile 1.5s ease-in-out forwards;
+  }
+
+  @keyframes popUpSignUpMobile {
+    0% {
+      transform: translateY(800%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+@media only screen and (max-width: 2560px) and (min-width: 721px) {
+  .signedUpSuccessfully {
+    animation: popUpSignUpDesktop 2s ease-in-out forwards;
+  }
+
+  @keyframes popUpSignUpDesktop {
+    0% {
+      transform: translateY(800%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+@media only screen and (max-width: 319px) and (min-width: 250px) {
+  .signUpJoinLogo {
+    width: 2.5rem;
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .signedUpSuccessfully {
+    display: none;
+    z-index: 5;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 13rem;
+    height: 2.5rem;
+    border-radius: 0.6rem;
+    position: fixed;
+    left: 25%;
+    bottom: 10%;
+    transform: translate(0%, 800%);
+    background-color: var(--lightGray);
+  }
+
+  .signedUpSuccessfullyPara {
+    font-size: 0.8rem;
+    color: var(--white);
+  }
+
+  .firstRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: var(--whiteGray);
+    position: relative;
+  }
+
+  .registerLayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--white);
+    width: 15rem;
+    height: 24rem;
+    border-radius: 1.8rem;
+  }
+
+  .headerRegisterBox {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .headerRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .registerLayout h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+  }
+
+  .underlineFrameMobileRegister {
+    width: 4rem;
+    height: 0.15rem;
+    background-color: var(--lightBlue);
+  }
+
+  .backToLoginMobile {
+    width: 1rem;
+  }
+
+  .blancoHelper {
+    width: 1rem;
+  }
+
+  .inpIconStyle {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .nameRegistDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1.5rem;
+    height: 2rem;
+    width: 13rem;
+    gap: 0.75rem;
+  }
+
+  .registerInputName {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerEmailDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1.5rem;
+    height: 2rem;
+    width: 13rem;
+    gap: 0.75rem;
+  }
+
+  .registerInputMail {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerPasswortDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1rem;
+    height: 2rem;
+    width: 13rem;
+    gap: 0.75rem;
+  }
+
+  .registerInpPass {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerConfirmPasswortDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1rem;
+    height: 2rem;
+    width: 13rem;
+    gap: 0.75rem;
+  }
+
+  .confirmPasswort {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .acceptPolicyBox {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 0 1rem 0;
+  }
+
+  .acceptPolicy {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    padding-left: 0.3rem;
+    cursor: pointer;
+  }
+
+  .acceptPolicyParagraf {
+    color: var(--lightBlue);
+  }
+
+  .mobilePoliceLegal {
+    margin-bottom: 0.3rem;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .mobilePoliceLegalLink {
+    color: var(--fontGray);
+    transition: transform 0.5s ease;
+    font-size: 0.6rem !important;
+    text-decoration: none;
+  }
+
+  .mobilePoliceLegalLink:hover {
+    cursor: pointer;
+    color: var(--lightBlue);
+    transform: scaleX(1.2);
+    font-size: 1rem;
+  }
+
+  .registerBtnBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .registerError {
+    color: var(--wrongInputText);
+    font-size: smaller;
+    margin-bottom: 0.5rem;
+    padding: 0 1rem 0 1rem;
+    display: flex;
+    align-items: center;
+    text-align: -webkit-center;
+  }
+
+  .registerBtn {
+    font-weight: 700;
+    font-size: 0.65rem;
+    border: var(--lightGray) 1px solid;
+    border-radius: 0.3rem;
+    width: 5.4rem;
+    height: 1.8rem;
+    background-color: var(--lightGray);
+    color: var(--white);
+  }
+
+  .registerBtn:hover {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: var(--lighBlue);
+    background-color: var(--lightBlue);
+  }
+}
+
+@media only screen and (max-width: 480px) and (min-width: 320px) {
+  .signUpJoinLogo {
+    width: 3rem;
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .signedUpSuccessfully {
+    display: none;
+    z-index: 5;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 13rem;
+    height: 2.5rem;
+    border-radius: 0.6rem;
+    position: fixed;
+    left: 25%;
+    bottom: 10%;
+    transform: translate(0%, 800%);
+    background-color: var(--lightGray);
+  }
+
+  .signedUpSuccessfullyPara {
+    font-size: 0.8rem;
+    color: var(--white);
+  }
+
+  .firstRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: var(--whiteGray);
+    position: relative;
+  }
+
+  .registerLayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--white);
+    width: 18rem;
+    height: 26rem;
+    border-radius: 1.8rem;
+  }
+
+  .headerRegisterBox {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .headerRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .registerLayout h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+  }
+
+  .underlineFrameMobileRegister {
+    width: 4rem;
+    height: 0.15rem;
+    background-color: var(--lightBlue);
+  }
+
+  .backToLoginMobile {
+    width: 1rem;
+  }
+
+  .blancoHelper {
+    width: 1rem;
+  }
+
+  .inpIconStyle {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .nameRegistDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1.5rem;
+    height: 2.6rem;
+    width: 16rem;
+    gap: 0.75rem;
+  }
+
+  .registerInputName {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerEmailDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1.5rem;
+    height: 2.6rem;
+    width: 16rem;
+    gap: 0.75rem;
+  }
+
+  .registerInputMail {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerPasswortDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1rem;
+    height: 2.6rem;
+    width: 16rem;
+    gap: 0.75rem;
+  }
+
+  .registerInpPass {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerConfirmPasswortDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1rem;
+    height: 2.6rem;
+    width: 16rem;
+    gap: 0.75rem;
+  }
+
+  .confirmPasswort {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .acceptPolicyBox {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 0 1rem 0;
+  }
+
+  .acceptPolicy {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    padding-left: 0.3rem;
+    cursor: pointer;
+  }
+
+  .acceptPolicyParagraf {
+    color: var(--lightBlue);
+  }
+
+  .mobilePoliceLegal {
+    margin-bottom: 1.2rem;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .mobilePoliceLegalLink {
+    color: var(--fontGray);
+    transition: transform 0.5s ease;
+    font-size: 0.6rem !important;
+    text-decoration: none;
+  }
+
+  .mobilePoliceLegalLink:hover {
+    cursor: pointer;
+    color: var(--lightBlue);
+    transform: scaleX(1.2);
+    font-size: 1rem;
+  }
+
+  .registerBtnBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .registerError {
+    /* display: none; */
+    color: var(--wrongInputText);
+    font-size: smaller;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    text-align: -webkit-center;
+  }
+
+  .registerBtn {
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: var(--lightGray) 1px solid;
+    border-radius: 0.5rem;
+    width: 7rem;
+    height: 2.2rem;
+    background-color: var(--lightGray);
+    color: var(--white);
+  }
+
+  .registerBtn:hover {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: var(--lighBlue);
+    background-color: var(--lightBlue);
+  }
+}
+
+@media only screen and (max-width: 720px) and (min-width: 481px) {
+  .signUpJoinLogo {
+    width: 3.5rem;
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .signedUpSuccessfully {
+    display: none;
+    z-index: 5;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 13rem;
+    height: 2.5rem;
+    border-radius: 0.6rem;
+    position: fixed;
+    left: 35%;
+    bottom: 20%;
+    transform: translate(0%, 800%);
+    background-color: var(--lightGray);
+  }
+
+  .signedUpSuccessfullyPara {
+    font-size: 0.8rem;
+    color: var(--white);
+  }
+
+  .firstRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: var(--whiteGray);
+    position: relative;
+  }
+
+  .registerLayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--white);
+    width: 28rem;
+    height: 32rem;
+    border-radius: 1.8rem;
+  }
+
+  .headerRegisterBox {
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+    margin-top: 1rem;
+  }
+
+  .headerRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .registerLayout h1 {
+    font-size: 3rem;
+    font-weight: 800;
+  }
+
+  .underlineFrameMobileRegister {
+    width: 6rem;
+    height: 0.2rem;
+    background-color: var(--lightBlue);
+  }
+
+  .backToLoginMobile {
+    width: 1.4 rem;
+  }
+
+  .blancoHelper {
+    width: 1rem;
+  }
+
+  .inpIconStyle {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .nameRegistDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1.5rem;
+    height: 2.8rem;
+    width: 25rem;
+    gap: 0.75rem;
+  }
+
+  .registerInputName {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerEmailDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1.5rem;
+    height: 2.8rem;
+    width: 25rem;
+    gap: 0.75rem;
+  }
+
+  .registerInputMail {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerPasswortDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1rem;
+    height: 2.8rem;
+    width: 25rem;
+    gap: 0.75rem;
+  }
+
+  .registerInpPass {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerConfirmPasswortDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1rem;
+    height: 2.8rem;
+    width: 25rem;
+    gap: 0.75rem;
+  }
+
+  .confirmPasswort {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .acceptPolicyBox {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0 1.5rem 0;
+  }
+
+  .acceptPolicy {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    padding-left: 0.3rem;
+    cursor: pointer;
+  }
+
+  .acceptPolicyParagraf {
+    color: var(--lightBlue);
+  }
+
+  .mobilePoliceLegal {
+    margin-bottom: 1.2rem;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .mobilePoliceLegalLink {
+    color: var(--fontGray);
+    transition: transform 0.5s ease;
+    font-size: 0.9rem !important;
+    text-decoration: none;
+  }
+
+  .mobilePoliceLegalLink:hover {
+    cursor: pointer;
+    color: var(--lightBlue);
+    transform: scaleX(1.2);
+    font-size: 1rem;
+  }
+
+  .registerBtnBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .registerError {
+    /* display: none; */
+    color: var(--wrongInputText);
+    font-size: smaller;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    text-align: -webkit-center;
+  }
+
+  .registerBtn {
+    font-weight: bold;
+    font-size: 1rem;
+    border: var(--lightGray) 1px solid;
+    border-radius: 0.5rem;
+    width: 8rem;
+    height: 2.6rem;
+    background-color: var(--lightGray);
+    color: var(--white);
+  }
+
+  .registerBtn:hover {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: var(--lighBlue);
+    background-color: var(--lightBlue);
+  }
+}
+
+@media only screen and (max-width: 2560px) and (min-width: 721px) {
+  .signUpJoinLogo {
+    width: 4rem;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+  }
+
+  .signedUpSuccessfully {
+    display: none;
+    z-index: 5;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 13rem;
+    height: 2.5rem;
+    border-radius: 0.6rem;
+    position: fixed;
+    left: 40%;
+    bottom: 35%;
+    transform: translate(0%, 800%);
+    background-color: var(--lightGray);
+  }
+
+  .signedUpSuccessfullyPara {
+    font-size: 0.8rem;
+    color: var(--white);
+  }
+
+  .firstRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: var(--whiteGray);
+    position: relative;
+  }
+
+  .registerLayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--white);
+    width: 35rem;
+    height: 38rem;
+    border-radius: 1.8rem;
+  }
+
+  .headerRegisterBox {
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+    margin-top: 1rem;
+  }
+
+  .headerRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .registerLayout h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+  }
+
+  .underlineFrameMobileRegister {
+    width: 9rem;
+    height: 0.2rem;
+    background-color: var(--lightBlue);
+  }
+
+  .backToLoginMobile {
+    width: 1.5rem;
+  }
+
+  .blancoHelper {
+    width: 1rem;
+  }
+
+  .inpIconStyle {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .nameRegistDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1.5rem;
+    height: 2.8rem;
+    width: 25rem;
+    gap: 0.75rem;
+  }
+
+  .registerInputName {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerEmailDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1.5rem;
+    height: 2.8rem;
+    width: 25rem;
+    gap: 0.75rem;
+  }
+
+  .registerInputMail {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerPasswortDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1rem;
+    height: 2.8rem;
+    width: 25rem;
+    gap: 0.75rem;
+  }
+
+  .registerInpPass {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .registerConfirmPasswortDevision {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid 1px var(--lighterGray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-top: 1rem;
+    height: 2.8rem;
+    width: 25rem;
+    gap: 0.75rem;
+  }
+
+  .confirmPasswort {
+    width: 100%;
+    height: 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .acceptPolicyBox {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0 2rem 0;
+  }
+
+  .acceptPolicy {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    padding-left: 0.3rem;
+    cursor: pointer;
+  }
+
+  .acceptPolicyParagraf {
+    color: var(--lightBlue);
+  }
+
+  .mobilePoliceLegal {
+    margin-bottom: 1.2rem;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .mobilePoliceLegalLink {
+    color: var(--fontGray);
+    transition: transform 0.5s ease;
+    font-size: 1rem !important;
+    text-decoration: none;
+  }
+
+  .mobilePoliceLegalLink:hover {
+    cursor: pointer;
+    color: var(--lightBlue);
+    transform: scaleX(1.2);
+    font-size: 1.2rem;
+  }
+
+  .registerBtnBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .registerError {
+    color: var(--wrongInputText);
+    font-size: smaller;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    text-align: -webkit-center;
+  }
+
+  .registerBtn {
+    font-weight: bold;
+    font-size: 1rem;
+    border: var(--lightGray) 1px solid;
+    border-radius: 0.5rem;
+    width: 6rem;
+    height: 2.5rem;
+    background-color: var(--lightGray);
+    color: var(--white);
+  }
+
+  .registerBtn:hover {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: var(--lighBlue);
+    background-color: var(--lightBlue);
+  }
+}

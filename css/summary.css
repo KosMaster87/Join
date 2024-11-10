@@ -1,0 +1,1132 @@
+@import url("../style.css");
+
+.cursorPointer {
+  cursor: pointer;
+}
+
+.reactangle:hover p {
+  color: var(--white);
+}
+
+.squareButton:hover p {
+  color: var(--white);
+}
+
+.row2Helper:hover p {
+  color: var(--white);
+}
+
+.summaryToDoSum {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+}
+
+@media only screen and (max-width: 480px) and (min-width: 250px) {
+  .sammarySumNumberTill480 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .summaryTextTill480 {
+    font-size: 0.7rem;
+  }
+
+  .greetingGuestSummary {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--whiteGray);
+  }
+
+  .greetingUserSummary {
+    flex-direction: column;
+    background-color: var(--whiteGray);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    height: calc(100% - 10rem);
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 5rem;
+  }
+
+  .greetingGuestSummaryParagraf {
+    font-size: 2rem;
+  }
+
+  .greetingBoxShow {
+    display: none;
+  }
+
+  .summaryToDos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .summaryRowContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    min-width: 18rem;
+    width: 70%;
+  }
+
+  .verticalLine {
+    width: 4rem;
+    height: 1px;
+    border: 1px solid var(--lightBlue);
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .summaryHeaderHelper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: flex-start;
+  }
+
+  .summaryHeader p {
+    font-size: medium;
+  }
+
+  .summaryHeadline1 {
+    font-size: 2.5rem;
+    font-family: Inter;
+    filter: drop-shadow(2px 2px 2px gray);
+  }
+
+  .row1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 17rem;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .reactangle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    min-width: 8rem;
+    width: 100%;
+    height: 5rem;
+    gap: 1rem;
+    transition: transform 0.5s ease;
+  }
+
+  .reactangle:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .todoSpecial {
+    height: 2.5rem;
+  }
+
+  .doneSpecial {
+    height: 2.5rem;
+  }
+
+  .reactangle img {
+    height: 2.6rem;
+  }
+
+  .row2Helper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 17rem;
+    width: 100%;
+    transition: transform 0.5s ease;
+  }
+
+  .row2Helper:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .row2summary {
+    display: flex;
+    flex-direction: row;
+    width: 25%;
+    height: 5.25rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .row2summary img {
+    height: 2.5rem;
+  }
+
+  .prioVerticalLine {
+    width: 1px;
+    height: 3.5rem;
+    border: 1px solid #d1d1d1;
+    border-radius: 0.5rem;
+  }
+
+  .urgentDater {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-right: 1rem;
+  }
+
+  .summaryDeadDater {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .summaryDeadUpcoming {
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+
+  .row3 {
+    display: flex;
+    gap: 1.1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 10rem;
+    width: 100%;
+  }
+
+  .squareButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+    min-width: 5rem;
+    width: 29%;
+    height: 5rem;
+    transition: transform 0.5s ease;
+  }
+
+  .squareButton:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .squareButton img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .borderRadius {
+    border-radius: 20px;
+  }
+
+  .backgroundColor {
+    background-color: var(--white);
+  }
+
+  .reactangelBoxShadow {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media only screen and (max-width: 720px) and (min-width: 481px) {
+  .sammarySumNumberTill720 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .summaryTextTill720 {
+    font-size: 0.7rem;
+  }
+
+  .greetingGuestSummary {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--whiteGray);
+  }
+
+  .greetingUserSummary {
+    flex-direction: column;
+    background-color: var(--whiteGray);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    height: calc(100% - 10rem);
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 5rem;
+  }
+
+  .greetingGuestSummaryParagraf {
+    font-size: 2rem;
+  }
+
+  .greetingBoxShow {
+    display: none;
+  }
+
+  .summaryToDos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .summaryRowContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    min-width: 18rem;
+    width: 70%;
+  }
+
+  .verticalLine {
+    width: 4rem;
+    height: 1px;
+    border: 1px solid var(--lightBlue);
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .summaryHeaderHelper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: flex-start;
+  }
+
+  .summaryHeader p {
+    font-size: medium;
+  }
+  .summaryHeadline1 {
+    font-size: 2.5rem;
+    font-family: Inter;
+    filter: drop-shadow(2px 2px 2px gray);
+  }
+
+  .row1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 17rem;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .reactangle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    min-width: 8rem;
+    width: 100%;
+    height: 5rem;
+    gap: 1rem;
+    transition: transform 0.5s ease;
+  }
+
+  .reactangle:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .todoSpecial {
+    height: 2.5rem;
+  }
+
+  .doneSpecial {
+    height: 2.5rem;
+  }
+
+  .reactangle img {
+    height: 2.6rem;
+  }
+
+  .row2Helper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 17rem;
+    width: 100%;
+    transition: transform 0.5s ease;
+  }
+
+  .row2Helper:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .row2summary {
+    display: flex;
+    flex-direction: row;
+    width: 25%;
+    height: 5.25rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .row2summary img {
+    height: 2.5rem;
+  }
+
+  .prioVerticalLine {
+    width: 1px;
+    height: 3.5rem;
+    border: 1px solid #d1d1d1;
+    border-radius: 0.5rem;
+  }
+
+  .urgentDater {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-right: 1rem;
+  }
+
+  .summaryDeadDater {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .summaryDeadUpcoming {
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+
+  .row3 {
+    display: flex;
+    gap: 1.1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 10rem;
+    width: 100%;
+  }
+
+  .squareButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+    min-width: 5rem;
+    width: 29%;
+    height: 5rem;
+    transition: transform 0.5s ease;
+  }
+
+  .squareButton:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .squareButton img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .borderRadius {
+    border-radius: 20px;
+  }
+
+  .backgroundColor {
+    background-color: var(--white);
+  }
+
+  .reactangelBoxShadow {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media only screen and (max-width: 1028px) and (min-width: 721px) {
+  .greetingsDesktop {
+    font-size: 1.2rem;
+  }
+
+  .greetingNameDesktop {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--lightBlue);
+  }
+
+  .sammarySumNumberTill1028 {
+    font-size: 2.6rem;
+    font-weight: 600;
+  }
+
+  .summaryTextTill1028 {
+    font-size: 0.7rem;
+  }
+
+  .GreetingsMobile {
+    display: none;
+  }
+
+  .summaryContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .greetingBoxShow {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7rem;
+  }
+
+  .summaryToDos {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+    width: 34rem;
+    padding-left: 2rem;
+  }
+
+  .summaryRowContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 20rem;
+  }
+
+  .verticalLine {
+    width: 4rem;
+    height: 1px;
+    border: 1px solid var(--lightBlue);
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .summaryHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    background-color: var(--whiteGray);
+  }
+
+  .summaryHeaderHelper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: flex-start;
+  }
+
+  .summaryHeader h1 {
+    font-size: larger;
+  }
+
+  .summaryHeader p {
+    font-size: medium;
+  }
+
+  .summaryHeadline1 {
+    font-size: 2.5rem;
+    font-family: Inter;
+    filter: drop-shadow(2px 2px 2px gray);
+  }
+
+  .row1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 17rem;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .reactangle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    min-width: 8rem;
+    width: 100%;
+    height: 5rem;
+    gap: 1rem;
+    transition: transform 0.5s ease;
+    background-color: var(--lightBlue);
+  }
+
+  .reactangle:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .todoSpecial {
+    height: 2.5rem;
+  }
+
+  .doneSpecial {
+    height: 2.5rem;
+  }
+
+  .reactangle img {
+    height: 2.6rem;
+  }
+
+  .row2Helper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 17rem;
+    width: 100%;
+    transition: transform 0.5s ease;
+  }
+
+  .row2Helper:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .row2summary {
+    display: flex;
+    flex-direction: row;
+    width: 25%;
+    height: 5.25rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .row2summary img {
+    height: 2.5rem;
+  }
+
+  .prioVerticalLine {
+    width: 1px;
+    height: 3.5rem;
+    border: 1px solid var(--lighterGray);
+    border-radius: 0.5rem;
+  }
+
+  .urgentDater {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-right: 1rem;
+  }
+
+  .summaryDeadDater {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .summaryDeadUpcoming {
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+
+  .row3 {
+    display: flex;
+    gap: 1.1rem;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .squareButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+    min-width: 5rem;
+    width: 29%;
+    height: 5rem;
+    transition: transform 0.5s ease;
+  }
+
+  .squareButton:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .squareButton img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .borderRadius {
+    border-radius: 20px;
+  }
+
+  .backgroundColor {
+    background-color: var(--white);
+  }
+
+  .reactangelBoxShadow {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media only screen and (max-width: 1440px) and (min-width: 1029px) {
+  .greetingNameDesktop {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: var(--lightBlue);
+  }
+
+  .greetingsDesktop {
+    font-size: 1.4rem;
+  }
+
+  .headlinePara {
+    font-size: 1.2rem;
+  }
+
+  .sammarySumNumberTill1440 {
+    font-size: 2.8rem;
+    font-weight: 600;
+  }
+
+  .summaryTextTill1440 {
+    font-size: 1rem;
+  }
+
+  .GreetingsMobile {
+    display: none;
+  }
+
+  .summaryContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .greetingBoxShow {
+    display: block;
+    margin-top: 9rem;
+  }
+
+  .summaryToDos {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+    width: 53rem;
+  }
+
+  .summaryRowContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 120rem;
+    width: 70%;
+  }
+
+  .verticalLine {
+    width: 4rem;
+    height: 1px;
+    border: 1px solid var(--lightBlue);
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .summaryHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    background-color: var(--whiteGray);
+  }
+
+  .summaryHeaderHelper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: flex-start;
+  }
+
+  .summaryHeader h1 {
+    font-size: larger;
+  }
+
+  .summaryHeader p {
+    font-size: medium;
+  }
+
+  .summaryHeadline1 {
+    font-size: 3.5rem;
+    font-family: Inter;
+    filter: drop-shadow(2px 2px 2px gray);
+  }
+
+  .row1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 17rem;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .reactangle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    min-width: 8rem;
+    width: 100%;
+    height: 7rem;
+    gap: 1rem;
+    transition: transform 0.5s ease;
+    background-color: var(--lightBlue);
+  }
+
+  .reactangle:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .todoSpecial {
+    height: 2.5rem;
+  }
+
+  .doneSpecial {
+    height: 2.5rem;
+  }
+
+  .reactangle img {
+    height: 2.6rem;
+  }
+
+  .row2Helper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 17rem;
+    width: 100%;
+    height: 7rem;
+    transition: transform 0.5s ease;
+  }
+
+  .row2Helper:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .row2summary {
+    display: flex;
+    flex-direction: row;
+    width: 25%;
+    height: 5.25rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .row2summary img {
+    height: 2.5rem;
+  }
+
+  .prioVerticalLine {
+    width: 1px;
+    height: 3.5rem;
+    border: 1px solid var(--lighterGray);
+    border-radius: 0.5rem;
+  }
+
+  .urgentDater {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-right: 1rem;
+  }
+
+  .summaryDeadDater {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .summaryDeadUpcoming {
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+
+  .row3 {
+    display: flex;
+    gap: 1.1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 10rem;
+    width: 100%;
+  }
+
+  .squareButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+    min-width: 5rem;
+    width: 29%;
+    height: 7rem;
+    transition: transform 0.5s ease;
+  }
+
+  .squareButton:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .squareButton img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .borderRadius {
+    border-radius: 20px;
+  }
+
+  .backgroundColor {
+    background-color: var(--white);
+  }
+
+  .reactangelBoxShadow {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media only screen and (max-width: 2560px) and (min-width: 1441px) {
+  .greetingNameDesktop {
+    font-size: 2.7rem;
+    font-weight: 800;
+    color: var(--lightBlue);
+  }
+
+  .greetingsDesktop {
+    font-size: 1.6rem;
+  }
+
+  .greetingBoxShow {
+    display: flex;
+    flex-direction: column;
+    margin-top: 11rem;
+  }
+
+  .sammarySumNumberTill2560 {
+    font-size: 2.6rem;
+    font-weight: 600;
+  }
+
+  .summaryTextTill10282560 {
+    font-size: 0.7rem;
+  }
+
+  .GreetingsMobile {
+    display: none;
+  }
+
+  .summaryContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .summaryToDos {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+    width: 50rem;
+    padding-left: 2rem;
+  }
+
+  .summaryRowContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 40rem;
+  }
+
+  .verticalLine {
+    width: 4rem;
+    height: 1px;
+    border: 1px solid var(--lightBlue);
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .summaryHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    background-color: var(--whiteGray);
+  }
+
+  .summaryHeaderHelper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: flex-start;
+  }
+
+  .summaryHeader h1 {
+    font-size: larger;
+  }
+
+  .summaryHeader p {
+    font-size: medium;
+  }
+
+  .summaryHeadline1 {
+    font-size: 4.2rem;
+    font-family: Inter;
+    filter: drop-shadow(2px 2px 2px gray);
+  }
+
+  .headlinePara {
+    font-size: 1.6rem;
+  }
+
+  .row1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 17rem;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .reactangle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    width: 100%;
+    height: 7rem;
+    gap: 1.2rem;
+    transition: transform 0.5s ease;
+    background-color: var(--lightBlue);
+  }
+
+  .reactangle:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .todoSpecial {
+    height: 2.5rem;
+  }
+
+  .doneSpecial {
+    height: 2.5rem;
+  }
+
+  .reactangle img {
+    height: 2.6rem;
+  }
+
+  .row2Helper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 17rem;
+    width: 100%;
+    transition: transform 0.5s ease;
+  }
+
+  .row2Helper:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .row2summary {
+    display: flex;
+    flex-direction: row;
+    width: 25%;
+    height: 7.25rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .row2summary img {
+    height: 2.5rem;
+  }
+
+  .prioVerticalLine {
+    width: 1px;
+    height: 3.5rem;
+    border: 1px solid var(--lighterGray);
+    border-radius: 0.5rem;
+  }
+
+  .urgentDater {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-right: 1rem;
+  }
+
+  .summaryDeadDater {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .summaryDeadUpcoming {
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+
+  .row3 {
+    display: flex;
+    gap: 1.1rem;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .squareButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+    min-width: 5rem;
+    width: 29%;
+    height: 7rem;
+    transition: transform 0.5s ease;
+  }
+
+  .squareButton:hover {
+    background-color: var(--lightGray);
+    transform: scale(1.05);
+  }
+
+  .squareButton img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .borderRadius {
+    border-radius: 20px;
+  }
+
+  .backgroundColor {
+    background-color: var(--white);
+  }
+
+  .reactangelBoxShadow {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  }
+}

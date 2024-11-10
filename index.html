@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./css/register.css" />
+    <link rel="stylesheet" href="./style.css" />
+
+    <script src="./js/backup.js"></script>
+    <script src="./js/legality.js"></script>
+    <script src="./js/policy.js"></script>
+    <script src="./js/header.js"></script>
+    <script src="./js/menu.js"></script>
+    <script defer src="./js/register.js"></script>
+    <script defer src="./js/login.js"></script>
+    <script src="includeHTML.js"></script>
+    <script src="script.js"></script>
+    <link rel="icon" type="image/x-icon" href="./assets/img/login/secondLogo.svg">
+    <title>Join Project Management Tool</title>
+  </head>
+  <body>
+    <div class="loginMain" id="loginMain" style="display: flex">
+      <div class="joinLogoAnimationLogin">
+        <img src="./assets/img/login/firstLogo.svg" class="loginSecondImg" />
+        <img src="./assets/img/login/secondLogo.svg" class="loginPrimaryImg" />
+      </div>
+
+      <div class="firstLogin">
+        <form
+          class="loginLayout LogInBoxShadow"
+          onsubmit="login(); return false;"
+        >
+          <div class="headerLogin">
+            <h1>Log in</h1>
+
+            <div class="underlineFrameMobileLogIn"></div>
+          </div>
+
+          <div class="loginEmailDevision" id="loginEmailDevision">
+            <input
+              class="loginInputMail"
+              id="loginInputMail"
+              name="loginInputMaill"
+              required
+              minlength="2"
+              type="email"
+              placeholder="Email"
+              value=""
+              autocomplete="username"
+              onfocus="changeBorderColor('loginEmailDevision')"
+              onblur="resetBorderColor('loginEmailDevision')"
+            />
+            <img class="inpIconStyle" src="./assets/img/login/mail.svg" />
+          </div>
+
+          <div class="loginPasswortDevision" id="loginPasswortDevision">
+            <input
+              class="loginInputPassword"
+              id="loginInputPassword"
+              name="loginInputPassword"
+              required
+              minlength="3"
+              type="password"
+              placeholder="Password"
+              value=""
+              autocomplete="currentPassword"
+              onfocus="changeBorderColor('loginPasswortDevision')"
+              onblur="resetBorderColor('loginPasswortDevision')"
+            />
+            <img
+              style="padding-right: 3px"
+              class="inpIconStyle"
+              id="logInPasswordImage"
+              src="./assets/img/login/lock.svg"
+              onclick="changeToShowCurrentPassword('loginInputPassword', 'logInPasswordImage')"
+            />
+          </div>
+
+          <div class="rememberBox">
+            <input
+              class="rememberMe"
+              id="rememberMe"
+              type="checkbox"
+              name="checkRemember"
+              value="Remember me"
+              onclick="handleRememberme()"
+              style="cursor: pointer"
+            />
+            <label class="rememberLabel" for="rememberMe">Remember me</label>
+          </div>
+
+          <div class="loginBtnBox">
+            <p id="loginError" style="display: block"></p>
+            <div class="justBtn">
+              <button class="confirmLogInBtn" id="loginBtn">Log in</button>
+
+              <button
+                class="guestLogInBtn"
+                onclick="loginAsGuest(); return false;"
+              >
+                Guest Log in
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div class="mobileNotUser" id="mobileNotUser">
+          <p>Not a Join user?</p>
+          <button
+            class="mobileNotUserBtn"
+            id="mobileNotUserBtn"
+            onclick="redirectToRegister()"
+          >
+            Sign up
+          </button>
+        </div>
+
+        <div class="mobilePoliceLegal" id="mobilePoliceLegal">
+          <div class="mobilePoliceLegalLink" onclick="offlinePolicy()">
+            Privacy Police
+          </div>
+          <div class="mobilePoliceLegalLink" onclick="offlineLegality()">
+            Legal notice
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="registerMain" id="registerMain" style="display: none">
+      <div class="signedUpSuccessfully" id="signedUpSuccessfully">
+        <p class="signedUpSuccessfullyPara">You Signed Up successfully</p>
+      </div>
+
+      <div class="firstRegister">
+        <img
+          class="signUpJoinLogo"
+          src="../assets/img/register/secondLogo.svg"
+        />
+
+        <form
+          class="registerLayout RegisterBoxShadow"
+          id="registerNewUser"
+          onsubmit="registerNewUser(); return false;"
+        >
+          <div class="headerRegisterBox">
+            <img
+              class="backToLoginMobile"
+              src="./assets/img/register/arrowLeftLine.svg"
+              onclick="redirectToLoin()"
+            />
+            <div class="headerRegister">
+              <h1>Sign up</h1>
+              <div class="underlineFrameMobileRegister"></div>
+            </div>
+            <div class="blancoHelper"></div>
+          </div>
+
+          <div class="nameRegistDevision" id="nameRegistDevision">
+            <input
+              class="registerInputName"
+              id="registerInputName"
+              required
+              minlength="3"
+              type="text"
+              placeholder="Name"
+              value=""
+              autocomplete="username"
+              onfocus="changeBorderColor('nameRegistDevision')"
+              onblur="resetBorderColor('nameRegistDevision')"
+            />
+            <img class="inpIconStyle" src="./assets/img/register/person.svg" />
+          </div>
+
+          <div class="registerEmailDevision" id="registerEmailDevision">
+            <input
+              class="registerInputMail"
+              id="registerInputEmail"
+              required
+              minlength="10"
+              type="email"
+              placeholder="Email"
+              value=""
+              autocomplete="email"
+              onfocus="changeBorderColor('registerEmailDevision')"
+              onblur="resetBorderColor('registerEmailDevision')"
+            />
+            <img class="inpIconStyle" src="./assets/img/login/mail.svg" />
+          </div>
+
+          <div class="registerPasswortDevision" id="registerPasswortDevision">
+            <input
+              class="registerInpPass"
+              id="registerInputPassword"
+              required
+              minlength="12"
+              type="password"
+              placeholder="Password"
+              value=""
+              autocomplete="current-password"
+              onfocus="changeBorderColor('registerPasswortDevision')"
+              onblur="resetBorderColor('registerPasswortDevision')"
+            />
+            <img
+              style="padding-right: 3px"
+              class="inpIconStyle"
+              id="signUpPasswordImage"
+              src="./assets/img/register/lock.svg"
+              onclick="changeToShowCurrentPassword('registerInputPassword', 'signUpPasswordImage')"
+            />
+          </div>
+
+          <div
+            class="registerConfirmPasswortDevision"
+            id="registerConfirmPasswortDevision"
+          >
+            <input
+              class="confirmPasswort"
+              id="registerInputPasswordConfirm"
+              required
+              minlength="12"
+              type="password"
+              placeholder="Confirm Password"
+              value=""
+              autocomplete="current-password"
+              onfocus="changeBorderColor('registerConfirmPasswortDevision')"
+              onblur="resetBorderColor('registerConfirmPasswortDevision')"
+            />
+            <img
+              style="padding-right: 3px"
+              class="inpIconStyle"
+              id="signUpConfirmPasswordImage"
+              src="./assets/img/register/lock.svg"
+              onclick="changeToShowCurrentPassword('registerInputPasswordConfirm', 'signUpConfirmPasswordImage')"
+            />
+          </div>
+
+          <div class="acceptPolicyBox" onclick="checkedPrivacy()">
+            <input
+              class="privacyCheck"
+              id="privacyCheck"
+              type="checkbox"
+              name="acceptPolicy"
+              value="acceptPolicy"
+              style="cursor: pointer"
+            />
+            <label class="acceptPolicy" for="privacyCheck"
+              >I accept the
+              <p class="acceptPolicyParagraf" onclick="offlinePolicy()">
+                Privacy policy
+              </p></label
+            >
+          </div>
+
+          <div class="registerBtnBox">
+            <p class="registerError" id="registerError"></p>
+            <button class="registerBtn" id="registerBtn">Sign up</button>
+          </div>
+        </form>
+
+        <div class="mobilePoliceLegal" id="mobilePoliceLegal">
+          <div class="mobilePoliceLegalLink" onclick="offlinePolicy()">
+            Privacy Police
+          </div>
+          <div class="mobilePoliceLegalLink" onclick="offlineLegality()">
+            Legal notice
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /**
+       * Check userinspiriens, if he will be remember herself.
+       */
+      let rememberMeCheckbox = document.getElementById("rememberMe");
+      window.addEventListener("DOMContentLoaded", function () {
+        const userDataString = localStorage.getItem("rememberMe");
+
+        if (userDataString) {
+          const userData = JSON.parse(userDataString);
+
+          document.getElementById("loginInputMail").value = userData.userId;
+          document.getElementById("loginInputPassword").value =
+            userData.password;
+
+          rememberMeCheckbox.checked = true;
+        }
+      });
+    </script>
+  </body>
+</html>

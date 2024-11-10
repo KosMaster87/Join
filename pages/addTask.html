@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/addTask.css" />
+    <link rel="stylesheet" href="./../style.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/menu.css" />
+    <link rel="stylesheet" href="../css/fonts.css" />
+
+    <script src="../js/menu.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="./../../includeHTML.js"></script>
+    <script src="./../script.js"></script>
+    <script src="../js/register.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/contact/editContact.js"></script>
+    <script src="../js/contact/listContact.js"></script>
+    <script src="../js/contact/showSingleContact.js"></script>
+    <script src="../js/addTask.js"></script>
+    <script src="../js/addTaskAssignedTo.js"></script>
+    <script src="../js/addTaskHTML.js"></script>
+    <script src="../js/summary.js"></script>
+    <link rel="icon" type="image/x-icon" href="../assets/img/login/secondLogo.svg">
+    <title>Join Project Management Tool</title>
+  </head>
+  <body onload="initAddTask()">
+    <div
+      w3-include-html="../assets/templates/header.html"
+      id="mainHeader"
+      class="mainHeader"
+    ></div>
+    <div id="mainContent" class="mainContent">
+      <div id="taskMainContainer">
+      </div>
+    </div>
+    <div
+      w3-include-html="../assets/templates/menu.html"
+      id="afterLoginMainMenu"
+      class="afterLoginMainMenu"
+    ></div>
+  </body>
+</html>
