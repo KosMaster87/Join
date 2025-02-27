@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: register.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: register.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let passwordContainer = document.getElementById("registerPasswortDevision");
+let confirmPasswordContainer = document.getElementById(
+  "registerConfirmPasswortDevision"
+);
+let emailContainer = document.getElementById("registerEmailDivision");
+let registerInputName = document.getElementById("registerInputName");
+let registerInputEmail = document.getElementById("registerInputEmail");
+let registerInputPassword = document.getElementById("registerInputPassword");
+let registerInputPasswordConfirm = document.getElementById(
+  "registerInputPasswordConfirm"
+);
+let errorMessage = document.getElementById("registerError");
+let registerBtn = document.getElementById("registerBtn");
+let colorCode = "#ff3d00";
+let signedUpSuccessfully = document.getElementById("signedUpSuccessfully");
+
+let confirmedValidation = true;
+let privacyPolicyCheckedValidate = false;
+let validatePasswordConfirmation = false;
+
+/**
+ * Registers a new user by validating inputs, checking if the email is already taken,
+ * and creating a new user in the database. Disables the register button during the process.
+ * @returns {Promise&lt;void>} - A promise that resolves when the registration process is complete.
+ */
+async function registerNewUser() {
+  registerBtn.disabled = true;
+
+  privacyPolicyCheckedValidate = privacyPolicyCheckedValidateFn();
+  if (!privacyPolicyCheckedValidate) return;
+
+  validatePasswordConfirmation = validatePasswordConfirmationFn();
+  if (!validatePasswordConfirmation) return;
+
+  let validateEmailRegister = await validateEmailRegisterFn(emailContainer);
+  if (!validateEmailRegister) return;
+
+  await registerUser();
+}
+
+/**
+ * Validates if the email is already taken by checking the existing users.
+ * Displays an error message if the email is already in use.
+ * @param {HTMLElement} emailContainer - The container element for the email input.
+ * @returns {Promise&lt;boolean>} - A promise that resolves to `true` if the email is valid, otherwise `false`.
+ */
+async function validateEmailRegisterFn(emailContainer) {
+  let emailTaken = await emailAlreadyTaken();
+
+  if (emailTaken) {
+    users = [];
+    errorMessage.innerHTML = "A Account with this Email already exists";
+    registerBtn.disabled = false;
+    confirmedValidation = false;
+    emailContainer.classList.add("wrong");
+    return false;
+  }
+  emailContainer.classList.remove("wrong");
+  return true;
+}
+
+/**
+ * Checks if the email provided during registration is already taken by an existing user.
+ * @returns {Promise&lt;boolean>} - A promise that resolves to `true` if the email is taken, otherwise `false`.
+ */
+async function emailAlreadyTaken() {
+  await loadUsersAndCurrentUser();
+
+  if (!users) return false;
+
+  return Object.values(users).some(
+    (user) => user.email === registerInputEmail.value
+  );
+}
+
+/**
+ * Registers a new user by creating a user object and saving it to the database.
+ * Handles guest and regular user registration separately.
+ * @returns {Promise&lt;void>} - A promise that resolves when the user is successfully registered.
+ */
+async function registerUser() {
+  const isGuest = registerInputEmail.value === "guest@mail.de";
+  const userId = generateUserId();
+
+  if (
+    !registerInputName.value ||
+    !registerInputEmail.value ||
+    !registerInputPassword.value
+  ) {
+    return;
+  }
+
+  const newUser = {
+    name: isGuest ? `Guest User ${userId}` : registerInputName.value,
+    email: isGuest ? `guest_${userId}@mail.de` : registerInputEmail.value,
+    password: registerInputPassword.value,
+    colorCode,
+    tasks: [],
+    contacts: [],
+    isGuest,
+  };
+
+  try {
+    const collection = isGuest ? "guests" : "users";
+    await setItem(collection, userId, newUser);
+
+    resetForm();
+    await signedUpSuccessfullyFn();
+  } catch (error) {
+  } finally {
+    registerBtn.disabled = false;
+  }
+}
+
+/**
+ * Generates a unique user ID.
+ * @returns {string} - A unique user ID.
+ */
+function generateUserId() {
+  return `user_${Math.random().toString(36).substr(2, 9)}`;
+}
+
+/**
+ * Validates if the password and confirmation password match.
+ * Displays an error message if they do not match.
+ * @returns {boolean} - `true` if the passwords match, otherwise `false`.
+ */
+function validatePasswordConfirmationFn() {
+  let password = registerInputPassword.value;
+  let passwordConfirm = registerInputPasswordConfirm.value;
+
+  if (password !== passwordConfirm) {
+    errorMessage.innerHTML = "Passwords do not match";
+    passwordContainer.classList.add("wrong");
+    confirmPasswordContainer.classList.add("wrong");
+    confirmedValidation = false;
+    registerBtn.disabled = false;
+    return false;
+  } else {
+    errorMessage.innerHTML = "";
+    passwordContainer.classList.remove("wrong");
+    confirmPasswordContainer.classList.remove("wrong");
+    confirmedValidation = true;
+    return true;
+  }
+}
+
+/**
+ * Toggles the privacy policy checkbox and updates the UI accordingly.
+ */
+function checkedPrivacy() {
+  let checkedElement = document.getElementById("privacyCheck");
+  let checkedBox = checkedElement.checked;
+
+  if (checkedBox) {
+    errorMessage.innerHTML = "";
+    confirmedValidation = true;
+    checkedElement.setAttribute("checked", "checked");
+    registerBtn.disabled = false;
+  } else {
+    errorMessage.innerHTML = "U must accept the privacy police";
+    confirmedValidation = false;
+    checkedElement.removeAttribute("checked", "");
+  }
+}
+
+/**
+ * Validates if the privacy policy checkbox is checked.
+ * @returns {boolean} - `true` if the checkbox is checked, otherwise `false`.
+ */
+function privacyPolicyCheckedValidateFn() {
+  let privacyPolicyChecked = document
+    .getElementById("privacyCheck")
+    .hasAttribute("checked");
+
+  if (!privacyPolicyChecked) {
+    errorMessage.innerHTML = "U must accept the privacy police";
+    confirmedValidation = false;
+  } else {
+    confirmedValidation = true;
+  }
+  return confirmedValidation;
+}
+
+/**
+ * Resets the registration form inputs to their default values.
+ */
+function resetForm() {
+  registerInputName.value = "";
+  registerInputEmail.value = "";
+  registerInputPassword.value = "";
+  registerInputPasswordConfirm.value = "";
+}
+
+/**
+ * Displays a success message after successful registration and redirects to the login page.
+ * @returns {Promise&lt;void>} - A promise that resolves after the success message is displayed.
+ */
+async function signedUpSuccessfullyFn() {
+  signedUpSuccessfully.style.display = "flex";
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  signedUpSuccessfully.style.display = "none";
+  redirectToLoin();
+}
+
+/**
+ * Redirects the user from the registration page to the login page.
+ */
+function redirectToLoin() {
+  let registerMain = document.getElementById("registerMain");
+  let loginMain = document.getElementById("loginMain");
+  loginMain.style.display = "flex";
+  registerMain.style.display = "none";
+}
+
+/**
+ * Toggles the visibility of the password in the input field.
+ * @param {string} passwordId - The ID of the password input field.
+ * @param {string} imageId - The ID of the image element used to toggle visibility.
+ */
+function changeToShowCurrentPassword(passwordId, imageId) {
+  let hideThePassword = document.getElementById(passwordId);
+  let hideThePasswordImage = document.getElementById(imageId);
+
+  if (hideThePassword.type == "password") {
+    hideThePassword.type = "text";
+    hideThePasswordImage.src = "/assets/img/login/visibilityOff.svg";
+  } else {
+    hideThePassword.type = "password";
+    hideThePasswordImage.src = "/assets/img/login/lock.svg";
+  }
+}
+
+/**
+ * Adds an active border color to the specified container.
+ * @param {string} containerId - The ID of the container to change the border color.
+ */
+function changeBorderColor(containerId) {
+  let focusContainer = document.getElementById(containerId);
+  focusContainer.classList.add("active");
+}
+
+/**
+ * Removes the active border color from the specified container.
+ * @param {string} containerId - The ID of the container to reset the border color.
+ */
+function resetBorderColor(containerId) {
+  let focusContainer = document.getElementById(containerId);
+  focusContainer.classList.remove("active");
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#FinalUpcomingDate">FinalUpcomingDate</a></li><li><a href="global.html#TaskDisplayFields">TaskDisplayFields</a></li><li><a href="global.html#addBoardSubtask">addBoardSubtask</a></li><li><a href="global.html#addContactIsSavedGoToSingleContact">addContactIsSavedGoToSingleContact</a></li><li><a href="global.html#addFocusBorder">addFocusBorder</a></li><li><a href="global.html#addSubtask">addSubtask</a></li><li><a href="global.html#adjustDate">adjustDate</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#assignTaskToUser">assignTaskToUser</a></li><li><a href="global.html#assignedToContactBg">assignedToContactBg</a></li><li><a href="global.html#assignedToContactBgElse">assignedToContactBgElse</a></li><li><a href="global.html#assignedToContactBgIf">assignedToContactBgIf</a></li><li><a href="global.html#categoryImageDown">categoryImageDown</a></li><li><a href="global.html#categoryImageUp">categoryImageUp</a></li><li><a href="global.html#categoryRequired">categoryRequired</a></li><li><a href="global.html#changeBoardMenu">changeBoardMenu</a></li><li><a href="global.html#changeBorderColor">changeBorderColor</a></li><li><a href="global.html#changeImage">changeImage</a></li><li><a href="global.html#changeImageBack">changeImageBack</a></li><li><a href="global.html#changeInfoImage">changeInfoImage</a></li><li><a href="global.html#changeInfoImageBack">changeInfoImageBack</a></li><li><a href="global.html#changeMenu">changeMenu</a></li><li><a href="global.html#changePrioColor">changePrioColor</a></li><li><a href="global.html#changePrioColorLow">changePrioColorLow</a></li><li><a href="global.html#changePrioColorMedium">changePrioColorMedium</a></li><li><a href="global.html#changePrioColorUrgent">changePrioColorUrgent</a></li><li><a href="global.html#changeToShowCurrentPassword">changeToShowCurrentPassword</a></li><li><a href="global.html#cheackCurrentStatus">cheackCurrentStatus</a></li><li><a href="global.html#checkAllInputFields">checkAllInputFields</a></li><li><a href="global.html#checkCategory">checkCategory</a></li><li><a href="global.html#checkInputEmail">checkInputEmail</a></li><li><a href="global.html#checkInputName">checkInputName</a></li><li><a href="global.html#checkInputPhone">checkInputPhone</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkNoFilledTasks">checkNoFilledTasks</a></li><li><a href="global.html#checkWidth">checkWidth</a></li><li><a href="global.html#checkedPrivacy">checkedPrivacy</a></li><li><a href="global.html#clearBoardTasksField">clearBoardTasksField</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#clearSubtaskInputfield">clearSubtaskInputfield</a></li><li><a href="global.html#clearVariables">clearVariables</a></li><li><a href="global.html#closeAddContactAndGoToShowSingleContactContainer">closeAddContactAndGoToShowSingleContactContainer</a></li><li><a href="global.html#closeAddContactContainer">closeAddContactContainer</a></li><li><a href="global.html#closeAddContactContainerDesktop">closeAddContactContainerDesktop</a></li><li><a href="global.html#closeAddContactContainerWithoutAddingNewContact">closeAddContactContainerWithoutAddingNewContact</a></li><li><a href="global.html#closeCategoryMenu">closeCategoryMenu</a></li><li><a href="global.html#closeCategoryWindow">closeCategoryWindow</a></li><li><a href="global.html#closeContactWindow">closeContactWindow</a></li><li><a href="global.html#closeContacts">closeContacts</a></li><li><a href="global.html#closeEditContactWindow">closeEditContactWindow</a></li><li><a href="global.html#closeEditTask">closeEditTask</a></li><li><a href="global.html#closeHeaderSubMenu">closeHeaderSubMenu</a></li><li><a href="global.html#closeListener">closeListener</a></li><li><a href="global.html#closeMenu">closeMenu</a></li><li><a href="global.html#closeOpenTask">closeOpenTask</a></li><li><a href="global.html#closeShowSingleContactContainer">closeShowSingleContactContainer</a></li><li><a href="global.html#createUserSignatureIcon">createUserSignatureIcon</a></li><li><a href="global.html#deleteAtEditContactDesktop">deleteAtEditContactDesktop</a></li><li><a href="global.html#deleteBoardSubtask">deleteBoardSubtask</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteContactAtShowSingleContactMobile">deleteContactAtShowSingleContactMobile</a></li><li><a href="global.html#deleteContactAtSingleContactDesktop">deleteContactAtSingleContactDesktop</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#deleteTaskBoard">deleteTaskBoard</a></li><li><a href="global.html#desktopCloseAddContactContainerWithoutAddingNewContact">desktopCloseAddContactContainerWithoutAddingNewContact</a></li><li><a href="global.html#desktopOpenAddContactContainer">desktopOpenAddContactContainer</a></li><li><a href="global.html#determineTodaysDate">determineTodaysDate</a></li><li><a href="global.html#disableSaveProcess">disableSaveProcess</a></li><li><a href="global.html#dueDateRequired">dueDateRequired</a></li><li><a href="global.html#editBoardSubtask">editBoardSubtask</a></li><li><a href="global.html#editBoardSubtaskDone">editBoardSubtaskDone</a></li><li><a href="global.html#editBoardTask">editBoardTask</a></li><li><a href="global.html#editContactIsSavedGoToSingleContact">editContactIsSavedGoToSingleContact</a></li><li><a href="global.html#editFocusBorder">editFocusBorder</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#editSubtaskDone">editSubtaskDone</a></li><li><a href="global.html#emailAlreadyTaken">emailAlreadyTaken</a></li><li><a href="global.html#fillAllVariables">fillAllVariables</a></li><li><a href="global.html#fillAwait">fillAwait</a></li><li><a href="global.html#fillDone">fillDone</a></li><li><a href="global.html#fillProgress">fillProgress</a></li><li><a href="global.html#fillSignature">fillSignature</a></li><li><a href="global.html#fillTodo">fillTodo</a></li><li><a href="global.html#fillValue">fillValue</a></li><li><a href="global.html#filterNamesForAssignedTo">filterNamesForAssignedTo</a></li><li><a href="global.html#filterTitles">filterTitles</a></li><li><a href="global.html#findUserInUsersArray">findUserInUsersArray</a></li><li><a href="global.html#footer">footer</a></li><li><a href="global.html#footerMobile">footerMobile</a></li><li><a href="global.html#formatDateString">formatDateString</a></li><li><a href="global.html#generateRandomId">generateRandomId</a></li><li><a href="global.html#generateUserId">generateUserId</a></li><li><a href="global.html#getAllContactsFromCurrentUser">getAllContactsFromCurrentUser</a></li><li><a href="global.html#getCurrentContact">getCurrentContact</a></li><li><a href="global.html#getCurrentContactEmail">getCurrentContactEmail</a></li><li><a href="global.html#getCurrentContactNew">getCurrentContactNew</a></li><li><a href="global.html#getFirstChars">getFirstChars</a></li><li><a href="global.html#getListFirstChars">getListFirstChars</a></li><li><a href="global.html#getMonthName">getMonthName</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#getSignature">getSignature</a></li><li><a href="global.html#giveOnlyAssignedBg">giveOnlyAssignedBg</a></li><li><a href="global.html#goFromDeleteContactToListContact">goFromDeleteContactToListContact</a></li><li><a href="global.html#goFromListContactToShowSingleContact">goFromListContactToShowSingleContact</a></li><li><a href="global.html#goFromShowSingleContactToEditContact">goFromShowSingleContactToEditContact</a></li><li><a href="global.html#goFromSingleContactToListContactContainer">goFromSingleContactToListContactContainer</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#handleRememberme">handleRememberme</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#howManyTasks">howManyTasks</a></li><li><a href="global.html#howManyUrgent">howManyUrgent</a></li><li><a href="global.html#importExistentVariable">importExistentVariable</a></li><li><a href="global.html#initAddContact">initAddContact</a></li><li><a href="global.html#initAddTask">initAddTask</a></li><li><a href="global.html#initBoard">initBoard</a></li><li><a href="global.html#initEditContact">initEditContact</a></li><li><a href="global.html#initGreeting">initGreeting</a></li><li><a href="global.html#initHelp">initHelp</a></li><li><a href="global.html#initLegalNotice">initLegalNotice</a></li><li><a href="global.html#initListContact">initListContact</a></li><li><a href="global.html#initMainContact">initMainContact</a></li><li><a href="global.html#initPolicy">initPolicy</a></li><li><a href="global.html#initSaveProcess">initSaveProcess</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#initializeAllVariables">initializeAllVariables</a></li><li><a href="global.html#initializeOverlayContactIsCreated">initializeOverlayContactIsCreated</a></li><li><a href="global.html#inputAbfrage">inputAbfrage</a></li><li><a href="global.html#loadAwaitTasks">loadAwaitTasks</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#loadContactsIfSelected">loadContactsIfSelected</a></li><li><a href="global.html#loadContent">loadContent</a></li><li><a href="global.html#loadDoneTasks">loadDoneTasks</a></li><li><a href="global.html#loadProgressTasks">loadProgressTasks</a></li><li><a href="global.html#loadShowSingleContact">loadShowSingleContact</a></li><li><a href="global.html#loadTasks">loadTasks</a></li><li><a href="global.html#logOut">logOut</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginAsGuest">loginAsGuest</a></li><li><a href="global.html#moreAssignedTo">moreAssignedTo</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#offlineLegality">offlineLegality</a></li><li><a href="global.html#offlinePolicy">offlinePolicy</a></li><li><a href="global.html#onclickInputBorder">onclickInputBorder</a></li><li><a href="global.html#openAddContactContainer">openAddContactContainer</a></li><li><a href="global.html#openCategorySelect">openCategorySelect</a></li><li><a href="global.html#openContacts">openContacts</a></li><li><a href="global.html#openEditContactAtSingleContactDesktop">openEditContactAtSingleContactDesktop</a></li><li><a href="global.html#openEditContactContainer">openEditContactContainer</a></li><li><a href="global.html#openEmailProgram">openEmailProgram</a></li><li><a href="global.html#openTask">openTask</a></li><li><a href="global.html#preparePopupEvent">preparePopupEvent</a></li><li><a href="global.html#privacyPolicyCheckedValidateFn">privacyPolicyCheckedValidateFn</a></li><li><a href="global.html#pushDummyData">pushDummyData</a></li><li><a href="global.html#redirectToLoin">redirectToLoin</a></li><li><a href="global.html#redirectToRegister">redirectToRegister</a></li><li><a href="global.html#registerNewUser">registerNewUser</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#rememberUserFn">rememberUserFn</a></li><li><a href="global.html#removeActiveStyle">removeActiveStyle</a></li><li><a href="global.html#removeAssignedToContactBg">removeAssignedToContactBg</a></li><li><a href="global.html#removeClickListener">removeClickListener</a></li><li><a href="global.html#removeFocusBorder">removeFocusBorder</a></li><li><a href="global.html#removeHighlight">removeHighlight</a></li><li><a href="global.html#removeItem">removeItem</a></li><li><a href="global.html#removeLastIcon">removeLastIcon</a></li><li><a href="global.html#removeOpenedTask">removeOpenedTask</a></li><li><a href="global.html#removePrio">removePrio</a></li><li><a href="global.html#removeWhiteImg">removeWhiteImg</a></li><li><a href="global.html#renderBoardSubtasks">renderBoardSubtasks</a></li><li><a href="global.html#renderContactCards">renderContactCards</a></li><li><a href="global.html#renderContainerList">renderContainerList</a></li><li><a href="global.html#renderSubtasks">renderSubtasks</a></li><li><a href="global.html#renderTaskAssigneds">renderTaskAssigneds</a></li><li><a href="global.html#renderTaskCategory">renderTaskCategory</a></li><li><a href="global.html#renderTaskSubtasks">renderTaskSubtasks</a></li><li><a href="global.html#renderTaskValues">renderTaskValues</a></li><li><a href="global.html#requiredFields">requiredFields</a></li><li><a href="global.html#resetAlertBorder">resetAlertBorder</a></li><li><a href="global.html#resetAllAlertBorders">resetAllAlertBorders</a></li><li><a href="global.html#resetAllInputMessages">resetAllInputMessages</a></li><li><a href="global.html#resetBorderColor">resetBorderColor</a></li><li><a href="global.html#resetForm">resetForm</a></li><li><a href="global.html#resetInputFields">resetInputFields</a></li><li><a href="global.html#resetInputMessage">resetInputMessage</a></li><li><a href="global.html#saveChangesAtEditContact">saveChangesAtEditContact</a></li><li><a href="global.html#saveChangesAtEditContactMobile">saveChangesAtEditContactMobile</a></li><li><a href="global.html#saveChangesDesktop">saveChangesDesktop</a></li><li><a href="global.html#saveContactAddContact">saveContactAddContact</a></li><li><a href="global.html#saveContactAtAddContactDesktop">saveContactAtAddContactDesktop</a></li><li><a href="global.html#saveContactAtAddContactMobile">saveContactAtAddContactMobile</a></li><li><a href="global.html#saveCurrentBoardTask">saveCurrentBoardTask</a></li><li><a href="global.html#savedUsersInBackend">savedUsersInBackend</a></li><li><a href="global.html#searchUpcomingDate">searchUpcomingDate</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectContacts">selectContacts</a></li><li><a href="global.html#setActiveLink">setActiveLink</a></li><li><a href="global.html#setCurrentContactEmail">setCurrentContactEmail</a></li><li><a href="global.html#setMinDate">setMinDate</a></li><li><a href="global.html#setSummaryLetter">setSummaryLetter</a></li><li><a href="global.html#showAlertBorder">showAlertBorder</a></li><li><a href="global.html#showGreetScreen">showGreetScreen</a></li><li><a href="global.html#showInputMessage">showInputMessage</a></li><li><a href="global.html#showMobileSelectBtns">showMobileSelectBtns</a></li><li><a href="global.html#signatureAndIcon">signatureAndIcon</a></li><li><a href="global.html#signedUpSuccessfullyFn">signedUpSuccessfullyFn</a></li><li><a href="global.html#sortAllContactsFromCurrentUserAlphabetical">sortAllContactsFromCurrentUserAlphabetical</a></li><li><a href="global.html#splitName">splitName</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#subtaskFinish">subtaskFinish</a></li><li><a href="global.html#switchTask">switchTask</a></li><li><a href="global.html#switchTaskAwait">switchTaskAwait</a></li><li><a href="global.html#switchTaskDone">switchTaskDone</a></li><li><a href="global.html#switchTaskProgress">switchTaskProgress</a></li><li><a href="global.html#switchTaskTodo">switchTaskTodo</a></li><li><a href="global.html#toggleHeaderSubMenu">toggleHeaderSubMenu</a></li><li><a href="global.html#updateProgressBar">updateProgressBar</a></li><li><a href="global.html#userClicksOutsideOfInputField">userClicksOutsideOfInputField</a></li><li><a href="global.html#userClicksOutsideOfPopup">userClicksOutsideOfPopup</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validateEmailRegisterFn">validateEmailRegisterFn</a></li><li><a href="global.html#validatePasswordConfirmationFn">validatePasswordConfirmationFn</a></li><li><a href="global.html#whatsCategory">whatsCategory</a></li><li><a href="global.html#whatsPrio">whatsPrio</a></li><li><a href="global.html#whatsSignatures">whatsSignatures</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Feb 27 2025 20:03:55 GMT-0300 (Paraguay Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

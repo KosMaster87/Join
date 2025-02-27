@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/menu.css" />
+    <script src="./../../includeHTML.js"></script>
+
+    <script src="../js/addTask.js"></script>
+    <script src="../js/contact/listContact.js"></script>
+
+    <script src="../../js/menu.js"></script>
+    <title>Menü-Leiste</title>
+  </head>
+  <body>
+    <div class="desktopMenuLogo hide">
+      <img
+        class="desktopMenuLogoImage"
+        src="../assets/img/menu/desktopFooterLogo.svg"
+      />
+    </div>
+
+    <div class="menuItemBox" id="menuItemBox">
+      <div
+        class="menuItem activeLinkStyle"
+        id="navSummary"
+        onclick="includeContentHTML('summary')"
+      >
+        <div class="menuHoverBox">
+          <img src="../assets/img/menu/summaryIcon.svg" class="menuItemImage" />
+          <p class="menuFontSizing">Summary</p>
+        </div>
+      </div>
+
+      <div class="menuItem" id="navBoard" onclick="includeContentHTML('board')">
+        <div class="menuHoverBox">
+          <img src="../assets/img/menu/Vector.svg" class="menuItemImage" />
+          <p class="menuFontSizing">Board</p>
+        </div>
+      </div>
+
+      <div
+        class="menuItem"
+        id="navAddTask"
+        onclick="includeContentHTML('addTask')"
+      >
+        <div class="menuHoverBox">
+          <img
+            src="../assets/img/menu/addTasksIcon.svg"
+            class="menuItemImage"
+          />
+          <p class="menuFontSizing">Add Tasks</p>
+        </div>
+      </div>
+
+      <div
+        class="menuItem"
+        id="navContacts"
+        onclick="includeContentHTML('contacts')"
+      >
+        <div class="menuHoverBox">
+          <img
+            src="../assets/img/menu/contactsIcon.svg"
+            class="menuItemImage"
+          />
+          <p class="menuFontSizing">Contacts</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="desktopMenuPolicyBox hide">
+      <div
+        id="navPrivacyPolicy"
+        onclick="includeContentHTML('policyLogin')"
+        class="menuItemExtra menuHoverBoxExtra"
+      >
+        <p class="menuFontSizing">Privacy Policy</p>
+      </div>
+
+      <div
+        id="navLegalNotice"
+        onclick="includeContentHTML('legalityLogin')"
+        class="menuItemExtra menuHoverBoxExtra"
+      >
+        <p class="menuFontSizing">Legal Notice</p>
+      </div>
+    </div>
+  </body>
+</html>

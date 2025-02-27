@@ -1,0 +1,372 @@
+@import url("../style.css");
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: flex;
+}
+
+.nameIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  background-color: var(--white);
+  border-radius: 50%;
+  border: 3px solid var(--black);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--lightBlue);
+}
+
+.nameIcon:hover {
+  cursor: pointer;
+  background-color: var(--lighterGray) !important;
+}
+
+@media only screen and (max-width: 319px) and (min-width: 250px) {
+  .mainHeader {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    height: 3.5rem;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+  }
+
+  .headerSubMenu {
+    position: absolute;
+    right: 1rem;
+    top: 4rem;
+    z-index: 30;
+    width: 8.5rem;
+    height: 9rem;
+    background-color: var(--lightGray);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  .headerSubMenuHoverBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    width: 7.5rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    padding-left: 0.4rem;
+  }
+
+  .headerSubMenuHoverBox:hover {
+    background-color: var(--darkBlueHover);
+  }
+
+  .headerSubMenuHoverAnchor {
+    color: var(--fontWhite);
+    text-decoration: none;
+  }
+
+  .userSymbolContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-right: 1rem;
+  }
+
+  .userSymbolContainerHelp {
+    display: none;
+  }
+
+  .theProgramm {
+    display: none;
+  }
+
+  .logoImgContainer {
+    margin-left: 1rem;
+  }
+
+  .mainHeaderLogoImg {
+    width: 1.5rem;
+    cursor: pointer;
+  }
+
+  .userLogoImg {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 480px) and (min-width: 320px) {
+  .mainHeader {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    height: 3.5rem;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+  }
+
+  .headerSubMenu {
+    display: none;
+    position: absolute;
+    right: 1rem;
+    top: 4rem;
+    z-index: 30;
+    width: 8.5rem;
+    height: 9rem;
+    background-color: var(--lightGray);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  .headerSubMenuHoverBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    width: 7.5rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    padding-left: 0.4rem;
+  }
+
+  .headerSubMenuHoverBox:hover {
+    background-color: var(--darkBlueHover);
+  }
+
+  .headerSubMenuHoverAnchor {
+    color: var(--fontWhite);
+    text-decoration: none;
+  }
+
+  .userSymbolContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-right: 1rem;
+  }
+
+  .userSymbolContainerHelp {
+    display: none;
+  }
+
+  .theProgramm {
+    display: none;
+  }
+
+  .logoImgContainer {
+    margin-left: 1rem;
+  }
+
+  .mainHeaderLogoImg {
+    width: 1.5rem;
+    cursor: pointer;
+  }
+
+  .userLogoImg {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 720px) and (min-width: 481px) {
+  .mainHeader {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    height: 3.5rem;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+  }
+
+  .headerSubMenu {
+    display: none;
+    position: absolute;
+    right: 1rem;
+    top: 4rem;
+    z-index: 30;
+    width: 8.5rem;
+    height: 9rem;
+    background-color: var(--lightGray);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  .headerSubMenuHoverBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    width: 7.5rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    padding-left: 0.4rem;
+  }
+
+  .headerSubMenuHoverBox:hover {
+    background-color: var(--darkBlueHover);
+  }
+
+  .headerSubMenuHoverAnchor {
+    color: var(--fontWhite);
+    text-decoration: none;
+  }
+
+  .userSymbolContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-right: 1rem;
+  }
+
+  .userSymbolContainerHelp {
+    display: none;
+  }
+
+  .theProgramm {
+    display: none;
+  }
+
+  .logoImgContainer {
+    margin-left: 1rem;
+  }
+
+  .mainHeaderLogoImg {
+    width: 1.5rem;
+    cursor: pointer;
+  }
+
+  .userLogoImg {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 2560px) and (min-width: 721px) {
+  .mainHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    height: 3.5rem;
+    top: 0;
+    left: 10rem;
+    right: 0;
+    position: fixed;
+    z-index: 5;
+  }
+
+  .headerSubMenu {
+    position: absolute;
+    right: 1rem;
+    top: 3.5rem;
+    z-index: 30;
+    width: 9rem;
+    height: 9rem;
+    background-color: var(--lightGray);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  .headerSubMenuHoverBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    width: 8rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    padding-left: 0.4rem;
+  }
+
+  .headerSubMenuHoverBox:hover {
+    background-color: var(--darkBlueHover);
+  }
+
+  .headerSubMenuHoverAnchor {
+    color: var(--fontWhite);
+    text-decoration: none;
+  }
+
+  .theProgramm {
+    display: block;
+    margin-left: 4rem;
+  }
+
+  .logoImgContainer {
+    display: none;
+    margin-left: 1rem;
+  }
+
+  .userSymbolContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-right: 1rem;
+  }
+
+  .userSymbolContainerHelp {
+    display: block;
+    width: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+  }
+
+  .userSymbolContainerHelp:hover {
+    transform: scale(1.2);
+  }
+
+  .userLogoImg {
+    display: fle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+  }
+}

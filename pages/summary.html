@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../css/summary.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/menu.css" />
+    <link rel="stylesheet" href="./../style.css" />
+
+    <script src="./../includeHTML.js"></script>
+    <script src="./../script.js"></script>
+    <script src="../js/register.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/header.js"></script>
+
+    <script src="../js/summary.js"></script>
+    <link rel="icon" type="image/x-icon" href="../assets/img/login/secondLogo.svg">
+    <title>Summary</title>
+  </head>
+  <body onload="initSummary()">
+    <div
+      w3-include-html="../assets/templates/header.html"
+      id="mainHeader"
+      class="mainHeader"
+    ></div>
+
+    <div class="summaryContent mainContent" id="summaryContent">
+      <div class="greetingUserSummary hide" id="GreetingsMobile">
+        <p class="greetingUserSummaryParagraf" id="greetingMobile"></p>
+      </div>
+
+      <div class="summaryToDos" id="summaryToDos">
+        <div class="summaryRowContent">
+          <div class="summaryHeaderHelper">
+            <h1 class="summaryHeadline1">Join 360</h1>
+            <br />
+            <p class="headlinePara">Key Metrics at a Glance</p>
+            <div class="verticalLine"></div>
+          </div>
+
+          <div class="row1">
+            <div
+              class="reactangle borderRadius backgroundColor reactangelBoxShadow cursorPointer"
+              onmouseover="changeImage(this)"
+              onmouseout="changeImageBack(this)"
+              onclick="includeContentHTML('board')"
+            >
+              <img
+                src="../assets/img/summary/summaryGrayEdit.svg"
+                class="todoSpecial summaryAnimateProgramm editImage"
+              />
+
+              <div class="summaryToDoSum" onclick="includeContentHTML('board')">
+                <p
+                  class="sammarySumNumberTill480 sammarySumNumberTill720 sammarySumNumberTill1028 sammarySumNumberTill1440 sammarySumNumberTill2560"
+                  id="summeryTodoTodos"
+                >
+                  0
+                </p>
+                <p
+                  class="summaryTextTill480 summaryTextTill720 summaryTextTill1028 summaryTextTill1440 summaryTextTill10282560"
+                >
+                  To-do
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="reactangle borderRadius backgroundColor reactangelBoxShadow cursorPointer"
+              onmouseover="changeImage(this)"
+              onmouseout="changeImageBack(this)"
+              onclick="includeContentHTML('board')"
+            >
+              <img
+                src="../assets/img/summary/summaryCheckGray.svg"
+                class="doneSpecial summaryAnimateProgramm checkImage"
+              />
+              <div class="summaryToDoSum" onclick="includeContentHTML('board')">
+                <p
+                  class="sammarySumNumberTill480 sammarySumNumberTill720 sammarySumNumberTill1028 sammarySumNumberTill1440 sammarySumNumberTill2560"
+                  id="summeryDoneTodos"
+                >
+                  0
+                </p>
+                <p
+                  class="summaryTextTill480 summaryTextTill720 summaryTextTill1028 summaryTextTill1440 summaryTextTill10282560"
+                >
+                  Done
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="row2Helper borderRadius backgroundColor reactangelBoxShadow cursorPointer"
+          >
+            <div class="row2summary" onclick="includeContentHTML('board')">
+              <img src="./../assets/img/summary/Frame59Urgent.svg" />
+
+              <div class="summaryToDoSum">
+                <p
+                  class="sammarySumNumberTill480 sammarySumNumberTill720 sammarySumNumberTill1028 sammarySumNumberTill1440 sammarySumNumberTill2560"
+                  id="summeryUpcomingTasks"
+                >
+                  0
+                </p>
+                <p
+                  class="summaryTextTill480 summaryTextTill720 summaryTextTill1028 summaryTextTill1440 summaryTextTill10282560"
+                >
+                  Urgent
+                </p>
+              </div>
+            </div>
+
+            <div class="urgentDater" onclick="includeContentHTML('board')">
+              <div class="prioVerticalLine"></div>
+              <div class="summaryDeadlineBox">
+                <p class="summaryDeadDater" id="summeryUrgentDate">0</p>
+                <p class="summaryDeadUpcoming">Upcoming Deadline</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row3">
+            <div
+              class="squareButton borderRadius backgroundColor reactangelBoxShadow cursorPointer"
+            >
+              <div class="summaryToDoSum" onclick="includeContentHTML('board')">
+                <p
+                  class="sammarySumNumberTill480 sammarySumNumberTill720 sammarySumNumberTill1028 sammarySumNumberTill1440 sammarySumNumberTill2560"
+                  id="dataTodos"
+                >
+                  0
+                </p>
+                <p
+                  class="summaryTextTill480 summaryTextTill720 summaryTextTill1028 summaryTextTill1440 summaryTextTill10282560"
+                >
+                  Tasks in<br />Board
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="squareButton borderRadius backgroundColor reactangelBoxShadow cursorPointer"
+            >
+              <div class="summaryToDoSum" onclick="includeContentHTML('board')">
+                <p
+                  class="sammarySumNumberTill480 sammarySumNumberTill720 sammarySumNumberTill1028 sammarySumNumberTill1440 sammarySumNumberTill2560"
+                  id="summeryProcessTasks"
+                >
+                  0
+                </p>
+                <p
+                  class="summaryTextTill480 summaryTextTill720 summaryTextTill1028 summaryTextTill1440 summaryTextTill10282560"
+                >
+                  Tasks in<br />Progress
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="squareButton borderRadius backgroundColor reactangelBoxShadow cursorPointer"
+            >
+              <div class="summaryToDoSum" onclick="includeContentHTML('board')">
+                <p
+                  class="sammarySumNumberTill480 sammarySumNumberTill720 sammarySumNumberTill1028 sammarySumNumberTill1440 sammarySumNumberTill2560"
+                  id="summeryAwaitingTask"
+                >
+                  0
+                </p>
+                <p
+                  class="summaryTextTill480 summaryTextTill720 summaryTextTill1028 summaryTextTill1440 summaryTextTill10282560"
+                >
+                  Awaiting<br />feedback
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="greetingBoxShow">
+          <h1 class="greetingsDesktop" id="greetingsDesktop"></h1>
+          <p class="greetingNameDesktop" id="greetingNameDesktop"></p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      w3-include-html="../assets/templates/menu.html"
+      id="afterLoginMainMenu"
+      class="afterLoginMainMenu"
+    ></div>
+  </body>
+</html>

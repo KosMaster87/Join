@@ -1,0 +1,434 @@
+/* EDIT CONTACT CSS */
+
+#mobileBtnEditContact {
+  background-color: var(--lightGray);
+  border-radius: 50%;
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  position: fixed;
+  bottom: 8.5%;
+  right: 5%;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  line-height: 1.2;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+#mobileBtnEditContact:hover {
+  cursor: pointer;
+}
+
+#editContactContainer {
+  background-color: rgba(0, 0, 0, 0.25);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 22;
+}
+
+#editOverlayFrame {
+  display: none;
+  position: fixed;
+  top: 0;
+  /*right: -100%; Startposition außerhalb des sichtbaren Bereichs - vorübergehend ausgeschaltet */
+  width: 100%;
+  height: 100%;
+  transition: right 1s ease; /* Transition für die Animation: 0.5 Sekunden, einfacher Übergangseffekt */
+}
+
+#contactHeaderCloseIcon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#contactHeaderCloseIcon:hover {
+  cursor: pointer;
+  background-color: var(--lightBlue) !important;
+}
+
+#contactHeaderCloseIcon:focus {
+  background-color: var(--lightBlue) !important;
+}
+
+.overlayVisible {
+  right: 0 !important; /* Zielposition für das Hereinsliden */
+}
+
+.editContactHeaderSection {
+  margin-top: 80px;
+}
+
+/* ÜBERARBEITEN */
+.editContactHeadline {
+  color: var(--white);
+  font-weight: 700;
+  font-size: 47px;
+  line-height: 1.2;
+}
+
+.editContactSubtitle {
+  color: var(--white);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  display: none;
+}
+
+#editContactHeaderSignature {
+  width: 120px;
+  height: 120px;
+  background-color: var(--red);
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 92px;
+  left: calc(50% - 61px);
+  color: white;
+  font-size: 47px;
+  font-weight: 500;
+}
+
+.editContactBtnRow {
+  display: flex;
+  margin-top: 36px;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.editContactBtnDelete {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--lightGray);
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 18px 10px;
+  border: 1px solid var(--lightGray);
+}
+
+.editContactBtnDelete:hover {
+  cursor: pointer;
+}
+
+#editContactInputContainerName {
+  border: solid 1px var(--lighterGray);
+}
+
+#editContactInputContainerEmail {
+  border: solid 1px var(--lighterGray);
+}
+
+#editContactInputContainerPhone {
+  border: solid 1px var(--lighterGray);
+}
+
+#editContactInputFieldName {
+  border: 1px solid var(--lighterGray);
+  width: 100%;
+}
+
+#editContactInputFieldName:focus {
+  border-color: var(--lightBlue);
+}
+
+#editContactInputFieldEmail {
+  border: 1px solid var(--lighterGray);
+}
+
+#editContactInputFieldPhone {
+  border: 1px solid var(--lighterGray);
+}
+
+.editContactMessageContainer {
+  padding: 0;
+  margin: 3px 0;
+  height: 17px;
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Zusammenfassen */
+#editContactMessageName {
+  font-size: 11px;
+  color: red;
+}
+
+#editContactMessageEmail {
+  font-size: 11px;
+  color: red;
+}
+
+#editContactMessagePhone {
+  font-size: 11px;
+  color: red;
+}
+
+#editContactInputName {
+  width: 100%;
+}
+
+#editContactInputEmail {
+  width: 100%;
+}
+
+#editContactInputPhone {
+  width: 100%;
+}
+
+#editContactBtnSaveMobile {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--white);
+  background-color: var(--lightGray);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+#editContactBtnSaveMobile:hover {
+  cursor: pointer;
+}
+
+#editContactCancelBtnDesktop {
+  display: none;
+}
+#editContactSaveBtnDesktop {
+  display: none;
+}
+
+@media screen and (min-width: 1000px) {
+}
+
+@media screen and (min-width: 1200px) {
+
+  .editContactHeaderSection {
+    margin-top: 0;
+  }
+
+  #editContactHeaderSignature {
+    display: none;
+  }
+
+  .editContactHeadline {
+    margin-top: 16px;
+  }
+
+  .contactContainerFlexZwei {
+    display: flex;
+    background-color:blue; 
+  }
+  
+  #editContactBodySignature {
+    display: flex;
+    width: 120px;
+    height: 120px;
+    background-color: var(--lighterGray);
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    z-index: 5;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    color: var(--white);
+    font-size: 47px;
+    font-weight: 500;
+  }
+
+  #editContactBtnSaveMobile {
+    display: none;
+  }
+
+  #editContactCancelBtnDesktop {
+    display: flex;
+    border: 1px solid var(--lightGray);
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 15px 24px;
+  }
+
+  #editContactCancelBtnDesktop:hover {
+    border: 1px solid var(--lightBlue);
+    color: var(--lightBlue);
+    cursor: pointer;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+  }
+
+  #editContactSaveBtnDesktop {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 18px 10px;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--white);
+    background-color: var(--lightGray);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  #editContactSaveBtnDesktop:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background-color: var(--lightBlue);
+  }
+
+  #editContactBodyBtnRowDesktop {
+    display: flex;
+    margin-top: 36px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  #editContactBtnSaveMobile {
+    display: none;
+  }
+
+  #editContactContainer {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+
+  .editContactHeaderSection {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+    margin: 0;
+  }
+
+  .editContactHeadline {
+    font-size: 61px;
+    margin-top: 0;
+    line-height: 1.2;
+  }
+
+  .editContactSubtitle {
+    color: var(--white);
+    font-weight: 400;
+    font-size: 27px;
+  }
+
+  .nameInputField {
+    width: 100%;
+  }
+
+  input::placeholder {
+    color: var(--lighterGray);
+  }
+
+  #contactBodytBtnRow {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 300px) {
+  #editContactContainer {
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+}
+
+@media screen and (min-width: 456px) {
+  #editContactContainer {
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+}
+
+@media screen and (max-width: 721px) {
+  #editContactContainer {
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+  }
+
+  @media screen and (min-width: 1000px) {
+  }
+
+  @media screen and (min-width: 1200px) {
+    #contactBodytBtnRowMobile {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 1440px) {
+    #editContactBtnSaveMobile {
+      display: none;
+    }
+
+    .editContactHeaderSection {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: flex-start;
+      margin: 0;
+    }
+
+    .editContactHeadline {
+      font-size: 61px;
+      line-height: 1.2;
+    }
+
+    .editContactSubtitle {
+      color: var(--white);
+      font-weight: 400;
+      font-size: 27px;
+      line-height: 1.2;
+    }
+
+    #contactBodyCloseIcon {
+      display: block;
+      position: relative;
+      top: -93px;
+      left: 684px;
+    }
+
+    .contactCancelBtn {
+      display: flex;
+      border: 1px solid var(--lightGray);
+      border-radius: 10px;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.2;
+      padding: 18px 10px;
+    }
+
+    .contactCancelBtn:hover {
+      border: 1px solid var(--lightBlue);
+      color: var(--lightBlue);
+    }
+
+  }
+}

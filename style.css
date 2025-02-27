@@ -1,0 +1,84 @@
+@import url("./css/fonts.css");
+
+:root {
+  --lighterGray: #d1d1d1;
+  --lightGray: #2a3647;
+  --lightBlue: #29abe2;
+  --intenseBlue: #007cee;
+  --darkBlue: #091931;
+  --darkBlueHover: #19273d;
+  --green: #7ae229;
+  --organe: #ff3d00;
+  --orangeIcons: #ff7a00;
+  --red: #ff3d00;
+  --yellow: #ffa800;
+  --pink: #fc71ff;
+  --mintGreen: #1fd7c1;
+  --whiteGray: #f6f7f8;
+  --white: #fff;
+  --wrongInputBorder: #ff001f;
+  --wrongInputText: #ff8190;
+  --fontGray: #a8a8a8;
+  --fontWhite: #cdcdcd;
+  --black: #000000;
+  --purple: #9327ff;
+  --curry: #ffbb2b;
+  --greenIcon: #1fd7c1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: flex;
+}
+
+.registerMain {
+  flex-direction: column;
+}
+
+.loginMain {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 720px) and (min-width: 250px) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mainContent {
+    min-height: calc(100dvh - 3.5rem);
+    display: flex;
+    justify-content: center;
+    background-color: var(--whiteGray);
+  }
+}
+
+@media only screen and (max-width: 2560px) and (min-width: 721px) {
+  .mainContent {
+    height: 100dvh;
+    bottom: 0;
+    display: flex;
+    padding-left: 160px;
+    padding-top: 56px;
+    background-color: var(--whiteGray);
+  }
+}

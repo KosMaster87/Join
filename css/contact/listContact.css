@@ -1,0 +1,152 @@
+/* LIST CONTACT CONTAINER */
+
+#listContactContainer {
+  max-width: 456px;
+  display: none;
+  flex-direction: column;
+  background-color: white;
+  padding: 24px 24px;
+  position: absolute;
+  top: 50px;
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100vh-60px);
+}
+
+#alphabeticalRow {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.firstChartSort {
+  font-size: 20px;
+  padding: 17px 36px;
+}
+
+/* singleContact */
+.singleContact {
+  display: flex;
+  padding: 15px 24px;
+  gap: 35px;
+}
+
+a.singleContact:hover {
+  cursor: pointer;
+  background-color: var(--whiteGray);
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+  color: var(--white);
+}
+
+/* contact signature icon */
+.contactSignatureIcon {
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--white);
+}
+
+.contactSignatureIconLetter {
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* contact data */
+
+.contactName {
+  color: var(--black);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.contactEmail {
+  color: var(--intenseBlue);
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.styleHr {
+  width: 100%;
+  height: 1px;
+  background-color: var(--lighterGray);
+  margin: 8px 0;
+}
+
+.d-none {
+  display: none;
+}
+
+
+@media screen and (min-width: 456px) {
+  #listContactContainer {
+    max-width: 456px;
+    top: 40px;
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 721px) {
+  #listContactContainer {
+    max-width: 456px;
+    top: 40px;
+    width: 70%;
+  }
+} 
+
+@media screen and (min-width: 1000px) {
+  #listContactContainer {
+    max-width: 456px;
+    top: 40px;
+    width: 50%;
+  }
+
+  .focusNewContact {
+    background-color: var(--lightGray);
+    border-radius: 10px;
+    width: 352px;
+    height: 78px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #listContactContainer {
+    max-width: 456px;
+    max-width: 456px;
+    flex: 1;
+    overflow-y: auto;
+    position: static;
+    border: none;
+  }
+
+  .active {
+    background-color: var(--lightGray);
+    border-radius: 10px; 
+  }
+
+  .active .contactName{
+    color: white;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  #listContactContainer {
+    max-width: 456px;
+    /* top: 155px; */
+    width: 456px;
+  }
+}
+@media (max-width: 1200px) {
+.mainContent{
+  background-color: var(--white) !important;
+}
+
+}

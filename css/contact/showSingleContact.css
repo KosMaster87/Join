@@ -1,0 +1,339 @@
+body {
+  background-color: var(--whiteGray) !important;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 42px;
+}
+
+#showSingleContactContainer {
+  z-index: 2;
+  display: none;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--whiteGray);
+}
+
+#singleContact {
+  position: relative;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+}
+
+#mobileShowContact {
+  background-color: var(--whiteGray);
+  height: 100vh;
+  padding: 0 16px;
+}
+
+.singleContactHeader {
+  display: flex;
+  flex-direction: column;
+}
+
+#singleContactNav {
+  margin-top:-40px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+#singleContactNav:hover {
+  cursor: pointer;
+  background-color: #eeeeee;
+  border-radius: 50px;
+}
+
+#singleContactNav:active {
+  transform: scale(1.1);
+}
+
+#singleContactDesktopButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.singleContactDestopBtn {
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  gap: 8px;
+  transition: background-color 0.3s, font-weight 0.3s;
+}
+
+.singleContactDestopBtn:hover {
+  color: var(--lightBlue);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#desktopBtnDelete:hover img {
+  content: url('../../assets/img/contact/deleteBlue.svg')
+}
+
+#desktopBtnEdit:hover img {
+  content: url('../../assets/img/contact/editBlue.svg')
+}
+
+.desktopBtnIcon {
+  width: 18.28px;
+  height: 18.28px;
+}
+
+.singleContactHeaderBorder {
+  height: 2px;
+  width: 90px;
+  background-color: var(--lightBlue);
+  margin-top: 8px;
+}
+
+.singleContactHeadline {
+  color: var(--black);
+  font-weight: 700;
+  font-size: 47px;
+  line-height: 1.2;
+}
+
+.singleContactSubtitle {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+#singleContactCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 36px;
+}
+
+.singleContactDisplayIdentidy {
+  display: flex;
+  gap: 42px;
+  align-items: center;
+}
+
+.singleContactName {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.singleContactIconName {
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 1.2;
+}
+
+#singleContactSignature {
+  color: var(--white);
+  width: 80px;
+  height: 80px;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 27px;
+  line-height: 1.2;
+  box-shadow: 0, 0, 4, 0, rgba(0, 0, 0, 0.4);
+}
+
+.singleContactDescription {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.singleContactLabel {
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.singleContactEmailLink {
+  color: var(--intenseBlue);
+}
+
+.singleContactEmailLink:hover {
+  cursor: pointer;
+}
+
+#overlayContactIsCreated {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 326px;
+  height: 74px;
+  border-radius: 20px;
+  font-size: 20px;
+  background-color: var(--lightGray);
+  color: var(--white);
+  animation: slideInSuccesfully 1s forwards;
+  z-index: 1000;
+  position: fixed; 
+  top: 80%;
+  left: 50%; 
+  transform: translate(-50%, -50%);
+}
+
+@keyframes slideInSuccesfully {
+  from {
+    left: 150%; /* Startposition rechts außerhalb des Bildschirms */
+  }
+  to {
+    left: 50%; /* Endposition in der Mitte des Bildschirms */
+  }
+}
+
+@media (max-width: 720px) {
+  #singleContact {
+    top: 56px;
+    padding-left: 10px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .singleContactHeader {
+    display: flex;
+  }
+  .singleContactHeader {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .singleContactHeaderBorder {
+    order: 2;
+    transform: rotate(90deg);
+    width: 59px;
+  }
+
+  #singleContact {
+    padding-left: 55px;
+  }
+
+  #singleContactCol {
+    display: none;
+  }
+
+  .singleContactHeadline {
+    order: 1;
+    font-size: 61px;
+  }
+
+  .singleContactSubtitle {
+    order: 3;
+    font-size: 27px;
+  }
+
+  .singleContactDescription {
+    margin: 24px 0;
+  }
+
+  .singleContactDestopBtn {
+    display: flex;
+  }
+
+  .singleContactDisplayIdentidy {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 1199px) {
+  #showSingleContactContainer {
+    width: 100%;
+    padding-left: 0px !important;
+  }
+
+  #singleContactNav{
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #contactOverlay {
+    display: none;
+  }
+
+  #singleContact {
+    position: relative;
+    top: 80px;
+  }
+
+  #showSingleContactContainer {
+    display: flex;
+    position: static;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: calc(100%-456px);
+    background-color: var(--whiteGray);
+    overflow: hidden;
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0;
+  }
+
+  .singleContactDisplayIdentidy {
+    display: flex;
+    gap: 42px;
+    align-items: center;
+  }
+
+  .singleContactName {
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .singleContactIconName {
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 1.2;
+  }
+
+  #singleContactSignature {
+    color: var(--white);
+    width: 120px;
+    height: 120px;
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 1.2;
+    box-shadow: 0, 0, 4, 0, rgba(0, 0, 0, 0.4);
+  }
+
+}
+
+@media screen and (min-width: 1440px) {
+}

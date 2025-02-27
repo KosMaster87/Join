@@ -1,0 +1,44 @@
+#body {
+    display: flex;
+  }
+
+/* #mainContact {
+    display:flex;
+    flex-direction: column;
+    background-color: blue;
+}
+  
+  @media screen and (min-width: 721px) {
+
+  }
+  
+  @media screen and (min-width: 800px) {
+
+  }
+
+  @media screen and (min-width: 1200px) {
+    #mainContact {
+        flex-direction: row;
+        background-color: red;
+       
+    }
+
+    #listContactContainer {
+        display: flex; 
+        flex-grow: 0;
+        width: 500px;
+        box-sizing: border-box;
+    }
+
+    #showSingleContactContainer {
+        display: inline;
+        flex-grow: 1; 
+        background-color: green;
+        width: calc(100% - 500px);
+        box-sizing: border-box;
+    }
+  }
+  
+  @media screen and (min-width: 1440px) {
+  } */
+  

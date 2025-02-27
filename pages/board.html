@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/board.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/menu.css" />
+    <link rel="stylesheet" href="../css/addTask.css" />
+
+    <script src="./../../includeHTML.js"></script>
+    <script src="./../script.js"></script>
+    <script src="../js/register.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/header.js"></script>
+    
+    <script src="./../js/board/board.js"></script>
+    <script src="./../js/board/boardFill.js"></script>
+    <script src="./../js/board/boardHTML.js"></script>
+    <script src="./../js/board/boardEdit.js"></script>
+    <script src="./../js/board/boardEditHTML.js"></script>
+    <script src="./../js/board/boardDragSearch.js"></script>
+    <link rel="icon" type="image/x-icon" href="../assets/img/login/secondLogo.svg">
+    <title>Board Kanban</title>
+  </head>
+  <body onload="initBoard()">
+    <div w3-include-html="../assets/templates/header.html" id="mainHeader" class="mainHeader"></div>
+
+    <div id="mainContent" class="mainContent">
+      <div id="boardMainContainerId" class="boardMainContainer">
+        <div class="headBox">
+          <div class="mobileHead">
+          <h1>Board</h1>
+          <img onclick="includeContentHTML('addTask')" class="boardMobilAddTask" src="../assets/img/board/add.svg" />
+        </div>
+          <div class="boardDesktopHeadRight">
+            <div class="searchTaskInputField">
+              <input onkeyup="filterTitles()" id="boardSearchInput" placeholder="Find Task" />
+              <img src="../assets/img/board/search.svg" />
+            </div>
+            <div onclick="includeContentHTML('addTask')" class="boardDesktopAddTask">
+              <p class="boardDesktopAddTaskText">Add Task</p>
+              <img src="../assets/img/board/add_white.svg" />
+            </div>
+          </div>
+        </div>
+
+        <div id="taskBoxId" class="taskBox">
+          <div class="selectionContainer">
+            <div class="headContainer">
+              <h2>To do</h2>
+              <img onclick="includeContentHTML('addTask')" src="../assets/img/board/add_mobile.svg" />
+            </div>
+            <div
+              id="TodoMainContainer"
+              ondrop="moveTo('to-do')"
+              ondragover="allowDrop(event); highlight('TodoMainContainer')"
+              ondragleave="removeHighlight('TodoMainContainer')"
+              class="boxesContainer"
+            ></div>
+          </div>
+
+          <div class="selectionContainer">
+            <div class="headContainer">
+              <h2>In progress</h2>
+              <img onclick="includeContentHTML('addTask')" src="../assets/img/board/add_mobile.svg" />
+            </div>
+            <div
+              id="progressMainContainer"
+              ondrop="moveTo('progress')"
+              ondragover="allowDrop(event); highlight('progressMainContainer')"
+              ondragleave="removeHighlight('progressMainContainer')"
+              class="boxesContainer"
+            ></div>
+          </div>
+          <div class="selectionContainer">
+            <div class="headContainer">
+              <h2>Await for feedback</h2>
+              <img onclick="includeContentHTML('addTask')" src="../assets/img/board/add_mobile.svg" />
+            </div>
+            <div
+              id="awaitMainContainer"
+              ondrop="moveTo('await')"
+              ondragover="allowDrop(event); highlight('awaitMainContainer')"
+              ondragleave="removeHighlight('awaitMainContainer')"
+              class="boxesContainer"
+            ></div>
+          </div>
+
+          <div class="selectionContainer">
+            <div class="headContainer">
+              <div>
+                <h2>Done</h2>
+              </div>
+            </div>
+            <div
+              id="doneMainContainer"
+              ondrop="moveTo('done')"
+              ondragover="allowDrop(event); highlight('doneMainContainer')"
+              ondragleave="removeHighlight('doneMainContainer')"
+              class="boxesContainer"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      w3-include-html="../assets/templates/menu.html"
+      id="afterLoginMainMenu"
+      class="afterLoginMainMenu"
+    ></div>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "source": {
+    "include": ["js", "pages"], // Verzeichnisse, die die zu dokumentierenden Dateien enthalten
+    "includePattern": ".+\\.js(doc|x)?$", // Regulärer Ausdruck zum Filtern von Dateien
+    "excludePattern": "(node_modules|\\.test\\.js$|\\.html$)" // Dateien und Verzeichnisse, die ausgeschlossen werden sollen
+  },
+  "opts": {
+    "destination": "./docs", // Zielverzeichnis für die generierte Dokumentation
+    "recurse": true // Unterverzeichnisse einbeziehen
+  },
+  "plugins": ["plugins/markdown"], // Markdown-Unterstützung aktivieren
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}
