@@ -42,6 +42,11 @@ function userClicksOutsideOfPopup(event) {
  * Logs out the current user by clearing stored data and redirecting to the login page.
  */
 async function logOut() {
+  if (user && user.isGuest) {
+    const collection = "guests";
+    await removeItem(collection, user.id);
+  }
+
   localStorage.removeItem("currentUserId");
   sessionStorage.removeItem("showedLoginGreeting");
   localStorage.removeItem("rememberMe");
