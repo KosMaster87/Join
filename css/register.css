@@ -321,7 +321,7 @@
     color: var(--lightBlue);
   }
 
-  .mobilePoliceLegal {
+  .mobilePolicyLegal {
     margin-bottom: 0.3rem;
     position: absolute;
     bottom: 0;
@@ -331,14 +331,14 @@
     gap: 1rem;
   }
 
-  .mobilePoliceLegalLink {
+  .mobilePolicyLegalLink {
     color: var(--fontGray);
     transition: transform 0.5s ease;
     font-size: 0.6rem !important;
     text-decoration: none;
   }
 
-  .mobilePoliceLegalLink:hover {
+  .mobilePolicyLegalLink:hover {
     cursor: pointer;
     color: var(--lightBlue);
     transform: scaleX(1.2);
@@ -564,7 +564,7 @@
     color: var(--lightBlue);
   }
 
-  .mobilePoliceLegal {
+  .mobilePolicyLegal {
     margin-bottom: 1.2rem;
     position: absolute;
     bottom: 0;
@@ -574,14 +574,14 @@
     gap: 1rem;
   }
 
-  .mobilePoliceLegalLink {
+  .mobilePolicyLegalLink {
     color: var(--fontGray);
     transition: transform 0.5s ease;
     font-size: 0.6rem !important;
     text-decoration: none;
   }
 
-  .mobilePoliceLegalLink:hover {
+  .mobilePolicyLegalLink:hover {
     cursor: pointer;
     color: var(--lightBlue);
     transform: scaleX(1.2);
@@ -807,7 +807,7 @@
     color: var(--lightBlue);
   }
 
-  .mobilePoliceLegal {
+  .mobilePolicyLegal {
     margin-bottom: 1.2rem;
     position: absolute;
     bottom: 0;
@@ -817,14 +817,14 @@
     gap: 1.5rem;
   }
 
-  .mobilePoliceLegalLink {
+  .mobilePolicyLegalLink {
     color: var(--fontGray);
     transition: transform 0.5s ease;
     font-size: 0.9rem !important;
     text-decoration: none;
   }
 
-  .mobilePoliceLegalLink:hover {
+  .mobilePolicyLegalLink:hover {
     cursor: pointer;
     color: var(--lightBlue);
     transform: scaleX(1.2);
@@ -1050,7 +1050,7 @@
     color: var(--lightBlue);
   }
 
-  .mobilePoliceLegal {
+  .mobilePolicyLegal {
     margin-bottom: 1.2rem;
     position: absolute;
     bottom: 0;
@@ -1060,14 +1060,14 @@
     gap: 2rem;
   }
 
-  .mobilePoliceLegalLink {
+  .mobilePolicyLegalLink {
     color: var(--fontGray);
     transition: transform 0.5s ease;
     font-size: 1rem !important;
     text-decoration: none;
   }
 
-  .mobilePoliceLegalLink:hover {
+  .mobilePolicyLegalLink:hover {
     cursor: pointer;
     color: var(--lightBlue);
     transform: scaleX(1.2);

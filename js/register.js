@@ -158,7 +158,7 @@ function checkedPrivacy() {
     checkedElement.setAttribute("checked", "checked");
     registerBtn.disabled = false;
   } else {
-    errorMessage.innerHTML = "U must accept the privacy police";
+    errorMessage.innerHTML = "U must accept the privacy policy";
     confirmedValidation = false;
     checkedElement.removeAttribute("checked", "");
   }
@@ -174,7 +174,7 @@ function privacyPolicyCheckedValidateFn() {
     .hasAttribute("checked");
 
   if (!privacyPolicyChecked) {
-    errorMessage.innerHTML = "U must accept the privacy police";
+    errorMessage.innerHTML = "U must accept the privacy policy";
     confirmedValidation = false;
   } else {
     confirmedValidation = true;
