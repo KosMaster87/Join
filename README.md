@@ -69,13 +69,13 @@ A Kanban-style productivity tool with contact management, drag & drop tasks, and
 ```text
 join/
 ├── assets/
-│   ├── fonts/          # Inter font variants
-│   ├── img/            # SVG icons & UI elements
+│   ├── fonts/                   # Inter font variants
+│   ├── img/                     # SVG icons & UI elements
 │   │   ├── addContact/
 │   │   ├── add_task/
 │   │   ├── board/
 │   │   └── ...        
-│   └── templates/      # HTML partials
+│   └── templates/               # HTML partials
 │       ├── header.html
 │       └── menu.html
 │
@@ -83,23 +83,23 @@ join/
 │   ├── addTask.css
 │   ├── board.css
 │   ├── contact/
-│   └── ...             # Page-specific styles
+│   └── ...                      # Page-specific styles
 │
 ├── js/
-│   ├── board/          # Kanban logic
+│   ├── board/                   # Kanban logic
 │   │   ├── boardDragSearch.js
 │   │   └── boardEdit.js
-│   ├── contact/        # Contact management
+│   ├── contact/                 # Contact management
 │   ├── header.js
-│   └── ...             # Page logic
+│   └── ...                      # Page logic
 │
-├── pages/              # HTML views
+├── pages/                       # HTML views
 │   ├── addTask.html
 │   ├── board.html
 │   └── contacts.html
 │
-├── index.html          # Entry point
-└── style.css           # Global styles
+├── index.html                   # Entry point
+└── style.css                    # Global styles
 ```
 
 ---
