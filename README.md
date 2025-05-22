@@ -42,10 +42,6 @@ A Kanban-style productivity tool with contact management, drag & drop tasks, and
 
 ## 🛠️ Tech Stack
 
-![JavaScript](Link image)
-![HTML5](Link image)
-![CSS3](Link image)
-
 - **MPA Architecture** with cross-page logic
 - **Modular JavaScript** with clear separation of concerns
 - **Responsive design** with mobile optimization
