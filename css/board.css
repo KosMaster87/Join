@@ -3,8 +3,9 @@
 body {
   background-color: var(--whiteGray);
 }
-.switchTasksContainer{
-  display:none;
+
+.switchTasksContainer {
+  display: none;
 }
 
 h1 {
@@ -115,8 +116,6 @@ h2 {
   margin-top: 16px;
 }
 
-/*--In Progress--*/
-
 .boxSizeProgress {
   cursor: pointer;
   flex: 0 0 250px;
@@ -175,6 +174,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
 }
+
 .IconBarClass {
   margin-left: 10px;
   max-width: 140px;
@@ -198,7 +198,6 @@ h2 {
 }
 
 /*--await for Feedback--*/
-
 .boxSizeFeedback {
   cursor: pointer;
   background-color: var(--white);
@@ -213,7 +212,6 @@ h2 {
 }
 
 /*--done--*/
-
 .boxSizeDone {
   flex: 0 0 250px;
   background-color: var(--white);
@@ -226,7 +224,6 @@ h2 {
 }
 
 /*--done--*/
-
 .boxSizeToDo {
   flex: 0 0 250px;
   background-color: var(--white);
@@ -245,35 +242,35 @@ h2 {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0); /* Startwert für Transparenz */
-  z-index: 999; /* Sicherstellen, dass es über anderen Elementen liegt */
-  animation: blurIn 0.5s forwards; /* Name der Animation und Dauer festlegen */
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 999;
+  animation: blurIn 0.5s forwards;
 }
 
 @keyframes blurIn {
   from {
-    background-color: rgba(0, 0, 0, 0); /* Startwert für Transparenz */
+    background-color: rgba(0, 0, 0, 0);
   }
   to {
-    background-color: rgba(0, 0, 0, 0.5); /* Endwert für Transparenz */
+    background-color: rgba(0, 0, 0, 0.5);
   }
 }
 
 @keyframes slideIn {
   from {
-    opacity: 0; /* Startwert der Opazität */
-    right: -100%; /* Startposition außerhalb des sichtbaren Bereichs */
-    transform: translate(100%, -50%); /* Startposition außerhalb des sichtbaren Bereichs */
+    opacity: 0;
+    right: -100%;
+    transform: translate(100%, -50%);
   }
   to {
-    opacity: 1; /* Endwert der Opazität */
-    right: calc(50% - 80px); /* Endposition mit 80px Abstand von rechts */
-    transform: translate(50%, -50%); /* Endposition zentriert */
+    opacity: 1;
+    right: calc(50% - 80px);
+    transform: translate(50%, -50%);
   }
 }
 
 .scroll {
-  overflow-y: auto; /* This makes the div vertically scrollable if content exceeds its height */
+  overflow-y: auto;
   max-height: 70vh;
   width: 310px;
   background-color: var(--white);
@@ -665,17 +662,16 @@ h2 {
 
 @media (min-width: 720px) {
   .openwindow {
-    
     margin-left: 80px;
     z-index: 800;
     position: fixed;
     top: 50%;
-    right: -100%; /* Startposition außerhalb des sichtbaren Bereichs */
-    transform: translate(100%, -50%); /* Startposition außerhalb des sichtbaren Bereichs */
+    right: -100%;
+    transform: translate(100%, -50%);
     max-width: 480px;
     min-width: 310px;
     max-height: 90%;
-    animation: slideIn 1s forwards; /* Animation hinzufügen */
+    animation: slideIn 1s forwards;
     word-wrap: break-word;
     overflow: auto;
     padding: 20px;
@@ -700,14 +696,14 @@ h2 {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  #boardMainContainerId{
+  #boardMainContainerId {
     padding-top: 60px;
     padding-bottom: 42px;
   }
 }
 @media (max-width: 1125px) {
-  .switchTasksContainer{
-    display:block;
+  .switchTasksContainer {
+    display: block;
   }
 
   .boxSizeFeedback {
@@ -737,8 +733,6 @@ h2 {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
-/**/
 
 .menu-options {
   display: block;

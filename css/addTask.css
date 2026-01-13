@@ -33,8 +33,6 @@ span {
   font-weight: 400;
 }
 
-/* ---------------------------------------- */
-
 #taskTitleContainer {
   display: flex;
   flex-direction: column;
@@ -55,7 +53,6 @@ span {
   outline: none;
   border-color: var(--lightBlue) !important;
 }
-/* ---------------------------------------- */
 
 #taskDescriptionContainer {
   display: flex;
@@ -77,8 +74,6 @@ span {
 .descriptionInputField:focus {
   border-color: var(--lightBlue) !important;
 }
-
-/* ---------------------------------------- */
 
 #taskPrioContainer {
   display: flex;
@@ -127,8 +122,6 @@ span {
   font-weight: 700;
 }
 
-/* ---------------------------------------- */
-
 #taskDueDateContainer {
   display: flex;
   flex-direction: column;
@@ -151,8 +144,6 @@ span {
   outline: none;
   border: solid 1px var(--lightBlue) !important;
 }
-
-/* ---------------------------------------- */
 
 #taskCategoryContainer {
   display: flex;
@@ -183,8 +174,6 @@ span {
   background-color: var(--white);
 }
 
-/* ---------------------------------------- */
-
 #contactList {
   display: none;
   z-index: 2;
@@ -202,8 +191,6 @@ span {
 #contactListIconsLine {
   display: flex;
 }
-
-/* ---------------------------------------- */
 
 #taskAssignedContainer {
   display: flex;
@@ -260,25 +247,30 @@ span {
   outline: none;
 }
 
-/* ---------------------------------------- */
-
 #taskSubtaskContainer {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.subTaskInputContainer {
-  padding: 12px 16px 12px 16px;
+.subTaskInputcontainerClass {
   display: flex;
   justify-content: space-between;
-  border: solid 1px var(--lighterGray);
-  border-radius: 10px;
   background-color: var(--white);
   flex: 1;
+  padding: 10px 21px;
+  border: solid 1px var(--lighterGray);
+  border-radius: 10px;
 }
-.subTaskInputContainerClass:focus {
-  border: solid 1px var(--lightBlue) !important;
+
+.subTaskInputcontainerClass:focus {
+  border: solid 1px var(--lightBlue);
+}
+
+.borderColor {
+  padding: 10px 21px;
+  border: solid 1px var(--lighterGray);
+  border-radius: 10px;
 }
 
 .subtaskInputfield {
@@ -382,10 +374,6 @@ span {
   background-color: var(--lightBlue);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   transition: 0.1s ease-in-out;
-}
-
-.borderColor {
-  border: solid 1px var(--lightBlue) !important;
 }
 
 .requiredStar {
@@ -533,12 +521,8 @@ span {
     content: url("../assets/img/add_task/task_cross_blue.svg");
     transition: 0.3s ease-in-out;
   }
-
-  footer {
-  }
 }
 
-/* SCROLLBAR DESIGN*/
 ::-webkit-scrollbar {
   width: 8px;
 }

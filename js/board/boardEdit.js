@@ -1,369 +1,203 @@
+/**
+ * @fileoverview Board task editing orchestration.
+ * Handles task editing operations and contact assignment coordination.
+ * @description Provides orchestration for task editing.
+ * Contact management moved to board-contact-management.js
+ * Navigation logic moved to board-contact-navigation.js
+ * UI helpers moved to board-ui-helpers.js
+ * @module boardEdit
+ */
+
 let switchTaskTriggered = false;
 
 /**
- * Load the assigned contacts for a task.
- *
- * @param {string} i - The number of the task
+ * Toggles contact selection state.
+ * @param {number} i - Contact index.
+ * @param {number} j - Task index.
  */
-async function loadContacts(i) {
-  let mainDiv = document.getElementById(`contactList`);
-  let totalHeight = Math.min(user.contacts.length * 52, 260);
-  mainDiv.style.height = `${totalHeight}px`;
-  for (let c = 0; c < user.contacts.length; c++) {
-    signatureAndIcon(c, i);
-    if (user.contacts[c].selected) {
-      loadContactsIfSelected(c);
-    }
-  }
-  if (user.contacts.length > 5) {
-    mainDiv.style.overflowY = "scroll";
-  }
-}
-
-/**
- * Load the icon/signature and name of the contact.
- *
- * @param {number} c - The index of the contact
- * @param {string} i - The number of the task
- */
-function signatureAndIcon(c, i) {
-  let mainDiv = document.getElementById(`contactList`);
-  contactSignature = user.contacts[c].signature;
-  contactName = user.contacts[c].name;
-  mainDiv.innerHTML += loadContactsReturn(c, i);
-  iconId = document.getElementById(`ContactSignatureIcon${c}`);
-  iconId.style.backgroundColor = user.contacts[c].userColor;
-}
-
-/**
- * Type the contact selected when opening the contacts.
- *
- * @param {number} c - The index of the contact
- */
-function loadContactsIfSelected(c) {
-  let container = document.getElementById(`assignedContactContainer${c}`);
-  let contactListIcons = document.getElementById("contactListIconsLine");
-  container.classList.add("assignedContainerBlack");
-  let image = document.getElementById(`assignedContactImage${c}`);
-  image.src = "../assets/img/add_task/task_box_check.svg";
-  let signature = document.getElementById(`ContactSignatureIcon${c}`).innerHTML;
-  let userColor = user.contacts[c].userColor;
-  contactListIcons.innerHTML += `<div id="contactIconNumber${c}" style="background-color: ${userColor};" class="assignedContactLeftSideIcon">${signature}</div>`;
-}
-
-/**
- * Close the contacts list.
- *
- * @param {string} i - The number of the task
- */
-function closeContacts(i) {
-  let contactList = document.getElementById(`contactList`);
-  contactList.style.display = "none";
-  let border = document.getElementById(`contactSelectContainer`);
-  border.classList.remove("borderColor");
-  let image = document.getElementById(`openerAssignedTo`);
-  image.src = "../assets/img/add_task/arrow_drop_down.svg";
-  let contactListIcons = document.getElementById("contactListIcons");
-  contactListIcons.style.display = "block";
-  setTimeout(function () {
-    document.body.click();
-  }, 0);
-  image.onclick = function () {
-    openContacts(i);
-  };
-}
-
-/**
- * Open the contacts list from the current user.
- *
- * @param {string} i - The number of the task
- */
-function openContacts(i) {
-  let contactList = document.getElementById("contactList");
-  let contactListIcons = document.getElementById("contactListIcons");
-  let border = document.getElementById(`contactSelectContainer`);
-  let image = document.getElementById(`openerAssignedTo`);
-  contactList.style.display = "block";
-  contactListIcons.style.display = "none";
-  border.classList.add("borderColor");
-  image.src = "../assets/img/add_task/arrow_drop_up.svg";
-  image.onclick = function () {
-    closeContacts(i);
-  };
-}
-
-/**
- * Change the background color and the image of the selected contact.
- *
- * @param {number} i - The index of the contact
- * @param {number} j - The number of the task
- */
-async function assignedToContactBg(i, j) {
+const assignedToContactBg = async (i, j) => {
   if (user.contacts[i].selected) {
-    assignedToContactBgIf(i, j);
+    deselectContact(i, j);
   } else {
-    assignedToContactBgElse(i, j);
+    selectContact(i, j);
   }
-  savedUsersInBackend();
-}
+  await savedUsersInBackend();
+};
 
 /**
- * If the contact is selected, change it to not selected.
- *
- * @param {number} i - The index of the contact
- * @param {number} j - The number of the task
+ * Filters contacts by search term.
  */
-function assignedToContactBgIf(i, j) {
-  if (!user.contacts[i]) {
-    return;
-  }
-
-  user.contacts[i].selected = false;
-  let container = document.getElementById(`assignedContactContainer${i}`);
-  container?.classList.remove("assignedContainerBlack");
-  let image = document.getElementById(`assignedContactImage${i}`);
-  if (image) image.src = "../assets/img/add_task/task_box.svg";
-  let iconId = document.getElementById(`contactIconNumber${i}`);
-  if (iconId) iconId.remove();
-
-  if (!user.tasks[j]) {
-    return;
-  }
-
-  if (!Array.isArray(user.tasks[j].assignedTo)) {
-    return;
-  }
-
-  let removeName = user.tasks[j].assignedTo.findIndex(
-    (item) => item.name === user.contacts[i].name
-  );
-
-  if (removeName !== -1) {
-    user.tasks[j].assignedTo.splice(removeName, 1);
-  }
-}
-
-/**
- * If the contact is not selected, change it to selected.
- *
- * @param {number} i - The index of the contact
- * @param {number} j - The number of the task
- */
-function assignedToContactBgElse(i, j) {
-  user.contacts[i].selected = true;
-
-  let container = document.getElementById(`assignedContactContainer${i}`);
-  let contactListIcons = document.getElementById("contactListIconsLine");
-  container.classList.add("assignedContainerBlack");
-
-  let image = document.getElementById(`assignedContactImage${i}`);
-  image.src = "../assets/img/add_task/task_box_check.svg";
-
-  let signature = document.getElementById(`ContactSignatureIcon${i}`).innerHTML;
-  let userColor = user.contacts[i].userColor;
-
-  contactListIcons.innerHTML += `<div id="contactIconNumber${i}" style="background-color: ${userColor};" class="assignedContactLeftSideIcon">${signature}</div>`;
-
-  if (!user.tasks[j].assignedTo) {
-    user.tasks[j].assignedTo = [];
-  }
-
-  user.tasks[j].assignedTo.push({
-    name: user.contacts[i].name,
-    userColor: user.contacts[i].userColor,
-  });
-}
-
-/**
- * Change the border of the clicked field.
- */
-function onclickInputBorder() {
-  let border = document.getElementById(`contactSelectContainer`);
-  border.classList.add("borderColor");
-}
-
-/**
- * Filter letters in the input field and search for contacts that include the search term.
- */
-function filterNamesForAssignedTo() {
-  let search = document
-    .getElementById("assignedToContainer")
-    .value.toLowerCase();
-  let list = document.getElementById("contactList");
+const filterNamesForAssignedTo = () => {
+  const search = getContactSearchValue();
+  const list = document.getElementById("contactList");
   list.innerHTML = "";
-  openContacts();
-  for (let i = 0; i < user.contacts.length; i++) {
-    let name = user.contacts[i].name.toLowerCase();
-    if (name.includes(search)) {
-      list.innerHTML += filterNamesForAssignedToReturn(i);
-      let iconId = document.getElementById(`ContactSignatureIcon${i}`);
-      iconId.style.backgroundColor += user.contacts[i].userColor;
+  openContactList();
+  user.contacts.forEach((contact, i) => {
+    if (contact.name.toLowerCase().includes(search)) {
+      renderFilteredContact(i, list);
     }
-  }
-}
+  });
+};
 
 /**
- * Save the changes when the "OK" button is pressed.
- *
- * @param {number} i - The number of the task
+ * Removes popup and shows updated task.
+ * @param {number} i - Task index.
  */
-async function saveCurrentBoardTask(i) {
-  removeClickListener();
-  let title = document.getElementById(`titelInputContainer`);
-  let description = document.getElementById(`descriptionInput`);
-  let date = document.getElementById(`dueDateInputContainer`);
-  user.tasks[i].title = title.value;
-  user.tasks[i].dueDate = date.value;
-  user.tasks[i].description = description.value;
-  savedUsersInBackend();
+const removePopupAndShowTask = (i) => {
   document.getElementById(`popUpMainContainer`).remove();
   document.getElementById(`blurrContainer`).remove();
   openTask(i);
-}
+};
 
 /**
- * Prevent selecting a date in the future.
+ * Saves changes when OK button pressed.
+ * @param {number} i - Task index.
  */
-function setMinDate() {
-  let today = new Date();
-  let dd = String(today.getDate()).padStart(2, "0");
-  let mm = String(today.getMonth() + 1).padStart(2, "0");
-  let yyyy = today.getFullYear();
-  today = yyyy + "-" + mm + "-" + dd;
-  document.getElementById("dueDateInputContainer").min = today;
-}
+const saveCurrentBoardTask = async (i) => {
+  if (window.isSaving) {
+    console.log("Bitte warten, Daten werden gespeichert...");
+    return;
+  }
+  removeClickListener();
+  const values = getTaskInputValues(i);
+  updateTaskWithValues(i, values);
+  await savedUsersInBackend();
+  removePopupAndShowTask(i);
+};
 
 /**
- * Clear the input fields in the subtask section.
+ * Creates switch menu HTML.
+ * @param {number} i - Task index.
+ * @returns {string} Menu HTML.
  */
-function clearSubtaskInputfield() {
-  let input = document.getElementById(`subTaskInputfieldText`);
-  input.value = "";
-  container = document.getElementById(`subTaskInputfieldMenu`);
-  container.innerHTML = `
-  <img src="../assets/img/add_task/task_add.svg" />`;
-  let border = document.getElementById(`subTaskInputContainer`);
-  border.classList.remove("borderColor");
-}
+const createSwitchMenuHTML = (i) => `
+  <ul id="menuForSwitchTask" class="menu-options">
+    <li class="menuForSwitchTaskMenuHead"> Switch to:</li>
+    <li class="menuForSwitchTaskMenu" id="menuForSwitchTaskTodo" onclick="switchTaskTodo(${i})">To Do</li>
+    <li class="menuForSwitchTaskMenu" id="menuForSwitchTaskProgress" class="font16400" onclick="switchTaskProgress(${i})">In progress</li>
+    <li class="menuForSwitchTaskMenu" id="menuForSwitchTaskAwait" class="font16400" onclick="switchTaskAwait(${i})">Await for Feedback</li>
+    <li class="menuForSwitchTaskMenu" id="menuForSwitchTaskDone" class="font16400" onclick="switchTaskDone(${i})">Done</li>
+  </ul>
+`;
 
 /**
- * Create a menu for switching the task status in the mobile version.
- *
- * @param {number} i - The number of the task
+ * Sets close menu handler.
+ * @param {number} i - Task index.
  */
-function switchTask(i) {
+const setCloseMenuHandler = (i) => {
+  document
+    .getElementById(`switchTaskImage${i}`)
+    .querySelector("img")
+    .setAttribute("onclick", `closeMenu(${i})`);
+};
+
+/**
+ * Creates menu for switching task status.
+ * @param {number} i - Task index.
+ */
+const switchTask = (i) => {
   switchTaskTriggered = true;
-  var menu = document.getElementById(`menuForSwitchTask`);
+  const menu = document.getElementById(`menuForSwitchTask`);
   if (!menu) {
-    document.getElementById(`switchTaskImage${i}`).innerHTML += `
-      <ul id="menuForSwitchTask" class="menu-options">
-        <li class="menuForSwitchTaskMenuHead"> Switch to:</li>
-        <li class="menuForSwitchTaskMenu" id="menuForSwitchTaskTodo" onclick="switchTaskTodo(${i})">To Do</li>
-        <li class="menuForSwitchTaskMenu" id="menuForSwitchTaskProgress" class="font16400" onclick="switchTaskProgress(${i})">In progress</li>
-        <li class="menuForSwitchTaskMenu" id="menuForSwitchTaskAwait" class="font16400" onclick="switchTaskAwait(${i})">Await for Feedback</li>
-        <li class="menuForSwitchTaskMenu" id="menuForSwitchTaskDone" class="font16400" onclick="switchTaskDone(${i})">Done</li>
-      </ul>
-    `;
-    cheackCurrentStatus(i);
-    document.querySelector(".boardMainContainer").style.overflow = "hidden";
-    document
-      .getElementById(`switchTaskImage${i}`)
-      .querySelector("img")
-      .setAttribute("onclick", `closeMenu(${i})`);
+    document.getElementById(`switchTaskImage${i}`).innerHTML +=
+      createSwitchMenuHTML(i);
+    checkCurrentStatus(i);
+    disableBodyScroll();
+    setCloseMenuHandler(i);
   }
-}
+};
 
 /**
- * Entfernt das Menü des aktuellen Status.
- *
- * @param {*} i - Nummer der Aufgabe
+ * Removes menu item for current status.
+ * @param {number} i - Task index.
  */
-function cheackCurrentStatus(i) {
-  if (user.tasks[i].status === "to-do") {
-    document.getElementById(`menuForSwitchTaskTodo`).remove();
+const checkCurrentStatus = (i) => {
+  const statusMap = {
+    "to-do": "menuForSwitchTaskTodo",
+    progress: "menuForSwitchTaskProgress",
+    await: "menuForSwitchTaskAwait",
+    done: "menuForSwitchTaskDone",
+  };
+  const elementId = statusMap[user.tasks[i].status];
+  if (elementId) {
+    document.getElementById(elementId)?.remove();
   }
-  if (user.tasks[i].status === "progress") {
-    document.getElementById(`menuForSwitchTaskProgress`).remove();
-  }
-  if (user.tasks[i].status === "await") {
-    document.getElementById(`menuForSwitchTaskAwait`).remove();
-  }
-  if (user.tasks[i].status === "done") {
-    document.getElementById(`menuForSwitchTaskDone`).remove();
-  }
-}
+};
 
 /**
- * Wechselt den Status der Aufgabe zu "to-do".
- *
- * @param {*} i - Nummer der Aufgabe
+ * Updates task status and reloads board.
+ * @param {number} i - Task index.
+ * @param {string} status - New status.
  */
-function switchTaskTodo(i) {
+const updateTaskStatusAndReload = async (i, status) => {
   switchTaskTriggered = true;
-  user.tasks[i].status = "to-do";
-  savedUsersInBackend();
+  await updateTaskStatusAndReloadBoard(i, status);
   closeMenu(i);
-  clearBoardTasksField();
-  loadTasks();
-}
+};
 
 /**
- * Wechselt den Status der Aufgabe zu "progress".
- *
- * @param {*} i - Nummer der Aufgabe
+ * Switches task status to to-do.
+ * @param {number} i - Task index.
  */
-function switchTaskProgress(i) {
-  switchTaskTriggered = true;
-  user.tasks[i].status = "progress";
-  savedUsersInBackend();
-  closeMenu(i);
-  clearBoardTasksField();
-  loadTasks();
-}
+const switchTaskTodo = async (i) => {
+  await updateTaskStatusAndReload(i, "to-do");
+};
 
 /**
- * Wechselt den Status der Aufgabe zu "await".
- *
- * @param {*} i - Nummer der Aufgabe
+ * Switches task status to progress.
+ * @param {number} i - Task index.
  */
-function switchTaskAwait(i) {
-  switchTaskTriggered = true;
-  user.tasks[i].status = "await";
-  savedUsersInBackend();
-  closeMenu(i);
-  clearBoardTasksField();
-  loadTasks();
-}
+const switchTaskProgress = async (i) => {
+  await updateTaskStatusAndReload(i, "progress");
+};
 
 /**
- * Wechselt den Status der Aufgabe zu "done".
- *
- * @param {*} i - Nummer der Aufgabe
+ * Switches task status to await.
+ * @param {number} i - Task index.
  */
-function switchTaskDone(i) {
-  switchTaskTriggered = true;
-  user.tasks[i].status = "done";
-  savedUsersInBackend();
-  closeMenu(i);
-  clearBoardTasksField();
-  loadTasks();
-}
+const switchTaskAwait = async (i) => {
+  await updateTaskStatusAndReload(i, "await");
+};
 
 /**
- * Schließt das Status-Wechsel-Menü in der mobilen Version.
- *
- * @param {*} i - Nummer der Aufgabe
+ * Switches task status to done.
+ * @param {number} i - Task index.
  */
-function closeMenu(i) {
+const switchTaskDone = async (i) => {
+  await updateTaskStatusAndReload(i, "done");
+};
+
+/**
+ * Sets open menu handler.
+ * @param {number} i - Task index.
+ */
+const setOpenMenuHandler = (i) => {
+  document
+    .getElementById(`switchTaskImage${i}`)
+    .querySelector("img")
+    .setAttribute("onclick", `switchTask(${i})`);
+};
+
+/**
+ * Closes status switch menu.
+ * @param {number} i - Task index.
+ */
+const closeMenu = (i) => {
   switchTaskTriggered = true;
-  var menu = document.getElementById("menuForSwitchTask");
+  const menu = document.getElementById("menuForSwitchTask");
   if (menu) {
     menu.remove();
-
-    document.querySelector(".boardMainContainer").style.overflow = "auto";
-    document
-      .getElementById(`switchTaskImage${i}`)
-      .querySelector("img")
-      .setAttribute("onclick", `switchTask(${i})`);
+    enableBodyScroll();
+    setOpenMenuHandler(i);
   }
-}
+};
+
+window.assignedToContactBg = assignedToContactBg;
+window.filterNamesForAssignedTo = filterNamesForAssignedTo;
+window.saveCurrentBoardTask = saveCurrentBoardTask;
+window.switchTask = switchTask;
+window.switchTaskTodo = switchTaskTodo;
+window.switchTaskProgress = switchTaskProgress;
+window.switchTaskAwait = switchTaskAwait;
+window.switchTaskDone = switchTaskDone;
+window.closeMenu = closeMenu;

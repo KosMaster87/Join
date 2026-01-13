@@ -22,10 +22,8 @@ body {
   .legalNoticeContent {
     display: flex;
     flex-direction: column;
-    margin: 5rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    margin-bottom: 2rem;
+    margin: 5rem 2rem 2rem 2rem;
+    padding-bottom: 50px;
 
     p {
       text-align: justify;

@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Contact creation module.
+ * Handles adding new contacts with validation and navigation.
+ * @description Provides orchestration for contact creation.
+ * CRUD operations moved to contact-operations.js
+ * Navigation logic moved to contact-navigation.js
+ * @module addContact
+ */
+
 const contactColors = [
   "var(--red)",
   "var(--yellow)",
@@ -8,231 +17,194 @@ const contactColors = [
 ];
 
 /**
- * This function is the first function when you open the page.
- * It initializes the add contact process by resetting the input fields, messages, and alert borders,
- * and setting the focus border to the "Name", "Email", and "Phone" fields.
+ * Initializes the add contact form.
  */
-async function initAddContact() {
-  resetInputFields();
-  resetAllInputMessages();
-  resetAllAlertBorders();
+const initAddContact = async () => {
+  resetInputFields("add");
+  resetAllInputMessages("add");
+  resetAllAlertBorders("add");
   editFocusBorder("add", "Name", "Email", "Phone");
-}
+  enableAddContactButtons();
+  updateSaveButtonState();
+  attachInputListeners();
+};
 
 /**
- * This function initializes the saving process when adding a contact.
- * It retrieves the input values for name, email, and phone,
- * checks if all fields are valid, saves the contact, and reloads the tasks list.
+ * Gets trimmed input values from form.
+ * @returns {Object} Object with name, email, phone.
  */
-async function initSaveProcess() {
-  let name = document.getElementById("addContactInputName").value.trim();
-  let email = document.getElementById("addContactInputEmail").value.trim();
-  let phone = document.getElementById("addContactInputPhone").value.trim();
+const getContactInputValues = () => ({
+  name: document.getElementById("addContactInputName").value.trim(),
+  email: document.getElementById("addContactInputEmail").value.trim(),
+  phone: document.getElementById("addContactInputPhone").value.trim(),
+});
 
-  if (checkAllInputFields("add", name, email, phone) === true) {
-    await saveContactAddContact(name, email, phone);
-    await addContactIsSavedGoToSingleContact();
-    resetInputFields("add");
+/**
+ * Checks if contact can be saved.
+ * @returns {boolean} True if name and (email or phone) filled.
+ */
+const canSaveContact = () => {
+  const { name, email, phone } = getContactInputValues();
+  return name.length > 0 && (email.length > 0 || phone.length > 0);
+};
+
+/**
+ * Enables cancel buttons in form.
+ */
+const enableAddContactButtons = () => {
+  const cancelBtnDesktop = document.getElementById("addCancelBtnDesktop");
+  const cancelBtnMobile = document.getElementById("addCancelBtn");
+  enableButtons(cancelBtnDesktop, cancelBtnMobile);
+};
+
+/**
+ * Updates button state based on validity.
+ * @param {HTMLElement} btn - Button element.
+ * @param {boolean} isValid - Whether input is valid.
+ */
+const updateButtonState = (btn, isValid) => {
+  if (!btn) return;
+  if (isValid) {
+    enableButton(btn);
   } else {
-    disableSaveProcess();
+    disableButton(btn);
   }
-}
+};
 
 /**
- * This function retrieves all contacts for the current user.
- *
- * @returns {Promise} - A promise that resolves with the user's contacts.
+ * Gets save button elements.
+ * @returns {Array<HTMLElement>} Save buttons.
  */
-async function getAllContactsFromCurrentUser() {
-  return await getAllContactsFromCurrentUserSorted();
-}
+const getSaveButtons = () => [
+  document.getElementById("contactBtnSaveDesktop"),
+  document.getElementById("contactBtnSave"),
+];
 
 /**
- * This function initializes the template for the 'overlayContactIsCreated' animation.
- * It displays the overlay, adds an animation class, and hides the overlay after 3 seconds.
+ * Updates save button state.
  */
-function initializeOverlayContactIsCreated() {
-  let overlay = document.getElementById("overlayContactIsCreated");
+const updateSaveButtonState = () => {
+  const isValid = canSaveContact();
+  getSaveButtons().forEach((btn) => updateButtonState(btn, isValid));
+};
+
+/**
+ * Attaches input listeners to fields.
+ */
+const attachInputListeners = () => {
+  const nameInput = document.getElementById("addContactInputName");
+  const emailInput = document.getElementById("addContactInputEmail");
+  const phoneInput = document.getElementById("addContactInputPhone");
+  [nameInput, emailInput, phoneInput].forEach((input) => {
+    if (input) {
+      input.addEventListener("input", updateSaveButtonState);
+    }
+  });
+};
+
+/**
+ * Generates random color from array.
+ * @param {Array} colors - Color array.
+ * @returns {string} Random color.
+ */
+const getRandomColor = (colors) =>
+  colors[Math.floor(Math.random() * colors.length)];
+
+/**
+ * Shows contact created overlay with animation.
+ */
+const showContactCreatedOverlay = () => {
+  const overlay = document.getElementById("overlayContactIsCreated");
   overlay.style.display = "flex";
   overlay.classList.add("slideInAnimation");
-  document.getElementById("overlayContactIsCreated").style.display = "flex";
-  setTimeout(function () {
+  setTimeout(() => {
     overlay.style.display = "none";
   }, 3000);
-}
+};
 
 /**
- * This function saves the newly added contact to the backend.
- * It creates a new contact or updates an existing one based on the provided name, email, and phone.
- *
- * @param {string} name - The name of the contact.
- * @param {string} email - The email address of the contact.
- * @param {string} phone - The phone number of the contact.
+ * Saves contact to backend.
+ * @param {string} name - Contact name.
+ * @param {string} email - Contact email.
+ * @param {string} phone - Contact phone.
  */
-async function saveContactAddContact(name, email, phone) {
-  if (!user) {
-    return;
+const saveContact = async (name, email, phone) => {
+  if (window.isSaving || !user) return;
+  const contactId = generateRandomId();
+  const userColor = getRandomColor(contactColors);
+  const contact = createNewContact(name, email, phone, contactId, userColor);
+  await saveNewContactToFirestore(contact);
+  showContactCreatedOverlay();
+};
+
+/**
+ * Validates and saves contact.
+ */
+const validateAndSaveContact = async () => {
+  const { name, email, phone } = getContactInputValues();
+  if (checkAllInputFields("add", name, email, phone)) {
+    await saveContact(name, email, phone);
+    resetInputFields("add");
+    await navigateFromAddToSingleContact(
+      currentContactId,
+      loadShowSingleContact
+    );
   }
-
-  if (!user.contacts) {
-    user.contacts = [];
-  }
-
-  let contact = user.contacts.find((c) => c.email === email);
-  let contactId = contact ? contact.contactId : generateRandomId();
-  let userColor = contact ? contact.userColor : getRandomColor(contactColors);
-  let signature = contact ? contact.signature : getSignature(name);
-  let updatedContact = {
-    userId: user.email,
-    contactId: contactId,
-    name: name,
-    email: email,
-    phone: phone,
-    userColor: userColor,
-    signature: signature,
-  };
-
-  if (contact) {
-    let index = user.contacts.findIndex((c) => c.contactId === contactId);
-    user.contacts[index] = updatedContact;
-  } else {
-    user.contacts.push(updatedContact);
-  }
-
-  const collection = user.isGuest ? "guests" : "users";
-
-  await setItem(collection, user.id, { contacts: user.contacts });
-  initializeOverlayContactIsCreated();
-}
+};
 
 /**
- * This function generates a random color from the given array of user colors.
- *
- * @param {Array} userColors - An array of color strings.
- * @returns {string} - A random color from the array.
+ * Resets add contact form.
  */
-function getRandomColor(userColors) {
-  let randomIndex = Math.floor(Math.random() * userColors.length);
-  let randomColor = userColors[randomIndex];
-
-  return randomColor;
-}
-
-/**
- * This function generates a random ID for contacts.
- *
- * @returns {string} - A randomly generated ID.
- */
-function generateRandomId() {
-  let id = "";
-  const chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!/%?";
-  for (let i = 0; i < 16; i++) {
-    const randomIndex = Math.floor(Math.random() * chars.length);
-    id += chars[randomIndex];
-  }
-
-  return id;
-}
-
-/**
- * This function disables the save process and shows the add contact form.
- */
-function disableSaveProcess() {
-  document.getElementById("addContactContainer").style.display = "block";
-}
-
-/**
- * This function handles the transition to displaying a single contact view after a contact has been saved.
- *
- * @param {string} contactId - The ID of the contact to display.
- */
-async function closeAddContactAndGoToShowSingleContactContainer(contactId) {
-  loadShowSingleContact(contactId);
-  document.getElementById("addContactContainer").style.display = "none";
-  document.getElementById("listContactContainer").style.display = "none";
-  document.getElementById("mobileBtnAddContact").style.display = "none";
-  document.getElementById("mobileBtnThreePoints").style.display = "block";
-  document.getElementById("showSingleContactContainer").style.display = "block";
-}
-
-/**
- * This function handles the transition to the list of contacts after closing the add contact container without saving.
- */
-async function closeAddContactContainerWithoutAddingNewContact() {
-  await initListContact();
-  document.getElementById("addContactContainer").style.display = "none";
-  document.getElementById("mobileBtnAddContact").style.display = "block";
-  document.getElementById("overlayFrame").style.display = "none";
-}
-
-/**
- * This function closes the add contact container without saving, updating the display as necessary.
- */
-async function closeAddContactContainerDesktop() {
+const resetAddContactForm = () => {
   resetInputFields("add");
   editFocusBorder("add", "Name", "Email", "Phone");
   resetAllInputMessages("add");
   resetAllAlertBorders("add");
+};
+
+/**
+ * Closes add contact without saving (mobile).
+ */
+const closeAddContactContainer = async () => {
+  resetAddContactForm();
   await initListContact();
-  document.getElementById("addContactContainer").style.display = "none";
-  document.getElementById("mobileBtnAddContact").style.display = "none";
-  document.getElementById("showSingleContactContainer").style.display = "flex";
-  document.getElementById("singleContactCol").style.display = "none";
-}
+  hideAddContactContainer();
+  showMobileAddButton();
+};
 
 /**
- * This function closes the add contact container without saving and updates the display for mobile view.
+ * Closes add contact without saving (desktop).
  */
-async function closeAddContactContainer() {
-  resetInputFields("add");
-  editFocusBorder("add", "Name", "Email", "Phone");
-  resetAllInputMessages("add");
-  resetAllAlertBorders("add");
+const closeAddContactContainerDesktop = async () => {
+  resetAddContactForm();
   await initListContact();
-  document.getElementById("addContactContainer").style.display = "none";
-  document.getElementById("mobileBtnAddContact").style.display = "block";
-}
+  hideAddContactDesktop();
+  showSingleContactDesktop();
+};
 
 /**
- * This function initializes the save process from the desktop button and then navigates to the list of contacts.
+ * Saves contact from desktop view.
  */
-async function saveContactAtAddContactDesktop() {
-  await initSaveProcess();
+const saveContactAtAddContactDesktop = async () => {
+  if (!canSaveContact() || window.isSaving) return;
+  const cancelBtn = document.getElementById("addCancelBtnDesktop");
+  const saveBtn = document.getElementById("contactBtnSaveDesktop");
+  disableButtons(cancelBtn, saveBtn);
+  await validateAndSaveContact();
   goFromSingleContactToListContactContainer();
-}
+};
 
 /**
- * This function initializes the save process from the mobile button and then navigates to the list of contacts.
+ * Saves contact from mobile view.
  */
-async function saveContactAtAddContactMobile() {
-  await initSaveProcess();
+const saveContactAtAddContactMobile = async () => {
+  if (!canSaveContact() || window.isSaving) return;
+  await validateAndSaveContact();
   goFromSingleContactToListContactContainer();
-}
+};
 
-/**
- * This function handles the transition to displaying a single contact after saving the contact,
- * updating the display depending on the screen size.
- */
-async function addContactIsSavedGoToSingleContact() {
-  let screenwidth = window.innerWidth;
-
-  await loadShowSingleContact(currentContactId);
-
-  if (screenwidth < 1200) {
-    document.getElementById("listContactContainer").style.display = "none";
-    document.getElementById("addContactContainer").style.display = "none";
-    document.getElementById("mobileBtnAddContact").style.display = "none";
-    document.getElementById("mobileBtnThreePoints").style.display = "block";
-    document.getElementById("showSingleContactContainer").style.display =
-      "flex";
-  } else {
-    await initListContact();
-    document.getElementById("listContactContainer").style.display = "flex";
-    document.getElementById("showSingleContactContainer").style.display =
-      "flex";
-    document.getElementById("addContactContainer").style.display = "none";
-    document.getElementById("mobileBtnAddContact").style.display = "none";
-    document.getElementById("singleContactCol").style.display = "flex";
-  }
-}
+window.initAddContact = initAddContact;
+window.saveContactAtAddContactDesktop = saveContactAtAddContactDesktop;
+window.saveContactAtAddContactMobile = saveContactAtAddContactMobile;
+window.closeAddContactContainerDesktop = closeAddContactContainerDesktop;
+window.closeAddContactContainer = closeAddContactContainer;

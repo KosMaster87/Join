@@ -48,7 +48,7 @@ function awaitHtmlReturn(i) {
     </div>
     <div class="inProgressText">
       <p class="titleText font16700" id="titleId${i}">
-  
+
       </p>
       <p class="descriptionText font16400" id="descriptionID${i}">
 
@@ -96,7 +96,7 @@ function openTaskReturn(i) {
 
       <div class="inProgressText">
         <p class="bordPopUptitleText font16700" id="popUpTitleId">
-          
+
         </p>
         <p class="font16400" id="popUpDescriptionID">
           Build start page with recipe recommendation...
@@ -132,13 +132,13 @@ function openTaskReturn(i) {
       </div>
     </div>
     <div class="popUpFooter">
-      <div onclick="deleteTaskBoard(${i})" class="footerBox deleteBlue">
+      <div id="deleteTaskBtn${i}" onclick="deleteTaskBoard(${i})" class="footerBox deleteBlue">
         <img src="../assets/img/board/board_delete.svg" />
         <p class="font16400">Delete</p>
       </div>
       <div class="popUpLine"></div>
-      <div  onclick="editBoardTask(${i})"  class="footerBox editBlue">
-        <img  src="../assets/img/board/board_edit.svg" />
+      <div id="editTaskBtn${i}" onclick="editBoardTask(${i})" class="footerBox editBlue">
+        <img src="../assets/img/board/board_edit.svg" />
         <p class="font16400" >Edit</p>
       </div>
     </div>

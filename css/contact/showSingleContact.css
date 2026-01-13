@@ -190,18 +190,18 @@ body {
   color: var(--white);
   animation: slideInSuccesfully 1s forwards;
   z-index: 1000;
-  position: fixed; 
+  position: fixed;
   top: 80%;
-  left: 50%; 
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
 @keyframes slideInSuccesfully {
   from {
-    left: 150%; /* Startposition rechts außerhalb des Bildschirms */
+    left: 150%;
   }
   to {
-    left: 50%; /* Endposition in der Mitte des Bildschirms */
+    left: 50%;
   }
 }
 

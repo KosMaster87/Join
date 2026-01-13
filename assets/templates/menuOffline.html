@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../css/menu.css" />
-    <script src="./../../includeHTML.js"></script>
+    <link rel="stylesheet" href="./../../css/menu.css" />
+    <script src="./../../js/includeHTML.js"></script>
 
-    <script src="../js/addTask.js"></script>
-    <script src="../js/contact/listContact.js"></script>
-
-    <script src="../../js/menu.js"></script>
+    <script src="./../js/add-task/addTask.js"></script>
+    <script src="./../js/contact/listContact.js"></script>
+    <script src="./../../js/menu.js"></script>
     <title>Menu bar offline</title>
   </head>
+
   <body>
     <div class="desktopMenuLogo hide">
       <img
         class="desktopMenuLogoImage"
-        src="../assets/img/menu/desktopFooterLogo.svg"
+        src="./../assets/img/menu/desktopFooterLogo.svg"
       />
     </div>
 
@@ -29,14 +29,17 @@
         onclick="includeContentHTML('summary')"
       >
         <div class="menuHoverBox">
-          <img src="../assets/img/menu/summaryIcon.svg" class="menuItemImage" />
+          <img
+            src="./../assets/img/menu/summaryIcon.svg"
+            class="menuItemImage"
+          />
           <p class="menuFontSizing">Summary</p>
         </div>
       </div>
 
       <div class="menuItem" id="navBoard" onclick="includeContentHTML('board')">
         <div class="menuHoverBox">
-          <img src="../assets/img/menu/Vector.svg" class="menuItemImage" />
+          <img src="./../assets/img/menu/Vector.svg" class="menuItemImage" />
           <p class="menuFontSizing">Board</p>
         </div>
       </div>
@@ -48,7 +51,7 @@
       >
         <div class="menuHoverBox">
           <img
-            src="../assets/img/menu/addTasksIcon.svg"
+            src="./../assets/img/menu/addTasksIcon.svg"
             class="menuItemImage"
           />
           <p class="menuFontSizing">Add Tasks</p>
@@ -62,7 +65,7 @@
       >
         <div class="menuHoverBox">
           <img
-            src="../assets/img/menu/contactsIcon.svg"
+            src="./../assets/img/menu/contactsIcon.svg"
             class="menuItemImage"
           />
           <p class="menuFontSizing">Contacts</p>

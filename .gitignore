@@ -1,45 +1,81 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# Dependencies
+node_modules/
+package-lock.json
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
+# Development
+# dev-server.js
 
-# IDEs and editors
+# Environment files
+config/firebase.config.js
+
+# IDE/Editor
+.vscode/
 .idea/
 .project
 .classpath
-.c9/
-*.launch
-.settings/
 *.sublime-workspace
-
-# Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
 .history/*
 
-# Miscellaneous
+# CI/CD
+.github/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+/.directory
+
+# Temporary files
+*.tmp
+*.temp
+/tmp
+/out-tsc
+
+# Build output
+/dist
+/bazel-out
+
+# Coverage reports
+# /coverage
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
+
+# SSL certificates
+csr.pem
+privateKey.pem
+certificate.pem
+
+# Apache
+# .htaccess
+
+# Cache
 /.angular/cache
 .sass-cache/
+
+# Runtime
 /connect.lock
-/coverage
 /libpeerconnection.log
 testem.log
 /typings
 
-# System files
-.DS_Store
-Thumbs.db
+# Documentation
+docs/
 
-# Costum
-.directory/*
+# Markdown files (documentation)
+# Exclude all markdown files by default
+*.md
+
+# But include the main README
+!README.md
+
+# Netlify
+.netlify/

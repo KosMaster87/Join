@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Summary Dashboard Module
+ * @description Displays an overview of all tasks with statistics including task counts by status,
+ *              urgent task deadline tracking, personalized greetings based on time of day,
+ *              and task priority visualization. Provides quick navigation to the board.
+ * @module js/summary
+ */
+
 let showedLoginGreeting = false;
 let todos = 0;
 let done = 0;
@@ -9,6 +17,7 @@ let urgentCounter = 0;
 let finaleDate;
 let greetingText;
 let dateCounter;
+let earliestUrgentTaskIndex = -1;
 
 /**
  * Initializes the summary view.
@@ -112,7 +121,7 @@ async function determineTodaysDate() {
 }
 
 /**
- * Finds the nearest upcoming task due date.
+ * Finds the nearest upcoming urgent task due date.
  */
 async function searchUpcomingDate() {
   if (!user.tasks || user.tasks.length === 0) {
@@ -122,15 +131,18 @@ async function searchUpcomingDate() {
   let earliestUpcomingDate = null;
 
   for (let i = 0; i < user.tasks.length; i++) {
-    const taskDueDate = new Date(user.tasks[i].dueDate);
+    if (user.tasks[i].prio === "Urgent" && user.tasks[i].status !== "done") {
+      const taskDueDate = new Date(user.tasks[i].dueDate);
 
-    if (!earliestUpcomingDate || taskDueDate < earliestUpcomingDate) {
-      earliestUpcomingDate = taskDueDate;
+      if (!earliestUpcomingDate || taskDueDate < earliestUpcomingDate) {
+        earliestUpcomingDate = taskDueDate;
+        earliestUrgentTaskIndex = i;
+      }
     }
   }
 
   if (!earliestUpcomingDate) {
-    console.warn("Keine gültige Fälligkeit in den Aufgaben gefunden!");
+    console.warn("Keine urgent Aufgabe gefunden!");
     return;
   }
 
@@ -159,7 +171,7 @@ function adjustDate() {
  */
 function howManyUrgent() {
   for (let i = 0; i < user.tasks.length; i++) {
-    if (user.tasks[i].prio === "Urgent") {
+    if (user.tasks[i].prio === "Urgent" && user.tasks[i].status !== "done") {
       urgentCounter++;
     }
   }
@@ -199,13 +211,18 @@ function getMonthName(month) {
 
 /**
  * Formats a date into a readable string.
- * @param {Date} date - The date to format.
+ * @param {Date|string} date - The date to format.
  * @returns {string} Formatted date string.
  */
 function formatDateString(date) {
-  const dateObject = new Date(date);
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  return dateObject.toLocaleDateString("en-US", options);
+  // Parse date string as UTC to avoid timezone shifts
+  let dateString =
+    typeof date === "string" ? date : date.toISOString().split("T")[0];
+  const [year, month, day] = dateString.split("-");
+
+  const monthName = getMonthName(parseInt(month));
+
+  return `${monthName} ${parseInt(day)}, ${year}`;
 }
 
 /**
@@ -222,26 +239,41 @@ function setSummaryLetter() {
   updateGreetingContainer();
 }
 
+/**
+ * Updates the To-do task counter in the summary display.
+ */
 function updateTodoContainer() {
   todoContainer = document.getElementById(`summeryTodoTodos`);
   todoContainer.innerHTML = todos;
 }
 
+/**
+ * Updates the Done task counter in the summary display.
+ */
 function updateDoneContainer() {
   doneContainer = document.getElementById(`summeryDoneTodos`);
   doneContainer.innerHTML = done;
 }
 
+/**
+ * Updates the In Progress task counter in the summary display.
+ */
 function updateProgressContainer() {
   progressContainer = document.getElementById(`summeryProcessTasks`);
   progressContainer.innerHTML = progresses;
 }
 
+/**
+ * Updates the Await Feedback task counter in the summary display.
+ */
 function updateAwaitContainer() {
   awaitContainer = document.getElementById(`summeryAwaitingTask`);
   awaitContainer.innerHTML = awaits;
 }
 
+/**
+ * Updates the total task count in the summary display.
+ */
 function updateCounterContainer() {
   if (Array.isArray(user.tasks)) {
     tasksInBoard = user.tasks.length;
@@ -253,11 +285,18 @@ function updateCounterContainer() {
   counterContainer.innerHTML = tasksInBoard;
 }
 
+/**
+ * Updates the urgent task counter in the summary display.
+ */
 function updateUrgentContainer() {
   urgentContainer = document.getElementById(`summeryUpcomingTasks`);
   urgentContainer.innerHTML = urgentCounter;
 }
 
+/**
+ * Updates the upcoming urgent deadline date display.
+ * Shows "none" if no urgent tasks exist.
+ */
 function updateUpcomingDateContainer() {
   upcomingDateContainer = document.getElementById(`summeryUrgentDate`);
 
@@ -268,6 +307,10 @@ function updateUpcomingDateContainer() {
   }
 }
 
+/**
+ * Updates the personalized greeting display for desktop and mobile views.
+ * Displays time-based greeting and user name (or "Guest User" for guests).
+ */
 function updateGreetingContainer() {
   greetingsDesktop = document.getElementById(`greetingsDesktop`);
   greetingNameDesktop = document.getElementById(`greetingNameDesktop`);
@@ -295,9 +338,9 @@ function updateGreetingContainer() {
 function changeImage(element) {
   const img = element.querySelector(".summaryAnimateProgramm");
   if (img.classList.contains("editImage")) {
-    img.src = "../assets/img/summary/summaryWhiteEdit.svg";
+    img.src = "./../assets/img/summary/summaryWhiteEdit.svg";
   } else if (img.classList.contains("checkImage")) {
-    img.src = "../assets/img/summary/summaryCheckWhite.svg";
+    img.src = "./../assets/img/summary/summaryCheckWhite.svg";
   }
 }
 
@@ -308,8 +351,18 @@ function changeImage(element) {
 function changeImageBack(element) {
   const img = element.querySelector(".summaryAnimateProgramm");
   if (img.classList.contains("editImage")) {
-    img.src = "../assets/img/summary/summaryGrayEdit.svg";
+    img.src = "./../assets/img/summary/summaryGrayEdit.svg";
   } else if (img.classList.contains("checkImage")) {
-    img.src = "../assets/img/summary/summaryCheckGray.svg";
+    img.src = "./../assets/img/summary/summaryCheckGray.svg";
   }
+}
+
+/**
+ * Navigates to the board and opens the earliest urgent task after loading.
+ */
+function openUrgentTask() {
+  if (earliestUrgentTaskIndex !== -1) {
+    sessionStorage.setItem("openTaskIndex", earliestUrgentTaskIndex);
+  }
+  includeContentHTML("board");
 }

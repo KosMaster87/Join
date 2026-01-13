@@ -5,7 +5,7 @@
   display: none;
   flex-direction: column;
   background-color: white;
-  padding: 24px 24px;
+  padding: 24px 24px 60px 24px;
   position: absolute;
   top: 50px;
   box-sizing: border-box;
@@ -85,7 +85,6 @@ a.singleContact:hover {
   display: none;
 }
 
-
 @media screen and (min-width: 456px) {
   #listContactContainer {
     max-width: 456px;
@@ -100,7 +99,7 @@ a.singleContact:hover {
     top: 40px;
     width: 70%;
   }
-} 
+}
 
 @media screen and (min-width: 1000px) {
   #listContactContainer {
@@ -129,10 +128,10 @@ a.singleContact:hover {
 
   .active {
     background-color: var(--lightGray);
-    border-radius: 10px; 
+    border-radius: 10px;
   }
 
-  .active .contactName{
+  .active .contactName {
     color: white;
   }
 }
@@ -145,8 +144,7 @@ a.singleContact:hover {
   }
 }
 @media (max-width: 1200px) {
-.mainContent{
-  background-color: var(--white) !important;
-}
-
+  .mainContent {
+    background-color: var(--white) !important;
+  }
 }

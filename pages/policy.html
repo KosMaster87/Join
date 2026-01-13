@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <script type="importmap">
+      {
+        "imports": {
+          "firebase/app": "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js",
+          "firebase/firestore": "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js",
+          "firebase/auth": "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js"
+        }
+      }
+    </script>
+
     <link rel="stylesheet" href="./../css/policy.css" />
     <link rel="stylesheet" href="./../css/header.css" />
     <link rel="stylesheet" href="./../css/menu.css" />
@@ -14,8 +24,8 @@
       href="../assets/img/login/secondLogo.svg"
     />
 
-    <script src="./../includeHTML.js"></script>
-    <script src="./../script.js"></script>
+    <script src="./../js/includeHTML.js"></script>
+    <script type="module" src="./../js/app.js"></script>
     <script src="../js/register.js"></script>
     <script src="../js/login.js"></script>
     <script src="../js/menu.js"></script>
