@@ -102,7 +102,7 @@ function editBoardMobileTaskReturn(i) {
         </div>
         <p id="contactRequired" class="fieldIsRequiredText"></p>
       </div>
-  
+
       <div id="taskSubtaskContainer">
         <p class="taskHeadline">Subtasks</p>
         <div class="subTaskInputContainerClass" id="subTaskInputContainer">
@@ -111,6 +111,7 @@ function editBoardMobileTaskReturn(i) {
             placeholder="Add new subtask"
             class="subtaskInputfield font"
             type="text"
+            onfocus="addSubtaskInputBorder()"
             onkeydown="if(event.key==='Enter') addBoardSubtask(${i})"
             onkeyup="changeBoardMenu(${i})"
           />
@@ -118,7 +119,10 @@ function editBoardMobileTaskReturn(i) {
             <img class="arrow" src="../assets/img/add_task/task_add.svg" />
           </div>
         </div>
-        <div class="subTaskAddContainer" id="subTasksContainer"></div>
+
+        <div class="subTaskAddContainer" id="subTasksContainer">
+          <p class="fieldIsRequiredText"></p>
+        </div>
       </div>
     </div>
     <div class="boardEditButtonContainer">
@@ -128,7 +132,7 @@ function editBoardMobileTaskReturn(i) {
       </div>
     </div>
   </div>
-  
+
   `;
 }
 function editBoardDesktopTaskReturn(i) {
@@ -235,6 +239,7 @@ function editBoardDesktopTaskReturn(i) {
           placeholder="Add new subtask"
           class="subtaskInputfield font"
           type="text"
+          onfocus="addSubtaskInputBorder()"
           onkeydown="if(event.key==='Enter') addBoardSubtask(${i})"
           onkeyup="changeBoardMenu(${i})"
         />

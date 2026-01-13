@@ -1,5 +1,4 @@
 /* EDIT CONTACT CSS */
-
 #mobileBtnEditContact {
   background-color: var(--lightGray);
   border-radius: 50%;
@@ -40,10 +39,9 @@
   display: none;
   position: fixed;
   top: 0;
-  /*right: -100%; Startposition außerhalb des sichtbaren Bereichs - vorübergehend ausgeschaltet */
   width: 100%;
   height: 100%;
-  transition: right 1s ease; /* Transition für die Animation: 0.5 Sekunden, einfacher Übergangseffekt */
+  transition: right 1s ease;
 }
 
 #contactHeaderCloseIcon {
@@ -66,7 +64,7 @@
 }
 
 .overlayVisible {
-  right: 0 !important; /* Zielposition für das Hereinsliden */
+  right: 0 !important;
 }
 
 .editContactHeaderSection {
@@ -169,7 +167,6 @@
   align-items: center;
 }
 
-/* Zusammenfassen */
 #editContactMessageName {
   font-size: 11px;
   color: red;
@@ -237,9 +234,9 @@
 
   .contactContainerFlexZwei {
     display: flex;
-    background-color:blue; 
+    background-color:blue;
   }
-  
+
   #editContactBodySignature {
     display: flex;
     width: 120px;

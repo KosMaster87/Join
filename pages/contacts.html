@@ -4,32 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="../css/header.css" />
-    <link rel="stylesheet" href="../css/menu.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "firebase/app": "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js",
+          "firebase/firestore": "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js",
+          "firebase/auth": "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js"
+        }
+      }
+    </script>
+
+    <link rel="stylesheet" href="./../css/header.css" />
+    <link rel="stylesheet" href="./../css/menu.css" />
     <link rel="stylesheet" href="./../style.css" />
-    <link rel="stylesheet" href="../css/contact/mainContact.css" />
-    <link rel="stylesheet" href="../css/contact/mobileBtn.css" />
-    <link rel="stylesheet" href="../css/contact/listContact.css" />
-    <link rel="stylesheet" href="../css/contact/editContact.css" />
-    <link rel="stylesheet" href="../css/contact/addContact.css" />
-    <link rel="stylesheet" href="../css/contact/showSingleContact.css" />
+    <link rel="stylesheet" href="./../css/contact/mobileBtn.css" />
+    <link rel="stylesheet" href="./../css/contact/listContact.css" />
+    <link rel="stylesheet" href="./../css/contact/editContact.css" />
+    <link rel="stylesheet" href="./../css/contact/addContact.css" />
+    <link rel="stylesheet" href="./../css/contact/showSingleContact.css" />
 
-    <script src="./../includeHTML.js"></script>
-    <script src="./../script.js"></script>
-    <script src="../js/register.js"></script>
-    <script src="../js/login.js"></script>
-    <script src="../js/menu.js"></script>
-    <script src="../js/header.js"></script>
+    <script src="./../js/includeHTML.js"></script>
+    <script type="module" src="./../js/app.js"></script>
+    <script src="./../js/register.js"></script>
+    <script src="./../js/login.js"></script>
+    <script src="./../js/menu.js"></script>
+    <script src="./../js/header.js"></script>
 
-    <script src="../js/contact/mainContact.js"></script>
-    <script src="../js/contact/addContact.js"></script>
-    <script src="../js/contact/listContact.js"></script>
-    <script src="../js/contact/showSingleContact.js"></script>
-    <script src="../js/contact/editContact.js"></script>
+    <!-- Shared utilities -->
+    <script src="./../js/shared/ui-helpers.js"></script>
+    <script src="./../js/shared/signature-helpers.js"></script>
+
+    <!-- Contact core modules -->
+    <script src="./../js/contact/core/contact-helpers.js"></script>
+    <script src="./../js/contact/core/contact-ui.js"></script>
+    <script src="./../js/contact/core/contact-validation.js"></script>
+    <script src="./../js/contact/core/contact-operations.js"></script>
+    <script src="./../js/contact/core/contact-navigation.js"></script>
+
+    <!-- Contact feature modules -->
+    <script src="./../js/contact/mainContact.js"></script>
+    <script src="./../js/contact/addContact.js"></script>
+    <script src="./../js/contact/listContact.js"></script>
+    <script src="./../js/contact/showSingleContact.js"></script>
+    <script src="./../js/contact/editContact.js"></script>
     <link
       rel="icon"
       type="image/x-icon"
-      href="../assets/img/login/secondLogo.svg"
+      href="./../assets/img/login/secondLogo.svg"
     />
     <title>Contacts Page</title>
   </head>
@@ -53,13 +74,13 @@
                   id="contactHeaderCloseIcon"
                   onclick="closeAddContactContainer()"
                 >
-                  <img src="../../assets/img/addContact/close.svg" />
+                  <img src="./../../assets/img/addContact/close.svg" />
                 </a>
               </div>
               <div class="addContactHeaderSection">
                 <img
                   id="contactHeaderJoinLogo"
-                  src="../assets/img/menu/desktopFooterLogo.svg"
+                  src="./../assets/img/menu/desktopFooterLogo.svg"
                 />
                 <h1 class="addContactHeadline">Add contact</h1>
                 <h3 class="addContactSubtitle">
@@ -68,7 +89,7 @@
               </div>
               <div class="contactHeaderBorder"></div>
               <div class="addContactHeaderSignature">
-                <img src="../../assets/img/addContact/person.svg" />
+                <img src="./../../assets/img/addContact/person.svg" />
               </div>
             </div>
             <div id="contactBody">
@@ -77,12 +98,12 @@
                   id="contactBodyCloseIcon"
                   onclick="closeAddContactContainerDesktop()"
                 >
-                  <img src="../../assets/img/addContact/close-gray.svg" />
+                  <img src="./../../assets/img/addContact/close-gray.svg" />
                 </a>
                 <div id="contactContainerFlexZwei">
                   <div class="contactBodySignatureContainer">
                     <div id="contactBodyEmptySignature">
-                      <img src="../assets/img/addContact/person.svg" />
+                      <img src="./../assets/img/addContact/person.svg" />
                     </div>
                   </div>
                   <div class="contactBodyInputSection">
@@ -100,7 +121,7 @@
                           type="text"
                         />
                         <img
-                          src="../../assets/img/addContact/person-gray.svg"
+                          src="./../../assets/img/addContact/person-gray.svg"
                         />
                       </div>
                       <div
@@ -120,7 +141,7 @@
                           class="textInputfield"
                           type="email"
                         />
-                        <img src="../../assets/img/addContact/mail.svg" />
+                        <img src="./../../assets/img/addContact/mail.svg" />
                       </div>
                       <div class="addContactMessageContainer">
                         <span id="addContactMessageEmail"></span>
@@ -136,7 +157,7 @@
                           class="textInputfield"
                           type="tel"
                         />
-                        <img src="../../assets/img/addContact/call.svg" />
+                        <img src="./../../assets/img/addContact/call.svg" />
                       </div>
                     </div>
                     <div class="addContactMessageContainer">
@@ -149,7 +170,7 @@
                         class="contactBtnSave"
                         >Create contact<img
                           class="contactBtnIcon"
-                          src="../../assets/img/addContact/check.svg"
+                          src="./../../assets/img/addContact/check.svg"
                       /></a>
                     </div>
                     <div class="contactBodytBtnRowDesktop">
@@ -159,7 +180,7 @@
                         class="contactCancelBtnDesktop"
                         >Cancel<img
                           class="contactBtnIcon"
-                          src="../../assets/img/addContact/close-gray.svg"
+                          src="./../../assets/img/addContact/close-gray.svg"
                       /></a>
                       <a
                         onclick="saveContactAtAddContactDesktop()"
@@ -167,7 +188,7 @@
                         class="contactBtnSave"
                         >Create contact<img
                           class="contactBtnIcon"
-                          src="../../assets/img/addContact/check.svg"
+                          src="./../../assets/img/addContact/check.svg"
                       /></a>
                     </div>
                   </div>
@@ -177,33 +198,24 @@
           </div>
         </div>
       </div>
-      
-      <!-- <div class="contactHeaderNav">
-        <a
-          id="contactHeaderCloseIcon"
-          onclick="goFromDeleteContactToListContact()"
-        >
-          <img src="../../assets/img/addContact/close.svg" />
-        </a>
-      </div> -->
+
       <div id="editContactContainer">
         <div id="editOverlayFrame">
           <div id="contactCard">
             <div class="contactHeader">
-
               <div class="contactHeaderNav">
                 <a
                   id="contactHeaderCloseIcon"
                   onclick="closeEditContactWindow()"
                 >
-                  <img src="../../assets/img/addContact/close.svg" />
+                  <img src="./../../assets/img/addContact/close.svg" />
                 </a>
               </div>
 
               <div class="editContactHeaderSection">
                 <img
                   id="contactHeaderJoinLogo"
-                  src="../assets/img/menu/desktopFooterLogo.svg"
+                  src="./../../assets/img/menu/desktopFooterLogo.svg"
                 />
 
                 <h1 class="editContactHeadline">Edit contact</h1>
@@ -223,7 +235,7 @@
                   id="contactBodyCloseIcon"
                   onclick="desktopCloseAddContactContainerWithoutAddingNewContact()"
                 >
-                  <img src="../../assets/img/addContact/close-gray.svg" />
+                  <img src="./../../assets/img/addContact/close-gray.svg" />
                 </a>
                 <div id="contactContainerFlexZwei">
                   <div class="contactBodySignatureContainer">
@@ -246,7 +258,7 @@
                           type="text"
                         />
                         <img
-                          src="../../assets/img/addContact/person-gray.svg"
+                          src="./../../assets/img/addContact/person-gray.svg"
                         />
                       </div>
                       <div
@@ -266,7 +278,7 @@
                           class="textInputfield"
                           type="email"
                         />
-                        <img src="../../assets/img/addContact/mail.svg" />
+                        <img src="./../../assets/img/addContact/mail.svg" />
                       </div>
                       <div class="editContactMessageContainer">
                         <span id="editContactMessageEmail"></span>
@@ -282,7 +294,7 @@
                           class="textInputfield"
                           type="tel"
                         />
-                        <img src="../../assets/img/addContact/call.svg" />
+                        <img src="./../../assets/img/addContact/call.svg" />
                       </div>
                     </div>
                     <div class="editContactMessageContainer">
@@ -294,7 +306,7 @@
                         id="editContactBtnSaveMobile"
                         >Save<img
                           class="contactBtnIcon"
-                          src="../../assets/img/addContact/check.svg"
+                          src="./../../assets/img/addContact/check.svg"
                         />
                       </a>
                     </div>
@@ -309,7 +321,7 @@
                         id="editContactSaveBtnDesktop"
                         >Save<img
                           class="contactBtnIcon"
-                          src="../../assets/img/addContact/check.svg"
+                          src="./../../assets/img/addContact/check.svg"
                       /></a>
                     </div>
                   </div>
@@ -333,7 +345,7 @@
                 id="singleContactNav"
                 onclick="goFromSingleContactToListContactContainer()"
               >
-                <img src="../../assets/img/other/Vektor.svg" />
+                <img src="./../../assets/img/other/Vektor.svg" />
               </a>
             </div>
           </div>
@@ -351,7 +363,7 @@
                   >
                     <img
                       class="desktopBtnIcon"
-                      src="../assets/img/contact/edit.svg"
+                      src="./../../assets/img/contact/edit.svg"
                     />
                     Edit
                   </div>
@@ -362,7 +374,7 @@
                   >
                     <img
                       class="desktopBtnIcon"
-                      src="../assets/img/contact/delete.svg"
+                      src="./../../assets/img/contact/delete.svg"
                     />
                     Delete
                   </div>
@@ -394,7 +406,7 @@
       >
         <img
           class="mobileBtnAddContactItem"
-          src="../assets/img/addContact/person_add.svg"
+          src="./../../assets/img/addContact/person_add.svg"
         />
       </div>
 
@@ -405,7 +417,7 @@
       >
         <img
           class="mobileBtnThreePointsIcon"
-          src="../assets/img/contact/more_vert.svg"
+          src="./../../assets/img/contact/more_vert.svg"
         />
       </div>
 
@@ -418,7 +430,7 @@
           >
             <img
               class="mobileBtnIconEdit"
-              src="../assets/img/contact/edit.svg"
+              src="./../../assets/img/contact/edit.svg"
             />
             <span>Edit</span>
           </a>
@@ -429,41 +441,15 @@
           >
             <img
               class="mobileBtnIconDelete"
-              src="../assets/img/contact/delete.svg"
+              src="./../../assets/img/contact/delete.svg"
             />
             <span>Delete</span>
           </a>
         </div>
       </div>
-      <!-- <div id="mobileBtnSelectOptions" class="mobileBtnSquare positionAbsolute">
-        <div class="internBtnSquare">
-          <a
-            id="mobileBtnSquareEdit"
-            class="internBtnSquareLink"
-            onclick="goFromShowSingleContactToEditContact()"
-          >
-            <img
-              class="mobileBtnIconEdit"
-              src="../assets/img/contact/edit.svg"
-            />
-            <span>Edit</span>
-          </a>
-          <a
-            id="mobileBtnSquareDelete"
-            class="internBtnSquareLink"
-            onclick="deleteContactAtShowSingleContactMobile(currentContactId)"
-          >
-            <img
-              class="mobileBtnIconDelete"
-              src="../assets/img/contact/delete.svg"
-            />
-            <span>Delete</span>
-          </a>
-        </div>
-      </div> -->
     </div>
     <div
-      w3-include-html="../assets/templates/menu.html"
+      w3-include-html="./../../assets/templates/menu.html"
       id="afterLoginMainMenu"
       class="afterLoginMainMenu"
     ></div>

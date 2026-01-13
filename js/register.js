@@ -1,3 +1,26 @@
+/**
+ * @fileoverview User registration module with Firebase Authentication integration.
+ *
+ * @description
+ * Handles user registration with Firebase Authentication, including form validation,
+ * password confirmation, privacy policy acceptance, and guest user creation.
+ * Integrates with the global state store and Firestore service for user data management.
+ *
+ * Key features:
+ * - Firebase Authentication for regular users
+ * - Guest user registration (legacy flow without Auth)
+ * - Email uniqueness validation
+ * - Password confirmation validation
+ * - Privacy policy checkbox validation
+ * - Real-time form field validation with visual feedback
+ * - Success message display and automatic redirect to login
+ *
+ * @module register
+ * @requires services/auth.service
+ * @requires services/firestore.service
+ * @requires services/store
+ */
+
 let passwordContainer = document.getElementById("registerPasswortDevision");
 let confirmPasswordContainer = document.getElementById(
   "registerConfirmPasswortDevision"
@@ -75,176 +98,252 @@ async function emailAlreadyTaken() {
 
 /**
  * Registers a new user by creating a user object and saving it to the database.
- * Handles guest and regular user registration separately.
+ * Handles guest and regular user registration separately. Updates the store.
  * @returns {Promise<void>} - A promise that resolves when the user is successfully registered.
  */
-async function registerUser() {
-  const isGuest = registerInputEmail.value === "guest@mail.de";
-  const userId = generateUserId();
-
-  if (
-    !registerInputName.value ||
-    !registerInputEmail.value ||
-    !registerInputPassword.value
-  ) {
-    return;
-  }
-
-  const newUser = {
-    name: isGuest ? `Guest User ${userId}` : registerInputName.value,
-    email: isGuest ? `guest_${userId}@mail.de` : registerInputEmail.value,
-    password: registerInputPassword.value,
-    colorCode,
-    tasks: [],
-    contacts: [],
-    isGuest,
-  };
+const registerUser = async () => {
+  if (!areInputsValid()) return;
 
   try {
-    const collection = isGuest ? "guests" : "users";
-    await setItem(collection, userId, newUser);
-
+    const isGuest = registerInputEmail.value === "guest@mail.de";
+    isGuest ? await registerGuestUser() : await registerRegularUser();
     resetForm();
     await signedUpSuccessfullyFn();
   } catch (error) {
+    handleRegistrationError(error);
   } finally {
     registerBtn.disabled = false;
   }
-}
+};
+
+/**
+ * Validates if all required input fields have values.
+ * @returns {boolean} - True if all inputs are valid, false otherwise.
+ */
+const areInputsValid = () => {
+  return (
+    !!registerInputName.value &&
+    !!registerInputEmail.value &&
+    !!registerInputPassword.value
+  );
+};
+
+/**
+ * Registers a guest user without Firebase Authentication.
+ * @returns {Promise<void>} - A promise that resolves when the guest is registered.
+ */
+const registerGuestUser = async () => {
+  const userId = generateUserId();
+  const newGuest = {
+    name: `Guest User ${userId}`,
+    email: `guest_${userId}@mail.de`,
+    colorCode,
+    tasks: [],
+    contacts: [],
+    isGuest: true,
+  };
+  await setItem("guests", userId, newGuest);
+  const updatedGuests = [...store.getGuests(), { id: userId, ...newGuest }];
+  store.setGuests(updatedGuests);
+};
+
+/**
+ * Registers a regular user with Firebase Authentication.
+ * @returns {Promise<void>} - A promise that resolves when the user is registered.
+ */
+const registerRegularUser = async () => {
+  const authUser = await registerWithAuth(
+    registerInputEmail.value,
+    registerInputPassword.value
+  );
+  const newUser = createUserObject();
+  await setItem("users", authUser.uid, newUser);
+  const updatedUsers = [...store.getUsers(), { id: authUser.uid, ...newUser }];
+  store.setUsers(updatedUsers);
+};
+
+/**
+ * Creates a user object from form inputs.
+ * @returns {Object} - The user object.
+ */
+const createUserObject = () => ({
+  name: registerInputName.value,
+  email: registerInputEmail.value,
+  colorCode,
+  tasks: [],
+  contacts: [],
+  isGuest: false,
+});
+
+/**
+ * Handles registration errors by logging and displaying error message.
+ * @param {Error} error - The error object.
+ */
+const handleRegistrationError = (error) => {
+  console.error("Registration error:", error);
+  errorMessage.innerHTML = error.message || "Registration failed";
+};
 
 /**
  * Generates a unique user ID.
  * @returns {string} - A unique user ID.
  */
-function generateUserId() {
+const generateUserId = () => {
   return `user_${Math.random().toString(36).substr(2, 9)}`;
-}
+};
 
 /**
  * Validates if the password and confirmation password match.
  * Displays an error message if they do not match.
  * @returns {boolean} - `true` if the passwords match, otherwise `false`.
  */
-function validatePasswordConfirmationFn() {
-  let password = registerInputPassword.value;
-  let passwordConfirm = registerInputPasswordConfirm.value;
+const validatePasswordConfirmationFn = () => {
+  const password = registerInputPassword.value;
+  const passwordConfirm = registerInputPasswordConfirm.value;
 
   if (password !== passwordConfirm) {
-    errorMessage.innerHTML = "Passwords do not match";
-    passwordContainer.classList.add("wrong");
-    confirmPasswordContainer.classList.add("wrong");
-    confirmedValidation = false;
-    registerBtn.disabled = false;
+    showPasswordMismatchError();
     return false;
-  } else {
-    errorMessage.innerHTML = "";
-    passwordContainer.classList.remove("wrong");
-    confirmPasswordContainer.classList.remove("wrong");
-    confirmedValidation = true;
-    return true;
   }
-}
+  clearPasswordError();
+  return true;
+};
+
+/**
+ * Displays password mismatch error and updates UI.
+ */
+const showPasswordMismatchError = () => {
+  errorMessage.innerHTML = "Passwords do not match";
+  passwordContainer.classList.add("wrong");
+  confirmPasswordContainer.classList.add("wrong");
+  confirmedValidation = false;
+  registerBtn.disabled = false;
+};
+
+/**
+ * Clears password error styling and message.
+ */
+const clearPasswordError = () => {
+  errorMessage.innerHTML = "";
+  passwordContainer.classList.remove("wrong");
+  confirmPasswordContainer.classList.remove("wrong");
+  confirmedValidation = true;
+};
 
 /**
  * Toggles the privacy policy checkbox and updates the UI accordingly.
  */
-function checkedPrivacy() {
-  let checkedElement = document.getElementById("privacyCheck");
-  let checkedBox = checkedElement.checked;
+const checkedPrivacy = () => {
+  const checkedElement = document.getElementById("privacyCheck");
+  checkedElement.checked
+    ? handlePrivacyChecked(checkedElement)
+    : handlePrivacyUnchecked(checkedElement);
+};
 
-  if (checkedBox) {
-    errorMessage.innerHTML = "";
-    confirmedValidation = true;
-    checkedElement.setAttribute("checked", "checked");
-    registerBtn.disabled = false;
-  } else {
-    errorMessage.innerHTML = "U must accept the privacy policy";
-    confirmedValidation = false;
-    checkedElement.removeAttribute("checked", "");
-  }
-}
+/**
+ * Handles UI when privacy policy is checked.
+ * @param {HTMLElement} element - The checkbox element.
+ */
+const handlePrivacyChecked = (element) => {
+  errorMessage.innerHTML = "";
+  confirmedValidation = true;
+  element.setAttribute("checked", "checked");
+  registerBtn.disabled = false;
+};
+
+/**
+ * Handles UI when privacy policy is unchecked.
+ * @param {HTMLElement} element - The checkbox element.
+ */
+const handlePrivacyUnchecked = (element) => {
+  errorMessage.innerHTML = "U must accept the privacy policy";
+  confirmedValidation = false;
+  element.removeAttribute("checked");
+};
 
 /**
  * Validates if the privacy policy checkbox is checked.
  * @returns {boolean} - `true` if the checkbox is checked, otherwise `false`.
  */
-function privacyPolicyCheckedValidateFn() {
-  let privacyPolicyChecked = document
+const privacyPolicyCheckedValidateFn = () => {
+  const privacyPolicyChecked = document
     .getElementById("privacyCheck")
     .hasAttribute("checked");
 
   if (!privacyPolicyChecked) {
     errorMessage.innerHTML = "U must accept the privacy policy";
     confirmedValidation = false;
-  } else {
-    confirmedValidation = true;
+    return false;
   }
-  return confirmedValidation;
-}
+  confirmedValidation = true;
+  return true;
+};
 
 /**
  * Resets the registration form inputs to their default values.
  */
-function resetForm() {
+const resetForm = () => {
   registerInputName.value = "";
   registerInputEmail.value = "";
   registerInputPassword.value = "";
   registerInputPasswordConfirm.value = "";
-}
+};
 
 /**
  * Displays a success message after successful registration and redirects to the login page.
  * @returns {Promise<void>} - A promise that resolves after the success message is displayed.
  */
-async function signedUpSuccessfullyFn() {
+const signedUpSuccessfullyFn = async () => {
   signedUpSuccessfully.style.display = "flex";
   await new Promise((resolve) => setTimeout(resolve, 3000));
   signedUpSuccessfully.style.display = "none";
   redirectToLoin();
-}
+};
 
 /**
  * Redirects the user from the registration page to the login page.
  */
-function redirectToLoin() {
-  let registerMain = document.getElementById("registerMain");
-  let loginMain = document.getElementById("loginMain");
+const redirectToLoin = () => {
+  const registerMain = document.getElementById("registerMain");
+  const loginMain = document.getElementById("loginMain");
   loginMain.style.display = "flex";
   registerMain.style.display = "none";
-}
+};
 
 /**
  * Toggles the visibility of the password in the input field.
  * @param {string} passwordId - The ID of the password input field.
  * @param {string} imageId - The ID of the image element used to toggle visibility.
  */
-function changeToShowCurrentPassword(passwordId, imageId) {
-  let hideThePassword = document.getElementById(passwordId);
-  let hideThePasswordImage = document.getElementById(imageId);
+const changeToShowCurrentPassword = (passwordId, imageId) => {
+  const hideThePassword = document.getElementById(passwordId);
+  const hideThePasswordImage = document.getElementById(imageId);
 
-  if (hideThePassword.type == "password") {
-    hideThePassword.type = "text";
-    hideThePasswordImage.src = "/assets/img/login/visibilityOff.svg";
-  } else {
-    hideThePassword.type = "password";
-    hideThePasswordImage.src = "/assets/img/login/lock.svg";
-  }
-}
+  const isPasswordType = hideThePassword.type === "password";
+  hideThePassword.type = isPasswordType ? "text" : "password";
+  hideThePasswordImage.src = isPasswordType
+    ? "/assets/img/login/visibilityOff.svg"
+    : "/assets/img/login/lock.svg";
+};
 
 /**
  * Adds an active border color to the specified container.
  * @param {string} containerId - The ID of the container to change the border color.
  */
-function changeBorderColor(containerId) {
-  let focusContainer = document.getElementById(containerId);
+const changeBorderColor = (containerId) => {
+  const focusContainer = document.getElementById(containerId);
   focusContainer.classList.add("active");
-}
+};
 
 /**
  * Removes the active border color from the specified container.
  * @param {string} containerId - The ID of the container to reset the border color.
  */
-function resetBorderColor(containerId) {
-  let focusContainer = document.getElementById(containerId);
+const resetBorderColor = (containerId) => {
+  const focusContainer = document.getElementById(containerId);
   focusContainer.classList.remove("active");
-}
+};
+
+window.addEventListener("scriptModuleReady", () => {
+  // console.log("script.js is ready!");
+});

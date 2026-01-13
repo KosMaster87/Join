@@ -1,0 +1,31 @@
+{
+  "name": "join",
+  "version": "2.0.0",
+  "description": "A Kanban-based task management application built with Vanilla JavaScript and Firestore",
+  "type": "module",
+  "scripts": {
+    "dev": "npx live-server --port=3000 --open=index.html",
+    "build": "echo 'No build step required for vanilla JS'",
+    "docs": "jsdoc -c jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KosMaster87/join-legacy.git"
+  },
+  "keywords": [
+    "kanban",
+    "task-management",
+    "firebase",
+    "firestore",
+    "vanilla-javascript"
+  ],
+  "author": "Konstantin Aksenov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KosMaster87/join-legacy/issues"
+  },
+  "homepage": "https://github.com/KosMaster87/join-legacy#readme",
+  "devDependencies": {
+    "jsdoc": "^4.0.0"
+  }
+}

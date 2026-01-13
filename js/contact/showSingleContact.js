@@ -1,268 +1,237 @@
+/**
+ * @fileoverview Single contact display module.
+ * Handles displaying individual contact details.
+ * @description Provides orchestration for viewing contact details.
+ * Navigation logic moved to contact-navigation.js
+ * UI helpers moved to contact-ui.js
+ * @module showSingleContact
+ */
+
 let currentContactId = null;
 
 /**
- * Initializes the page by loading the specified contact's information.
- *
- * @async
- * @function loadShowSingleContact
- * @param {string} contactId - The ID of the contact to be loaded.
+ * Loads and displays single contact.
+ * @param {string} contactId - Contact ID to load.
  */
-async function loadShowSingleContact(contactId) {
+const loadShowSingleContact = async (contactId) => {
   await getCurrentContact(contactId);
   await fillAllVariables(contactId);
-}
+};
 
 /**
- * Sets the current contact's email for either guests or users.
- *
- * @async
- * @function setCurrentContactEmail
- * @param {string} email - The email address of the current contact.
+ * Checks if user has no contacts.
+ * @returns {boolean} True if no contacts exist.
  */
-async function setCurrentContactEmail(email) {
-  if (user.isGuest) {
-    await setItem("guests", user.id, { currentContactEmail: email });
-  } else {
-    await setItem("users", user.id, { currentContactEmail: email });
-  }
-}
+const hasNoUserContacts = () => !user || !user.contacts;
 
 /**
- * Retrieves the current contact based on the given contact ID.
- *
- * @async
- * @function getCurrentContact
- * @param {string} contactId - The ID of the contact to retrieve.
- * @returns {Object|null} The contact object if found, otherwise null.
+ * Retrieves contact by ID.
+ * @param {string} contactId - Contact ID to retrieve.
+ * @returns {Object|null} Contact object or null.
  */
-async function getCurrentContact(contactId) {
-  if (!user || !user.contacts) {
-    return null;
-  }
-
-  let contacts = user.contacts;
-  for (let i = 0; i < contacts.length; i++) {
-    const contact = contacts[i];
-    if (contact.contactId === contactId) {
-      return contact;
-    }
-  }
-
-  return null;
-}
+const getCurrentContact = async (contactId) => {
+  if (hasNoUserContacts()) return null;
+  return findContactById(contactId);
+};
 
 /**
- * Fills the necessary HTML elements with the current contact's information.
- *
- * @async
- * @function fillAllVariables
- * @param {string} contactId - The ID of the contact to fill the information for.
+ * Sets contact name in UI.
+ * @param {Object} contact - Contact object.
  */
-async function fillAllVariables(contactId) {
-  if (!contactId) {
-    return;
-  }
-
-  let contact = user.contacts?.find((c) => c.contactId === contactId);
-
-  if (!contact) {
-    return;
-  }
-
+const setContactName = (contact) => {
   document.getElementById("singleContactName").innerText =
     contact.name || "Unbekannt";
+};
 
-  importExistentVariable(
+/**
+ * Sets contact phone in UI.
+ * @param {Object} contact - Contact object.
+ */
+const setContactPhone = (contact) => {
+  setElementProperty(
     "singleContactPhone",
     "innerText",
     contact.phone || "Keine Nummer"
   );
-  importExistentVariable(
+};
+
+/**
+ * Sets contact email in UI.
+ * @param {Object} contact - Contact object.
+ */
+const setContactEmail = (contact) => {
+  setElementProperty(
     "singleContactEmail",
     "innerText",
     contact.email || "Keine E-Mail"
   );
-
-  document.getElementById("singleContactSignature").innerText =
-    contact.signature || "";
-  document.getElementById("singleContactSignature").style.backgroundColor =
-    contact.userColor || "#ccc";
-}
+};
 
 /**
- * Opens the email program with the current contact's email address.
- *
- * @async
- * @function openEmailProgram
- * @param {string} currentContactId - The ID of the current contact.
+ * Sets contact signature and color in UI.
+ * @param {Object} contact - Contact object.
  */
-async function openEmailProgram(currentContactId) {
-  let email = await getCurrentContactEmail(currentContactId);
-
-  if (!email) {
-    return;
-  }
-
-  window.open("mailto:" + email);
-}
+const setContactSignature = (contact) => {
+  const sigElement = document.getElementById("singleContactSignature");
+  sigElement.innerText = contact.signature || "";
+  sigElement.style.backgroundColor = contact.userColor || "#ccc";
+};
 
 /**
- * Retrieves the current contact's email address based on the contact ID.
- *
- * @async
- * @function getCurrentContactEmail
- * @param {string} currentContactId - The ID of the current contact.
- * @returns {string|null} The email address of the current contact if found, otherwise null.
+ * Fills UI with contact information.
+ * @param {string} contactId - Contact ID to display.
  */
-async function getCurrentContactEmail(currentContactId) {
-  if (!user || !user.contacts) {
-    return null;
-  }
-
-  let contact = user.contacts.find((c) => c.contactId === currentContactId);
-
-  if (!contact || !contact.email) {
-    return null;
-  }
-
-  return contact.email;
-}
+const fillAllVariables = async (contactId) => {
+  if (!contactId) return;
+  const contact = findContactById(contactId);
+  if (!contact) return;
+  setContactName(contact);
+  setContactPhone(contact);
+  setContactEmail(contact);
+  setContactSignature(contact);
+};
 
 /**
- * Imports an existing variable into the specified HTML element.
- *
- * @async
- * @function importExistentVariable
- * @param {string} id - The ID of the HTML element to update.
- * @param {string} variableHtml - The HTML property to set (e.g., 'innerText').
- * @param {string} input - The information to transfer to the HTML element.
+ * Gets contact email by ID.
+ * @param {string} contactId - Contact ID.
+ * @returns {string|null} Contact email or null.
  */
-async function importExistentVariable(id, variableHtml, input) {
-  if (input) {
-    document.getElementById(id)[variableHtml] = input;
-  }
-}
+const getCurrentContactEmail = async (contactId) => {
+  if (hasNoUserContacts()) return null;
+  const contact = findContactById(contactId);
+  return contact?.email || null;
+};
 
 /**
- * Initializes the contact list after closing the single contact view.
- *
- * @async
- * @function goFromSingleContactToListContactContainer
+ * Opens email program with contact email.
+ * @param {string} contactId - Current contact ID.
  */
-async function goFromSingleContactToListContactContainer() {
+const openEmailProgram = async (contactId) => {
+  const email = await getCurrentContactEmail(contactId);
+  if (email) window.open("mailto:" + email);
+};
+
+/**
+ * Navigates from single contact to list view.
+ */
+const goFromSingleContactToListContactContainer = async () => {
   await initListContact();
-
-  document.getElementById("showSingleContactContainer").style.display = "none";
-  document.getElementById("addContactContainer").style.display = "none";
-  document.getElementById("listContactContainer").style.display = "flex";
-  document.getElementById("mobileBtnAddContact").style.display = "block";
-  document.getElementById("mobileBtnSelectOptions").style.display = "none";
-  document.getElementById("mobileBtnThreePoints").style.display = "none";
-}
+  hideSingleContactContainers();
+  showContactListView();
+};
 
 /**
- * Initializes all templates for editing contacts.
- *
- * @async
- * @function goFromShowSingleContactToEditContact
+ * Navigates to edit contact view.
  */
-async function goFromShowSingleContactToEditContact() {
-  document.getElementById("mobileBtnThreePoints").style.display = "none";
-  document.getElementById("mobileBtnSelectOptions").style.display = "none";
-  document.getElementById("showSingleContactContainer").style.display = "none";
-  document.getElementById("listContactContainer").style.display = "none";
-  document.getElementById("editContactContainer").style.display = "block";
-  document.getElementById("editOverlayFrame").style.display = "flex";
-}
+const goFromShowSingleContactToEditContact = async () => {
+  hideMobileButtons();
+  hideContactContainers();
+  showEditContactView();
+};
 
 /**
- * Closes the single contact container and shows the mobile button for adding contacts.
- *
- * @function closeShowSingleContactContainer
+ * Shows mobile select options buttons.
  */
-function closeShowSingleContactContainer() {
-  document.getElementById("showSingleContactContainer").style.display = "none";
-  document.getElementById("mobileBtnAddContact").style.display = "block";
-}
-
-/**
- * Initializes templates for changing the button from the three-point button to select options.
- *
- * @function showMobileSelectBtns
- */
-function showMobileSelectBtns() {
+const showMobileSelectBtns = () => {
   document.getElementById("mobileBtnThreePoints").style.display = "none";
   document.getElementById("mobileBtnSelectOptions").style.display = "block";
-}
+  setupClickOutsideHandler();
+};
 
 /**
- * Initializes all templates for opening the edit contact container.
- *
- * @async
- * @function openEditContactContainer
+ * Sets up click outside handler.
  */
-async function openEditContactContainer() {
-  await initEditContact();
-  document.getElementById("editContactContainer").style.display = "block";
-  document.getElementById("editOverlayFrame").style.display = "block";
-  document.getElementById("mobileBtnAddContact").style.display = "none";
-}
+const setupClickOutsideHandler = () => {
+  setTimeout(() => {
+    document.addEventListener("click", handleClickOutside, true);
+  }, 0);
+};
 
 /**
- * Initializes the deleting process and shows relevant templates.
- *
- * @async
- * @function deleteContactAtSingleContactDesktop
- * @param {string} currentContactId - The ID of the contact to be deleted.
+ * Handles clicks outside mobile select options.
+ * @param {Event} event - Click event.
  */
-async function deleteContactAtSingleContactDesktop(currentContactId) {
-  await deleteContact(currentContactId);
-  await initListContact();
-
-  document.getElementById("mobileBtnThreePoints").style.display = "none";
-  document.getElementById("mobileBtnSelectOptions").style.display = "none";
-  document.getElementById("showSingleContactContainer").style.display = "flex";
-  document.getElementById("listContactContainer").style.display = "flex";
-  document.getElementById("singleContactCol").style.display = "none";
-
-  goFromSingleContactToListContactContainer();
-}
-
-/**
- * Initializes templates for opening the edit contact view from single contact.
- *
- * @async
- * @function openEditContactAtSingleContactDesktop
- * @param {string} contactId - The ID of the contact to be edited.
- */
-async function openEditContactAtSingleContactDesktop(contactId) {
-  if (!contactId) {
+const handleClickOutside = (event) => {
+  const selectOptions = document.getElementById("mobileBtnSelectOptions");
+  const threePointsBtn = document.getElementById("mobileBtnThreePoints");
+  if (!selectOptions || !threePointsBtn) return;
+  if (selectOptions.style.display !== "block") {
+    document.removeEventListener("click", handleClickOutside, true);
     return;
   }
-
-  currentContactId = contactId; // Speichere die aktuelle Kontakt-ID
-
-  await initEditContact();
-  document.getElementById("editContactContainer").style.display = "block";
-  document.getElementById("editOverlayFrame").style.display = "block";
-  document.getElementById("mobileBtnAddContact").style.display = "none";
-}
+  if (
+    !selectOptions.contains(event.target) &&
+    !threePointsBtn.contains(event.target)
+  ) {
+    hideMobileBtnSelectOptions();
+    threePointsBtn.style.display = "block";
+    document.removeEventListener("click", handleClickOutside, true);
+  }
+};
 
 /**
- * Initializes templates shown after deleting a contact.
- *
- * @async
- * @function deleteContactAtShowSingleContactMobile
- * @param {string} currentContactId - The ID of the contact to be deleted.
+ * Deletes contact and refreshes list.
+ * @param {string} contactId - Contact ID to delete.
  */
-async function deleteContactAtShowSingleContactMobile(currentContactId) {
-  await deleteContact(currentContactId);
+const deleteAndRefreshList = async (contactId) => {
+  await deleteContact(contactId);
   await initListContact();
-  document.getElementById("mobileBtnThreePoints").style.display = "none";
-  document.getElementById("mobileBtnSelectOptions").style.display = "none";
-  document.getElementById("showSingleContactContainer").style.display = "none";
-  document.getElementById("listContactContainer").style.display = "flex";
-  document.getElementById("singleContactCol").style.display = "none";
+};
 
+/**
+ * Deletes contact from desktop single view.
+ * @param {string} contactId - Contact ID to delete.
+ */
+const deleteContactAtSingleContactDesktop = async (contactId) => {
+  const editBtn = document.getElementById("desktopBtnEdit");
+  const deleteBtn = document.getElementById("desktopBtnDelete");
+  disableButtons(editBtn, deleteBtn);
+  await deleteAndRefreshList(contactId);
+  if (typeof window.setIsSaving === "function") {
+    window.setIsSaving(false);
+  }
+  showDesktopAfterDelete();
   goFromSingleContactToListContactContainer();
-}
+};
+
+/**
+ * Opens edit contact from desktop single view.
+ * @param {string} contactId - Contact ID to edit.
+ */
+const openEditContactAtSingleContactDesktop = async (contactId) => {
+  if (!contactId) return;
+  hideMobileBtnSelectOptions();
+  currentContactId = contactId;
+  await initEditContact();
+  showEditContactView();
+  document.getElementById("mobileBtnAddContact").style.display = "none";
+};
+
+/**
+ * Deletes contact from mobile single view.
+ * @param {string} contactId - Contact ID to delete.
+ */
+const deleteContactAtShowSingleContactMobile = async (contactId) => {
+  hideMobileBtnSelectOptions();
+  document.getElementById("showSingleContactContainer").style.display = "none";
+  await deleteAndRefreshList(contactId);
+  if (typeof window.setIsSaving === "function") {
+    window.setIsSaving(false);
+  }
+  showMobileAfterDelete();
+  goFromSingleContactToListContactContainer();
+};
+
+window.loadShowSingleContact = loadShowSingleContact;
+window.openEmailProgram = openEmailProgram;
+window.goFromSingleContactToListContactContainer =
+  goFromSingleContactToListContactContainer;
+window.goFromShowSingleContactToEditContact =
+  goFromShowSingleContactToEditContact;
+window.showMobileSelectBtns = showMobileSelectBtns;
+window.deleteContactAtSingleContactDesktop =
+  deleteContactAtSingleContactDesktop;
+window.openEditContactAtSingleContactDesktop =
+  openEditContactAtSingleContactDesktop;
+window.deleteContactAtShowSingleContactMobile =
+  deleteContactAtShowSingleContactMobile;

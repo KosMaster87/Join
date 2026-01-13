@@ -1,105 +1,184 @@
+/**
+ * @fileoverview Board drag-and-drop and search functionality.
+ *
+ * @description
+ * Handles drag-and-drop operations for task management and search/filter
+ * functionality for tasks on the board. Includes task status updates,
+ * visual feedback during drag operations, and real-time task filtering.
+ *
+ * Key features:
+ * - Drag-and-drop task reordering between columns
+ * - Visual highlight feedback during drag operations
+ * - Task search and filtering by title/description
+ * - Backend synchronization after status changes
+ * - Board container management and clearing
+ *
+ * @module boardDragSearch
+ */
+
 let currentDragElement;
 
 /**
- * This function saves all user data into the backend.
+ * Initializes dragging of a task.
+ * @param {number} i - Task index being dragged.
  */
-async function savedUsersInBackend() {
-  const collection = user.isGuest ? "guests" : "users";
-  const userId = user.id;
-
-  await setItem(collection, userId, { tasks: user.tasks });
-}
-
-/**
- * This function initializes the dragging of a task and stores the task index.
- *
- * @param {number} i - The index of the task being dragged.
- */
-function startDragging(i) {
+const startDragging = (i) => {
   currentDragElement = i;
-}
+};
 
 /**
- * Prevent the default behavior for drop events.
- *
- * @param {Event} ev - The event object for the drop event.
+ * Prevents default drop behavior.
+ * @param {Event} ev - Drop event.
  */
-function allowDrop(ev) {
+const allowDrop = (ev) => {
   ev.preventDefault();
-}
+};
 
 /**
- * Change the status of the currently dragged task and reload the task fields.
- *
- * @param {string} newStatus - The new status to set for the task.
+ * Updates task status in data.
+ * @param {string} newStatus - New status value.
  */
-async function moveTo(newStatus) {
+const updateTaskStatus = (newStatus) => {
   user.tasks[currentDragElement].status = newStatus;
-  savedUsersInBackend();
+  store.updateTask(currentDragElement, { status: newStatus });
+};
+
+/**
+ * Reloads board after status change.
+ */
+const reloadBoard = () => {
   clearBoardTasksField();
   loadTasks();
-}
+};
 
 /**
- * Highlight the task field involved in the drag operation.
- *
- * @param {string} id - The id of the task field to be highlighted.
+ * Changes dragged task status and reloads board.
+ * @param {string} newStatus - New status to set.
  */
-function highlight(id) {
+const moveTo = async (newStatus) => {
+  updateTaskStatus(newStatus);
+  await savedUsersInBackend();
+  reloadBoard();
+};
+
+/**
+ * Highlights task drop area.
+ * @param {string} id - Container ID to highlight.
+ */
+const highlight = (id) => {
   document.getElementById(id).classList.add("drag-area-highlight");
-}
+};
 
 /**
- * Remove the highlight from the task field involved in the drag operation.
- *
- * @param {string} id - The id of the task field to remove the highlight from.
+ * Removes highlight from drop area.
+ * @param {string} id - Container ID to unhighlight.
  */
-function removeHighlight(id) {
+const removeHighlight = (id) => {
   document.getElementById(id).classList.remove("drag-area-highlight");
-}
+};
 
 /**
- * This function filters tasks based on the search input and posts the relevant tasks.
+ * Gets search input value.
+ * @returns {string} Lowercase search term.
  */
-async function filterTitles() {
-  let search = document.getElementById("boardSearchInput").value.toLowerCase();
+const getSearchValue = () => {
+  return document.getElementById("boardSearchInput").value.toLowerCase();
+};
+
+/**
+ * Checks if task matches search.
+ * @param {number} i - Task index.
+ * @param {string} search - Search term.
+ * @returns {boolean} True if task matches.
+ */
+const taskMatchesSearch = (i, search) => {
+  const inTitle = user.tasks[i].title.toLowerCase();
+  const inDesc = user.tasks[i].description.toLowerCase();
+  return inTitle.includes(search) || inDesc.includes(search);
+};
+
+/**
+ * Fills task by status.
+ * @param {number} i - Task index.
+ */
+const fillTaskByStatus = (i) => {
+  const container = document.getElementById(
+    getContainerIdByStatus(user.tasks[i].status)
+  );
+  if (!container) return;
+  const isAwait = user.tasks[i].status === "await";
+  const htmlTemplate = isAwait ? awaitHtmlReturn(i) : HtmlReturn(i);
+  container.innerHTML += htmlTemplate;
+  fillValue(i);
+};
+
+/**
+ * Gets container ID by task status.
+ * @param {string} status - Task status.
+ * @returns {string} Container ID.
+ */
+const getContainerIdByStatus = (status) => {
+  const containers = {
+    "to-do": "TodoMainContainer",
+    progress: "progressMainContainer",
+    await: "awaitMainContainer",
+    done: "doneMainContainer",
+  };
+  return containers[status] || "";
+};
+
+/**
+ * Filters and displays tasks by search term.
+ */
+const filterTitles = () => {
+  const search = getSearchValue();
   clearBoardTasksField();
-  for (let i = 0; i < user.tasks.length; i++) {
-    let inTitle = user.tasks[i].title.toLowerCase();
-    let inDesc = user.tasks[i].description.toLowerCase();
-    if (inTitle.includes(search) || inDesc.includes(search)) {
-      if (user.tasks[i].status === "to-do") {
-        fillTodo(i);
-      } else if (user.tasks[i].status === "progress") {
-        fillProgress(i);
-      } else if (user.tasks[i].status === "await") {
-        fillAwait(i);
-      } else if (user.tasks[i].status === "done") {
-        fillDone(i);
-      }
+  user.tasks.forEach((_, i) => {
+    if (taskMatchesSearch(i, search)) {
+      fillTaskByStatus(i);
     }
-  }
+  });
   checkNoFilledTasks();
-}
+};
 
 /**
- * This function clears all the task fields on the board.
+ * Removes highlights from all containers.
  */
-function clearBoardTasksField() {
-  document
-    .getElementById(`TodoMainContainer`)
-    .classList.remove("drag-area-highlight");
-  document
-    .getElementById(`progressMainContainer`)
-    .classList.remove("drag-area-highlight");
-  document
-    .getElementById(`awaitMainContainer`)
-    .classList.remove("drag-area-highlight");
-  document
-    .getElementById(`doneMainContainer`)
-    .classList.remove("drag-area-highlight");
-  document.getElementById(`TodoMainContainer`).innerHTML = "";
-  document.getElementById(`progressMainContainer`).innerHTML = "";
-  document.getElementById(`awaitMainContainer`).innerHTML = "";
-  document.getElementById(`doneMainContainer`).innerHTML = "";
-}
+const removeAllHighlights = () => {
+  [
+    "TodoMainContainer",
+    "progressMainContainer",
+    "awaitMainContainer",
+    "doneMainContainer",
+  ].forEach((id) => {
+    document.getElementById(id).classList.remove("drag-area-highlight");
+  });
+};
+
+/**
+ * Clears all container contents.
+ */
+const clearAllContainerContents = () => {
+  [
+    "TodoMainContainer",
+    "progressMainContainer",
+    "awaitMainContainer",
+    "doneMainContainer",
+  ].forEach((id) => {
+    document.getElementById(id).innerHTML = "";
+  });
+};
+
+/**
+ * Clears all task fields on board.
+ */
+const clearBoardTasksField = () => {
+  removeAllHighlights();
+  clearAllContainerContents();
+};
+
+window.startDragging = startDragging;
+window.allowDrop = allowDrop;
+window.moveTo = moveTo;
+window.highlight = highlight;
+window.removeHighlight = removeHighlight;

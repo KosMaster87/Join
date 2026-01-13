@@ -2,28 +2,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/addTask.css" />
-    <link rel="stylesheet" href="./../style.css" />
-    <link rel="stylesheet" href="../css/header.css" />
-    <link rel="stylesheet" href="../css/menu.css" />
-    <link rel="stylesheet" href="../css/fonts.css" />
 
-    <script src="../js/menu.js"></script>
-    <script src="../js/header.js"></script>
-    <script src="./../../includeHTML.js"></script>
-    <script src="./../script.js"></script>
-    <script src="../js/register.js"></script>
-    <script src="../js/login.js"></script>
-    <script src="../js/contact/editContact.js"></script>
-    <script src="../js/contact/listContact.js"></script>
-    <script src="../js/contact/showSingleContact.js"></script>
-    <script src="../js/addTask.js"></script>
-    <script src="../js/addTaskAssignedTo.js"></script>
-    <script src="../js/addTaskHTML.js"></script>
-    <script src="../js/summary.js"></script>
-    <link rel="icon" type="image/x-icon" href="../assets/img/login/secondLogo.svg">
+    <link rel="stylesheet" href="./../css/addTask.css" />
+    <link rel="stylesheet" href="./../style.css" />
+    <link rel="stylesheet" href="./../css/header.css" />
+    <link rel="stylesheet" href="./../css/menu.css" />
+    <link rel="stylesheet" href="./../css/fonts.css" />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "firebase/app": "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js",
+          "firebase/firestore": "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js",
+          "firebase/auth": "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js"
+        }
+      }
+    </script>
+
+    <script src="./../js/menu.js"></script>
+    <script src="./../js/header.js"></script>
+    <script src="./../../js/includeHTML.js"></script>
+    <script type="module" src="./../js/app.js"></script>
+
+    <script src="./../js/register.js"></script>
+    <script src="./../js/login.js"></script>
+    <script src="./../js/contact/editContact.js"></script>
+    <script src="./../js/contact/listContact.js"></script>
+    <script src="./../js/contact/showSingleContact.js"></script>
+
+    <!-- Shared utilities -->
+    <script src="./../js/shared/task-helpers.js"></script>
+
+    <!-- Add Task core modules -->
+    <script src="./../js/add-task/core/add-task-priority.js"></script>
+    <script src="./../js/add-task/core/add-task-validation.js"></script>
+    <script src="./../js/add-task/core/add-task-category.js"></script>
+    <script src="./../js/add-task/core/add-task-subtasks.js"></script>
+    <script src="./../js/add-task/core/add-task-ui.js"></script>
+    <script src="./../js/add-task/core/add-task-operations.js"></script>
+    <script src="./../js/add-task/core/add-task-contacts.js"></script>
+    <script src="./../js/add-task/core/add-task-listeners.js"></script>
+    <script src="./../js/add-task/core/add-task-input-clearing.js"></script>
+    <script src="./../js/add-task/core/add-task-form-state.js"></script>
+
+    <!-- Add Task orchestration -->
+    <script src="./../js/add-task/addTask.js"></script>
+    <script src="./../js/add-task/addTaskHTML.js"></script>
+
+    <script src="./../js/summary.js"></script>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./../assets/img/login/secondLogo.svg"
+    />
     <title>Join Project Management Tool</title>
   </head>
+
   <body onload="initAddTask()">
     <div
       w3-include-html="../assets/templates/header.html"
@@ -31,8 +65,7 @@
       class="mainHeader"
     ></div>
     <div id="mainContent" class="mainContent">
-      <div id="taskMainContainer">
-      </div>
+      <div id="taskMainContainer"></div>
     </div>
     <div
       w3-include-html="../assets/templates/menu.html"

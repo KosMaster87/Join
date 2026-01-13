@@ -1,177 +1,252 @@
 /**
- * Initializes the contact edit process when the site is first opened.
- * This is the entry point for setting up the contact editing interface.
+ * @fileoverview Contact editing module.
+ * Handles editing existing contacts and managing edit form state.
+ * @description This module provides edit-specific orchestration.
+ * CRUD operations moved to contact-operations.js
+ * Navigation logic moved to contact-navigation.js
+ * @module editContact
  */
-async function initEditContact() {
+
+/**
+ * Initializes the contact edit interface.
+ * Loads and populates form with current contact data.
+ */
+const initEditContact = async () => {
+  enableEditButtons();
   await initializeAllVariables();
-}
+  updateEditSaveButtonState();
+  attachEditInputListeners();
+};
 
 /**
- * Initializes all necessary variables and populates the contact form with current contact information.
+ * Gets contact by ID from user contacts.
+ * @returns {Object|null} Contact object or null if not found.
  */
-async function initializeAllVariables() {
-  let contact = await getCurrentContactNew();
-  let signature = contact.signature;
-  document.getElementById("editContactInputName").value = contact.name;
-  document.getElementById("editContactInputEmail").value = contact.email;
-  document.getElementById("editContactInputPhone").value = contact.phone;
-  document.getElementById("editContactHeaderSignature").innerText = signature;
-  document.getElementById("editContactHeaderSignature").style.backgroundColor =
-    contact.userColor;
-  document.getElementById("editContactBodySignature").innerText = signature;
-  document.getElementById("editContactBodySignature").style.backgroundColor =
-    contact.userColor;
-}
+const getContactById = () => findContactById(currentContactId);
 
 /**
- * Retrieves the current contact based on the current contact ID.
- * @returns {Object|null} The current contact object or null if not found.
+ * Checks if edit form can be saved.
+ * @returns {boolean} True if name and (email or phone) are filled.
  */
-async function getCurrentContactNew() {
-  let contacts = user.contacts || [];
-  let contact = contacts.find((c) => c.contactId === currentContactId);
-
-  return contact || null;
-}
+const canSaveEdit = () => {
+  const name = document.getElementById("editContactInputName").value.trim();
+  const email = document.getElementById("editContactInputEmail").value.trim();
+  const phone = document.getElementById("editContactInputPhone").value.trim();
+  return name.length > 0 && (email.length > 0 || phone.length > 0);
+};
 
 /**
- * Saves the changes made to the contact form and updates the contact information in the user’s contacts.
+ * Sets save button state based on validity.
+ * @param {HTMLElement} btn - Button element.
+ * @param {boolean} isValid - Whether input is valid.
  */
-async function saveChangesAtEditContact() {
-  let inputName = document.getElementById("editContactInputName").value.trim();
-  let inputEmail = document
-    .getElementById("editContactInputEmail")
-    .value.trim();
-  let inputPhone = document
-    .getElementById("editContactInputPhone")
-    .value.trim();
-  let inputSignature = getSignature(inputName);
-
-  if (!checkAllInputFields("edit", inputName, inputEmail, inputPhone)) {
-    return;
-  }
-
-  const collection = user.isGuest ? "guests" : "users";
-  let currentContact = user.contacts.find(
-    (contact) => contact.contactId === currentContactId
-  );
-
-  if (!currentContact) {
-    return;
-  }
-
-  let inputUserColor = currentContact.userColor || "var(--default-color)";
-  currentContact.name = inputName;
-  currentContact.email = inputEmail;
-  currentContact.phone = inputPhone;
-  currentContact.signature = inputSignature;
-  currentContact.userColor = inputUserColor;
-
-  await setItem(collection, user.id, { contacts: user.contacts });
-  await editContactIsSavedGoToSingleContact();
-}
-
-/**
- * Initializes the process to navigate to the single contact view after saving changes.
- * Adjusts the display based on the screen width.
- */
-async function editContactIsSavedGoToSingleContact() {
-  let contactId = currentContactId;
-  let screenWidth = window.innerWidth;
-
-  await loadShowSingleContact(contactId);
-  if (screenWidth < 1200) {
-    document.getElementById("listContactContainer").style.display = "none";
-    document.getElementById("editContactContainer").style.display = "none";
-    document.getElementById("mobileBtnAddContact").style.display = "none";
-    document.getElementById("mobileBtnThreePoints").style.display = "block";
-    document.getElementById("showSingleContactContainer").style.display =
-      "block";
+const setSaveButtonState = (btn, isValid) => {
+  if (!btn) return;
+  if (isValid) {
+    enableButton(btn);
   } else {
-    await initListContact();
-    document.getElementById("showSingleContactContainer").style.display =
-      "flex";
-    document.getElementById("editContactContainer").style.display = "none";
-    document.getElementById("singleContactCol").style.display = "flex";
+    disableButton(btn);
   }
-}
+};
 
 /**
- * Deletes a contact by finding it in the user’s contacts and removing it.
- * @param {string} currentContactId - The ID of the contact to delete.
+ * Updates edit save button disabled state.
  */
-async function deleteContact(currentContactId) {
-  let contacts = user.contacts;
-  for (let i = 0; i < contacts.length; i++) {
-    if (contacts[i].contactId === currentContactId) {
-      contacts.splice(i, 1);
+const updateEditSaveButtonState = () => {
+  const isValid = canSaveEdit();
+  const saveBtn = document.getElementById("editContactSaveBtnDesktop");
+  const mobileSaveBtn = document.getElementById("editContactSaveBtnMobile");
+  [saveBtn, mobileSaveBtn].forEach((btn) => setSaveButtonState(btn, isValid));
+};
+
+/**
+ * Attaches input listeners to edit form fields.
+ */
+const attachEditInputListeners = () => {
+  const nameInput = document.getElementById("editContactInputName");
+  const emailInput = document.getElementById("editContactInputEmail");
+  const phoneInput = document.getElementById("editContactInputPhone");
+  [nameInput, emailInput, phoneInput].forEach((input) => {
+    if (input) {
+      input.removeEventListener("input", updateEditSaveButtonState);
+      input.addEventListener("input", updateEditSaveButtonState);
     }
-  }
-  await setItem(user.isGuest ? "guests" : "users", user.id, { contacts });
-}
+  });
+};
 
 /**
- * Navigates from the contact deletion process back to the contact list view.
+ * Populates name input field.
+ * @param {Object} contact - Contact object.
  */
-async function goFromDeleteContactToListContact() {
-  await deleteContact();
-  await initListContact();
-  document.getElementById("editContactContainer").style.display = "none";
-  document.getElementById("showSingleContactContainer").style.display = "none";
-  document.getElementById("listContactContainer").style.display = "flex";
-  document.getElementById("mobileBtnSelectOptions").style.display = "none";
-  document.getElementById("mobileBtnAddContact").style.display = "block";
-}
+const populateNameField = (contact) => {
+  document.getElementById("editContactInputName").value = contact.name;
+};
 
 /**
- * Closes the edit contact window and returns to the contact list view.
+ * Populates email input field.
+ * @param {Object} contact - Contact object.
  */
-async function closeEditContactWindow() {
-  document.getElementById("editContactContainer").style.display = "none";
-  document.getElementById("showSingleContactContainer").style.display = "none";
-  document.getElementById("listContactContainer").style.display = "flex";
-  document.getElementById("mobileBtnSelectOptions").style.display = "none";
-  document.getElementById("mobileBtnAddContact").style.display = "block";
-}
+const populateEmailField = (contact) => {
+  document.getElementById("editContactInputEmail").value = contact.email;
+};
 
 /**
- * Closes the add contact form without saving any changes.
+ * Populates phone input field.
+ * @param {Object} contact - Contact object.
  */
-async function desktopCloseAddContactContainerWithoutAddingNewContact() {
-  document.getElementById("editContactContainer").style.display = "none";
-  document.getElementById("showSingleContactContainer").style.display = "flex";
-  document.getElementById("mobileBtnSelectOptions").style.display = "none";
-  document.getElementById("mobileBtnAddContact").style.display = "none";
-}
+const populatePhoneField = (contact) => {
+  document.getElementById("editContactInputPhone").value = contact.phone;
+};
 
 /**
- * Saves the changes made to the contact when the save button is clicked on a desktop.
+ * Sets signature display in header and body.
+ * @param {string} signature - Contact signature.
+ * @param {string} userColor - Contact color.
  */
-async function saveChangesDesktop() {
+const setSignatureDisplay = (signature, userColor) => {
+  const headerSig = document.getElementById("editContactHeaderSignature");
+  const bodySig = document.getElementById("editContactBodySignature");
+  headerSig.innerText = signature;
+  headerSig.style.backgroundColor = userColor;
+  bodySig.innerText = signature;
+  bodySig.style.backgroundColor = userColor;
+};
+
+/**
+ * Initializes form with contact data.
+ */
+const initializeAllVariables = async () => {
+  const contact = getContactById();
+  populateNameField(contact);
+  populateEmailField(contact);
+  populatePhoneField(contact);
+  setSignatureDisplay(contact.signature, contact.userColor);
+};
+
+/**
+ * Gets trimmed input values from edit form.
+ * @returns {Object} Object with name, email, and phone.
+ */
+const getEditInputValues = () => ({
+  name: document.getElementById("editContactInputName").value.trim(),
+  email: document.getElementById("editContactInputEmail").value.trim(),
+  phone: document.getElementById("editContactInputPhone").value.trim(),
+});
+
+/**
+ * Finds current contact in user contacts.
+ * @returns {Object|null} Current contact or null.
+ */
+const findCurrentContact = () => findContactById(currentContactId);
+
+/**
+ * Validates edit form inputs.
+ * @param {Object} inputs - Input values to validate.
+ * @returns {boolean} True if all inputs are valid.
+ */
+const validateEditInputs = (inputs) =>
+  checkAllInputFields("edit", inputs.name, inputs.email, inputs.phone);
+
+/**
+ * Callback after contact save completes.
+ */
+const afterContactSave = async () => {
+  await navigateToSingleContactAfterSave(
+    currentContactId,
+    loadShowSingleContact,
+    initListContact
+  );
+};
+
+/**
+ * Saves edited contact changes.
+ */
+const saveChangesAtEditContact = async () => {
+  if (window.isSaving) return;
+  const inputs = getEditInputValues();
+  if (!validateEditInputs(inputs)) return;
+  const currentContact = findCurrentContact();
+  if (!currentContact) return;
+  updateContactData(currentContact, inputs, currentContactId);
+  await saveContactChanges(afterContactSave);
+};
+
+/**
+ * Disables edit contact buttons.
+ */
+const disableEditButtons = () => {
+  const saveBtn = document.getElementById("editContactSaveBtnDesktop");
+  const deleteBtn = document.getElementById("editContactCancelBtnDesktop");
+  disableButtons(saveBtn, deleteBtn);
+};
+
+/**
+ * Enables edit contact buttons.
+ */
+const enableEditButtons = () => {
+  const saveBtn = document.getElementById("editContactSaveBtnDesktop");
+  const deleteBtn = document.getElementById("editContactCancelBtnDesktop");
+  enableButtons(saveBtn, deleteBtn);
+};
+
+/**
+ * Saves contact changes on desktop.
+ */
+const saveChangesDesktop = async () => {
+  if (!canSaveEdit() || window.isSaving) return;
+  disableEditButtons();
   await saveChangesAtEditContact();
-  let finalId = "singleContactBtn" + currentContactId;
-  document.getElementById(finalId).classList.add("active");
+  activateContactButton(currentContactId);
   goFromSingleContactToListContactContainer();
-}
+};
 
 /**
- * Saves the changes made to the contact when the save button is clicked on a mobile.
+ * Saves contact changes on mobile.
  */
-async function saveChangesAtEditContactMobile() {
+const saveChangesAtEditContactMobile = async () => {
+  if (!canSaveEdit() || window.isSaving) return;
   await saveChangesAtEditContact();
   goFromSingleContactToListContactContainer();
-}
+};
 
 /**
- * Deletes a contact from the edit screen and prepares the templates for the list contact view.
- * @param {string} currentContactId - The ID of the contact to delete.
+ * Deletes contact from desktop edit view.
+ * @param {string} contactId - ID of contact to delete.
  */
-async function deleteAtEditContactDesktop(currentContactId) {
+const deleteAtEditContactDesktop = async (contactId) => {
+  if (window.isSaving) return;
+  disableEditButtons();
+  await deleteContact(contactId);
+  await navigateFromDeleteToList(initListContact);
+};
+
+/**
+ * Closes edit contact and shows list.
+ */
+const closeEditContactWindow = async () => {
+  closeEditAndShowList();
+};
+
+/**
+ * Closes edit form on desktop.
+ */
+const desktopCloseAddContactContainerWithoutAddingNewContact = async () => {
+  closeEditOnDesktop();
+};
+
+/**
+ * Navigates from delete to list view.
+ */
+const goFromDeleteContactToListContact = async () => {
   await deleteContact(currentContactId);
-  await initListContact();
-  document.getElementById("editContactContainer").style.display = "none";
-  document.getElementById("showSingleContactContainer").style.display = "none";
-  document.getElementById("listContactContainer").style.display = "flex";
-  document.getElementById("mobileBtnSelectOptions").style.display = "none";
-  document.getElementById("mobileBtnAddContact").style.display = "block";
-}
+  await navigateFromDeleteToList(initListContact);
+};
+
+window.initEditContact = initEditContact;
+window.saveChangesDesktop = saveChangesDesktop;
+window.saveChangesAtEditContactMobile = saveChangesAtEditContactMobile;
+window.deleteAtEditContactDesktop = deleteAtEditContactDesktop;
+window.closeEditContactWindow = closeEditContactWindow;
+window.desktopCloseAddContactContainerWithoutAddingNewContact =
+  desktopCloseAddContactContainerWithoutAddingNewContact;
+window.goFromDeleteContactToListContact = goFromDeleteContactToListContact;
