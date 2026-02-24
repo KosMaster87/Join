@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -47,7 +47,10 @@
       <div class="firstLogin">
         <form
           class="loginLayout LogInBoxShadow"
-          onsubmit="login(); return false;"
+          onsubmit="
+            login();
+            return false;
+          "
         >
           <div class="headerLogin">
             <h1>Log in</h1>
@@ -91,7 +94,12 @@
               class="inpIconStyle"
               id="logInPasswordImage"
               src="./assets/img/login/lock.svg"
-              onclick="changeToShowCurrentPassword('loginInputPassword', 'logInPasswordImage')"
+              onclick="
+                changeToShowCurrentPassword(
+                  'loginInputPassword',
+                  'logInPasswordImage',
+                )
+              "
             />
           </div>
 
@@ -116,7 +124,10 @@
               <button
                 id="guestLoginBtn"
                 class="guestLogInBtn"
-                onclick="loginAsGuest(); return false;"
+                onclick="
+                  loginAsGuest();
+                  return false;
+                "
               >
                 Guest Log in
               </button>
@@ -160,7 +171,10 @@
         <form
           class="registerLayout RegisterBoxShadow"
           id="registerNewUser"
-          onsubmit="registerNewUser(); return false;"
+          onsubmit="
+            registerNewUser();
+            return false;
+          "
         >
           <div class="headerRegisterBox">
             <img
@@ -223,7 +237,12 @@
               class="inpIconStyle"
               id="signUpPasswordImage"
               src="./assets/img/register/lock.svg"
-              onclick="changeToShowCurrentPassword('registerInputPassword', 'signUpPasswordImage')"
+              onclick="
+                changeToShowCurrentPassword(
+                  'registerInputPassword',
+                  'signUpPasswordImage',
+                )
+              "
             />
           </div>
 
@@ -248,7 +267,12 @@
               class="inpIconStyle"
               id="signUpConfirmPasswordImage"
               src="./assets/img/register/lock.svg"
-              onclick="changeToShowCurrentPassword('registerInputPasswordConfirm', 'signUpConfirmPasswordImage')"
+              onclick="
+                changeToShowCurrentPassword(
+                  'registerInputPasswordConfirm',
+                  'signUpConfirmPasswordImage',
+                )
+              "
             />
           </div>
 

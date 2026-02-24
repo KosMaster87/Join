@@ -53,7 +53,7 @@ let backupContacts = [
     userId: "guest@mail.de",
     contactId: "mDnoCP18nLHMrWeh",
     name: "Konstantin Aksenov",
-    email: "Kontantin@aksenov.pa",
+    email: "Konstantin@aksenov.de",
     phone: "1425 5778",
     userColor: "var(--red)",
     signature: "KA",
