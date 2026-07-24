@@ -764,3 +764,64 @@ h2 {
 .menuForSwitchTaskMenuHead {
   border-bottom: 1px solid white;
 }
+
+/* Priority filter bar */
+.prioFilterBar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.prioFilterBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0px 0px 4px 1px #00000018;
+  transition: transform 0.1s ease;
+}
+
+.prioFilterBtn:hover {
+  transform: scale(1.04);
+}
+
+.prioFilterBtn img {
+  width: 16px;
+  height: 16px;
+}
+
+.prioFilterBtn--urgent {
+  border-color: #ff3b30;
+  color: #ff3b30;
+}
+.prioFilterBtn--medium {
+  border-color: #ff9500;
+  color: #ff9500;
+}
+.prioFilterBtn--low {
+  border-color: #34c759;
+  color: #34c759;
+}
+
+.prioFilterBtn--urgent.prioFilterBtn--active {
+  background-color: #ff3b30;
+  color: #ffffff;
+}
+.prioFilterBtn--medium.prioFilterBtn--active {
+  background-color: #ff9500;
+  color: #ffffff;
+}
+.prioFilterBtn--low.prioFilterBtn--active {
+  background-color: #34c759;
+  color: #ffffff;
+}
+
+.prioFilterBtn--active img {
+  filter: brightness(0) invert(1);
+}

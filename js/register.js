@@ -23,14 +23,14 @@
 
 let passwordContainer = document.getElementById("registerPasswortDevision");
 let confirmPasswordContainer = document.getElementById(
-  "registerConfirmPasswortDevision"
+  "registerConfirmPasswortDevision",
 );
 let emailContainer = document.getElementById("registerEmailDivision");
 let registerInputName = document.getElementById("registerInputName");
 let registerInputEmail = document.getElementById("registerInputEmail");
 let registerInputPassword = document.getElementById("registerInputPassword");
 let registerInputPasswordConfirm = document.getElementById(
-  "registerInputPasswordConfirm"
+  "registerInputPasswordConfirm",
 );
 let errorMessage = document.getElementById("registerError");
 let registerBtn = document.getElementById("registerBtn");
@@ -92,7 +92,7 @@ async function emailAlreadyTaken() {
   if (!users) return false;
 
   return Object.values(users).some(
-    (user) => user.email === registerInputEmail.value
+    (user) => user.email === registerInputEmail.value,
   );
 }
 
@@ -154,7 +154,7 @@ const registerGuestUser = async () => {
 const registerRegularUser = async () => {
   const authUser = await registerWithAuth(
     registerInputEmail.value,
-    registerInputPassword.value
+    registerInputPassword.value,
   );
   const newUser = createUserObject();
   await setItem("users", authUser.uid, newUser);
@@ -343,7 +343,3 @@ const resetBorderColor = (containerId) => {
   const focusContainer = document.getElementById(containerId);
   focusContainer.classList.remove("active");
 };
-
-window.addEventListener("scriptModuleReady", () => {
-  // console.log("script.js is ready!");
-});

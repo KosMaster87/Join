@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -76,6 +76,7 @@
               src="../assets/img/board/add.svg"
             />
           </div>
+
           <div class="boardDesktopHeadRight">
             <div class="searchTaskInputField">
               <input
@@ -85,6 +86,7 @@
               />
               <img src="../assets/img/board/search.svg" />
             </div>
+
             <div
               onclick="includeContentHTML('addTask')"
               class="boardDesktopAddTask"
@@ -95,6 +97,36 @@
           </div>
         </div>
 
+        <!-- TODO - experementel -->
+        <!-- <div class="prioFilterBar">
+          <button
+            onclick="togglePrioFilter('Urgent')"
+            id="filterUrgent"
+            class="prioFilterBtn prioFilterBtn--urgent"
+          >
+            <img src="../assets/img/board/board_urgent.svg" />
+            <span>Urgent</span>
+          </button>
+
+          <button
+            onclick="togglePrioFilter('Medium')"
+            id="filterMedium"
+            class="prioFilterBtn prioFilterBtn--medium"
+          >
+            <img src="../assets/img/board/board_medium.svg" />
+            <span>Medium</span>
+          </button>
+
+          <button
+            onclick="togglePrioFilter('Low')"
+            id="filterLow"
+            class="prioFilterBtn prioFilterBtn--low"
+          >
+            <img src="../assets/img/board/board_low.svg" />
+            <span>Low</span>
+          </button>
+        </div> -->
+
         <div id="taskBoxId" class="taskBox">
           <div class="selectionContainer">
             <div class="headContainer">
@@ -104,10 +136,14 @@
                 src="../assets/img/board/add_mobile.svg"
               />
             </div>
+
             <div
               id="TodoMainContainer"
               ondrop="moveTo('to-do')"
-              ondragover="allowDrop(event); highlight('TodoMainContainer')"
+              ondragover="
+                allowDrop(event);
+                highlight('TodoMainContainer');
+              "
               ondragleave="removeHighlight('TodoMainContainer')"
               class="boxesContainer"
             ></div>
@@ -121,14 +157,19 @@
                 src="../assets/img/board/add_mobile.svg"
               />
             </div>
+
             <div
               id="progressMainContainer"
               ondrop="moveTo('progress')"
-              ondragover="allowDrop(event); highlight('progressMainContainer')"
+              ondragover="
+                allowDrop(event);
+                highlight('progressMainContainer');
+              "
               ondragleave="removeHighlight('progressMainContainer')"
               class="boxesContainer"
             ></div>
           </div>
+
           <div class="selectionContainer">
             <div class="headContainer">
               <h2>Await for feedback</h2>
@@ -137,10 +178,14 @@
                 src="../assets/img/board/add_mobile.svg"
               />
             </div>
+
             <div
               id="awaitMainContainer"
               ondrop="moveTo('await')"
-              ondragover="allowDrop(event); highlight('awaitMainContainer')"
+              ondragover="
+                allowDrop(event);
+                highlight('awaitMainContainer');
+              "
               ondragleave="removeHighlight('awaitMainContainer')"
               class="boxesContainer"
             ></div>
@@ -151,15 +196,20 @@
               <div>
                 <h2>Done</h2>
               </div>
+
               <img
                 onclick="addTaskWithStatus('done')"
                 src="../assets/img/board/add_mobile.svg"
               />
             </div>
+
             <div
               id="doneMainContainer"
               ondrop="moveTo('done')"
-              ondragover="allowDrop(event); highlight('doneMainContainer')"
+              ondragover="
+                allowDrop(event);
+                highlight('doneMainContainer');
+              "
               ondragleave="removeHighlight('doneMainContainer')"
               class="boxesContainer"
             ></div>
@@ -167,6 +217,7 @@
         </div>
       </div>
     </div>
+
     <div
       w3-include-html="../assets/templates/menu.html"
       id="afterLoginMainMenu"

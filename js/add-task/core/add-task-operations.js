@@ -14,7 +14,6 @@
  */
 window.assignTaskToUser = async () => {
   if (window.isSaving) {
-    console.log("Bitte warten, Daten werden gespeichert...");
     return;
   }
 
@@ -73,7 +72,6 @@ const saveTaskToFirestore = async () => {
  */
 window.requiredFields = async () => {
   if (window.isSaving) {
-    console.log("Bitte warten, Daten werden gespeichert...");
     return;
   }
 
@@ -97,7 +95,7 @@ window.requiredFields = async () => {
 const disableAllFormElements = () => {
   // Disable all input fields
   const inputs = document.querySelectorAll(
-    "#taskMainContainer input, #taskMainContainer textarea"
+    "#taskMainContainer input, #taskMainContainer textarea",
   );
   inputs.forEach((input) => {
     input.disabled = true;
@@ -150,7 +148,7 @@ const disableAllFormElements = () => {
 const enableAllFormElements = () => {
   // Enable all input fields
   const inputs = document.querySelectorAll(
-    "#taskMainContainer input, #taskMainContainer textarea"
+    "#taskMainContainer input, #taskMainContainer textarea",
   );
   inputs.forEach((input) => {
     input.disabled = false;

@@ -122,7 +122,7 @@ const handleGuestLogin = async () => {
 const handleRegularLogin = async () => {
   const authUser = await signInWithAuth(
     loginInputMail.value,
-    loginInputPassword.value
+    loginInputPassword.value,
   );
   const userData = await getItem("users", authUser.uid);
 
@@ -314,7 +314,3 @@ const handleRememberme = () => {
     ? dasChecketElement.removeAttribute("checked")
     : dasChecketElement.setAttribute("checked", "");
 };
-
-window.addEventListener("scriptModuleReady", () => {
-  // console.log("script.js is ready!");
-});

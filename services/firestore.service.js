@@ -7,19 +7,19 @@
  * @module services/firestore.service
  */
 
-import { db } from "../config/firebase.config.js";
 import {
+  addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
+  query,
   setDoc,
   updateDoc,
-  deleteDoc,
-  query,
   where,
-  addDoc,
 } from "firebase/firestore";
+import { db } from "../config/firebase.config.js";
 
 /**
  * Creates or updates a document in a Firestore collection
@@ -32,7 +32,6 @@ export async function setDocument(collectionName, docId, data) {
   try {
     const docRef = doc(db, collectionName, docId);
     await setDoc(docRef, data, { merge: true });
-    console.log(`Document ${docId} written to ${collectionName}`);
   } catch (error) {
     console.error("Error writing document:", error);
     throw error;
@@ -53,7 +52,6 @@ export async function getDocument(collectionName, docId) {
     if (docSnap.exists()) {
       return { id: docSnap.id, ...docSnap.data() };
     } else {
-      console.log("No such document!");
       return null;
     }
   } catch (error) {
@@ -94,7 +92,6 @@ export async function updateDocument(collectionName, docId, data) {
   try {
     const docRef = doc(db, collectionName, docId);
     await updateDoc(docRef, data);
-    console.log(`Document ${docId} updated in ${collectionName}`);
   } catch (error) {
     console.error("Error updating document:", error);
     throw error;
@@ -111,7 +108,6 @@ export async function deleteDocument(collectionName, docId) {
   try {
     const docRef = doc(db, collectionName, docId);
     await deleteDoc(docRef);
-    console.log(`Document ${docId} deleted from ${collectionName}`);
   } catch (error) {
     console.error("Error deleting document:", error);
     throw error;
@@ -127,7 +123,6 @@ export async function deleteDocument(collectionName, docId) {
 export async function addDocument(collectionName, data) {
   try {
     const docRef = await addDoc(collection(db, collectionName), data);
-    console.log(`Document added with ID: ${docRef.id}`);
     return docRef.id;
   } catch (error) {
     console.error("Error adding document:", error);
@@ -147,7 +142,7 @@ export async function queryDocuments(collectionName, field, operator, value) {
   try {
     const q = query(
       collection(db, collectionName),
-      where(field, operator, value)
+      where(field, operator, value),
     );
     const querySnapshot = await getDocs(q);
     const documents = [];

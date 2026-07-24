@@ -4,15 +4,15 @@
  * @module services/auth.service
  */
 
-import { auth } from "../config/firebase.config.js";
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInAnonymously,
-  signOut,
-  onAuthStateChanged,
   deleteUser,
+  onAuthStateChanged,
+  signInAnonymously,
+  signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
+import { auth } from "../config/firebase.config.js";
 
 /**
  * Register new user with Firebase Auth
@@ -25,7 +25,7 @@ export const registerWithAuth = async (email, password) => {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
-      password
+      password,
     );
     return userCredential.user;
   } catch (error) {
@@ -45,7 +45,7 @@ export const signInWithAuth = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
-      password
+      password,
     );
     return userCredential.user;
   } catch (error) {
@@ -109,7 +109,6 @@ export const deleteCurrentUser = async () => {
       throw new Error("No user is currently signed in");
     }
     await deleteUser(currentUser);
-    console.log("User deleted from Firebase Auth");
   } catch (error) {
     console.error("Error deleting user:", error);
     throw error;

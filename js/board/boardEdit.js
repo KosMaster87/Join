@@ -55,7 +55,6 @@ const removePopupAndShowTask = (i) => {
  */
 const saveCurrentBoardTask = async (i) => {
   if (window.isSaving) {
-    console.log("Bitte warten, Daten werden gespeichert...");
     return;
   }
   removeClickListener();

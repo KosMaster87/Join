@@ -17,6 +17,7 @@
  */
 
 let currentDragElement;
+let activePrioFilter = null;
 
 /**
  * Initializes dragging of a task.
@@ -98,12 +99,57 @@ const taskMatchesSearch = (i, search) => {
 };
 
 /**
+ * Checks if task matches active priority filter.
+ * @param {number} i - Task index.
+ * @returns {boolean} True if task matches filter or no filter is active.
+ */
+const taskMatchesPrio = (i) => {
+  if (!activePrioFilter) return true;
+  return user.tasks[i].prio === activePrioFilter;
+};
+
+/**
+ * Updates visual state of priority filter buttons.
+ */
+const updatePrioFilterButtons = () => {
+  ["Urgent", "Medium", "Low"].forEach((prio) => {
+    const btn = document.getElementById(`filter${prio}`);
+    if (!btn) return;
+    btn.classList.toggle("prioFilterBtn--active", activePrioFilter === prio);
+  });
+};
+
+/**
+ * Applies both text search and priority filter.
+ */
+const applyFilters = () => {
+  const search = getSearchValue();
+  clearBoardTasksField();
+  user.tasks.forEach((_, i) => {
+    if (taskMatchesSearch(i, search) && taskMatchesPrio(i)) {
+      fillTaskByStatus(i);
+    }
+  });
+  checkNoFilledTasks();
+};
+
+/**
+ * Toggles priority filter on/off and re-renders board.
+ * @param {string} prio - Priority value: "Urgent", "Medium", or "Low".
+ */
+const togglePrioFilter = (prio) => {
+  activePrioFilter = activePrioFilter === prio ? null : prio;
+  updatePrioFilterButtons();
+  applyFilters();
+};
+
+/**
  * Fills task by status.
  * @param {number} i - Task index.
  */
 const fillTaskByStatus = (i) => {
   const container = document.getElementById(
-    getContainerIdByStatus(user.tasks[i].status)
+    getContainerIdByStatus(user.tasks[i].status),
   );
   if (!container) return;
   const isAwait = user.tasks[i].status === "await";
@@ -128,17 +174,10 @@ const getContainerIdByStatus = (status) => {
 };
 
 /**
- * Filters and displays tasks by search term.
+ * Filters and displays tasks by search term and active priority filter.
  */
 const filterTitles = () => {
-  const search = getSearchValue();
-  clearBoardTasksField();
-  user.tasks.forEach((_, i) => {
-    if (taskMatchesSearch(i, search)) {
-      fillTaskByStatus(i);
-    }
-  });
-  checkNoFilledTasks();
+  applyFilters();
 };
 
 /**
@@ -182,3 +221,4 @@ window.allowDrop = allowDrop;
 window.moveTo = moveTo;
 window.highlight = highlight;
 window.removeHighlight = removeHighlight;
+window.togglePrioFilter = togglePrioFilter;

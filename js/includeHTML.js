@@ -35,7 +35,6 @@ async function includeHTML() {
  */
 function includeContentHTML(changePage) {
   if (window.isSaving) {
-    console.log("Bitte warten, Daten werden gespeichert...");
     setTimeout(() => includeContentHTML(changePage), 100);
     return;
   }

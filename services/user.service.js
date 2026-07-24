@@ -19,7 +19,6 @@
  * @requires services/store
  */
 
-import { getAllItems, getItem } from "./data.service.js";
 import { getDocument } from "./firestore.service.js";
 import { store } from "./store.js";
 
@@ -28,23 +27,37 @@ let users = [];
 let user = null;
 
 /**
- * Loads all guests from Firestore and updates store
- * @returns {Promise<Array>} Array of guest users
+ * Loads the current guest's own document from Firestore and updates store.
+ * Only the own document is accessible due to Firestore security rules.
+ * @returns {Promise<Array>} Array containing the current guest, or empty array
  */
 export const loadGuests = async () => {
-  const guestsData = await getAllItems("guests");
-  guests = guestsData.map((guest) => ({ ...guest, isGuest: true }));
+  const currentUserId = getCurrentUserId();
+  if (!currentUserId) {
+    guests = [];
+    store.setGuests(guests);
+    return guests;
+  }
+  const guestData = await getDocument("guests", currentUserId);
+  guests = guestData ? [{ ...guestData, isGuest: true }] : [];
   store.setGuests(guests);
   return guests;
 };
 
 /**
- * Loads all users from Firestore and updates store
- * @returns {Promise<Array>} Array of users
+ * Loads the current user's own document from Firestore and updates store.
+ * Only the own document is accessible due to Firestore security rules.
+ * @returns {Promise<Array>} Array containing the current user, or empty array
  */
 export const loadUsers = async () => {
-  const usersData = await getAllItems("users");
-  users = usersData;
+  const currentUserId = getCurrentUserId();
+  if (!currentUserId) {
+    users = [];
+    store.setUsers(users);
+    return users;
+  }
+  const userData = await getDocument("users", currentUserId);
+  users = userData ? [userData] : [];
   store.setUsers(users);
   return users;
 };
@@ -65,32 +78,35 @@ export const findUserById = (userArray, userId) =>
 export const getCurrentUserId = () => localStorage.getItem("currentUserId");
 
 /**
- * Loads guests, users and current user from Firestore
+ * Loads current user's own document from Firestore (guest or regular user).
+ * Uses direct document lookup to comply with Firestore security rules.
  * @returns {Promise<void>}
  */
 export const loadUsersAndCurrentUser = async () => {
   try {
-    await loadGuests();
     const currentUserId = getCurrentUserId();
-    user = findUserById(guests, currentUserId);
+    if (!currentUserId) return;
 
-    if (shouldLoadRegularUsers(user)) {
-      await loadUsers();
-      user = findUserById(users, currentUserId);
+    const guestData = await getDocument("guests", currentUserId);
+    if (guestData) {
+      user = { ...guestData, isGuest: true };
+      guests = [user];
+      store.setGuests(guests);
+      store.setUser(user);
+      return;
     }
-    store.setUser(user);
+
+    const userData = await getDocument("users", currentUserId);
+    if (userData) {
+      user = userData;
+      users = [user];
+      store.setUsers(users);
+      store.setUser(user);
+    }
   } catch (error) {
     handleLoadUsersError(error);
   }
 };
-
-/**
- * Determines if regular users should be loaded.
- * @param {Object|null} currentUser - The current user object.
- * @returns {boolean} - True if regular users should be loaded.
- */
-const shouldLoadRegularUsers = (currentUser) =>
-  !currentUser || !currentUser.isGuest;
 
 /**
  * Handles errors during user loading.
