@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KosMaster87/join-legacy.git"
+    "url": "git+https://github.com/KosMaster87/Join.git"
   },
   "keywords": [
     "kanban",
@@ -22,9 +22,9 @@
   "author": "Konstantin Aksenov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/KosMaster87/join-legacy/issues"
+    "url": "https://github.com/KosMaster87/Join/issues"
   },
-  "homepage": "https://github.com/KosMaster87/join-legacy#readme",
+  "homepage": "https://github.com/KosMaster87/Join#readme",
   "devDependencies": {
     "jsdoc": "^4.0.0"
   }
