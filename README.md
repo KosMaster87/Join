@@ -6,7 +6,7 @@ A Kanban-style productivity tool with contact management, drag & drop tasks, and
 
 ## 🌐 Live Demo
 
-🔗 [Live Demo – join.dev2k.org](https://join.dev2k.org/)
+🔗 [Live Demo - join.dev2k.org](https://join.dev2k.org/)
 
 ---
 
