@@ -93,12 +93,19 @@ span {
   max-width: 33%;
   padding: 18px 10px 18px 10px;
   justify-content: center;
+  align-items: center;
   display: flex;
   gap: 8px;
   border: solid 1px var(--lighterGray);
   border-radius: 10px;
   background-color: var(--white);
   cursor: pointer;
+}
+
+.taskSelectButton img {
+  width: 16px;
+  height: auto;
+  flex-shrink: 0;
 }
 
 .prioMedium {
@@ -427,6 +434,10 @@ span {
   .taskSelectButton {
     font-size: 20px;
     font-weight: 400;
+  }
+
+  .taskSelectButton img {
+    width: 20px;
   }
 }
 
