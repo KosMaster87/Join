@@ -3,10 +3,13 @@
   "version": "2.0.0",
   "description": "A Kanban-based task management application built with Vanilla JavaScript and Firestore",
   "type": "module",
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
     "dev": "npx live-server --port=3000 --open=index.html",
     "build": "echo 'No build step required for vanilla JS'",
-    "docs": "jsdoc -c jsdoc.json"
+    "docs": "jsdoc -c jsdoc.json",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "repository": {
     "type": "git",
@@ -26,6 +29,7 @@
   },
   "homepage": "https://github.com/KosMaster87/Join#readme",
   "devDependencies": {
-    "jsdoc": "^4.0.0"
+    "jsdoc": "^4.0.0",
+    "prettier": "^3.8.3"
   }
 }
