@@ -51,10 +51,7 @@ const handleOutsideClick = (event) => {
 const userClicksOutsideOfPopup = (event) => {
   const headerSubMenu = document.getElementById("headerSubMenu");
   const headerProfile = document.getElementById("headerProfile");
-  return (
-    !headerSubMenu.contains(event.target) &&
-    !headerProfile.contains(event.target)
-  );
+  return !headerSubMenu.contains(event.target) && !headerProfile.contains(event.target);
 };
 
 /**

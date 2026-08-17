@@ -53,9 +53,7 @@ const showContactListView = () => {
   document.getElementById("listContactContainer").style.display = "flex";
   hideMobileBtnSelectOptions();
   const isMobile = isMobileView();
-  document.getElementById("mobileBtnAddContact").style.display = isMobile
-    ? "block"
-    : "none";
+  document.getElementById("mobileBtnAddContact").style.display = isMobile ? "block" : "none";
 };
 
 /**
@@ -246,11 +244,7 @@ const navigateToDesktopSingleContact = async (initList) => {
  * @param {Function} loadContact - Function to load contact.
  * @param {Function} initList - List initialization function.
  */
-const navigateToSingleContactAfterSave = async (
-  contactId,
-  loadContact,
-  initList
-) => {
+const navigateToSingleContactAfterSave = async (contactId, loadContact, initList) => {
   await loadContact(contactId);
   const screenWidth = window.innerWidth;
   if (screenWidth < 1200) {

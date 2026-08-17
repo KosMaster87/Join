@@ -22,11 +22,7 @@ import { auth } from "../config/firebase.config.js";
  */
 export const registerWithAuth = async (email, password) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     return userCredential.user;
   } catch (error) {
     console.error("Error registering user:", error);
@@ -42,11 +38,7 @@ export const registerWithAuth = async (email, password) => {
  */
 export const signInWithAuth = async (email, password) => {
   try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential.user;
   } catch (error) {
     console.error("Error signing in:", error);

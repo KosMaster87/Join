@@ -7,9 +7,10 @@ responsive multi-page architecture. Built with vanilla JavaScript and Firebase F
 
 ## Live
 
-| Environment | URL                                                      |
-| ----------- | -------------------------------------------------------- |
-| **App**     | [join.dev2ksoftware.com](https://join.dev2ksoftware.com) |
+| Environment | URL                                                                      |
+| ----------- | ------------------------------------------------------------------------ |
+| **Prod**    | [join.dev2ksoftware.com](https://join.dev2ksoftware.com)                 |
+| **Staging** | [join-staging.dev2ksoftware.com](https://join-staging.dev2ksoftware.com) |
 
 ---
 
@@ -59,7 +60,7 @@ responsive multi-page architecture. Built with vanilla JavaScript and Firebase F
 ```bash
 git clone https://github.com/KosMaster87/Join.git
 cd Join
-npm install
+pnpm install
 ```
 
 Copy the Firebase config template and add your credentials:
@@ -69,12 +70,12 @@ cp config/firebase.config.js.example config/firebase.config.js
 ```
 
 ```bash
-npm run dev
+pnpm run dev
 # → opens http://localhost:3000
 ```
 
 ```bash
-npm run docs   # generate JSDoc into docs/
+pnpm run docs   # generate JSDoc into docs/
 ```
 
 ---

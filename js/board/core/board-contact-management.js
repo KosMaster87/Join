@@ -50,9 +50,7 @@ const renderContactSignatureAndIcon = (c, i) => {
  */
 const addContactIconToLine = (c) => {
   const contactListIcons = document.getElementById("contactListIconsLine");
-  const signature = document.getElementById(
-    `ContactSignatureIcon${c}`
-  ).innerHTML;
+  const signature = document.getElementById(`ContactSignatureIcon${c}`).innerHTML;
   const userColor = user.contacts[c].userColor;
   contactListIcons.innerHTML += `<div id="contactIconNumber${c}" style="background-color: ${userColor};" class="assignedContactLeftSideIcon">${signature}</div>`;
 };

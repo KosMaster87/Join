@@ -33,9 +33,7 @@ const areRequiredFieldsValid = () => {
   const isCategoryValid =
     typeof window.checkCategory === "function" ? window.checkCategory() : false;
 
-  return (
-    dueDateValue.trim() !== "" && titleValue.trim() !== "" && isCategoryValid
-  );
+  return dueDateValue.trim() !== "" && titleValue.trim() !== "" && isCategoryValid;
 };
 
 /**

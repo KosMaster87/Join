@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -15,10 +15,7 @@
   <body>
     <div class="mainHeader">
       <div class="logoImgContainer">
-        <img
-          class="mainHeaderLogoImg"
-          src="./../assets/img/header/headerLogo.svg"
-        />
+        <img class="mainHeaderLogoImg" src="./../assets/img/header/headerLogo.svg" />
       </div>
 
       <div class="theProgramm">
@@ -38,33 +35,19 @@
         </div>
 
         <div id="headerProfile" onclick="toggleHeaderSubMenu()">
-          <p
-            id="userSignature"
-            class="nameIcon"
-            src="./../assets/img/header/help.svg"
-          ></p>
+          <p id="userSignature" class="nameIcon" src="./../assets/img/header/help.svg"></p>
         </div>
 
         <div class="headerSubMenu" id="headerSubMenu" style="display: none">
-          <div
-            class="headerSubMenuHoverBox"
-            onclick="includeContentHTML('legality')"
-          >
+          <div class="headerSubMenuHoverBox" onclick="includeContentHTML('legality')">
             <a class="headerSubMenuHoverAnchor">Legal notice</a>
           </div>
 
-          <div
-            class="headerSubMenuHoverBox"
-            onclick="includeContentHTML('policy')"
-          >
+          <div class="headerSubMenuHoverBox" onclick="includeContentHTML('policy')">
             <a class="headerSubMenuHoverAnchor">Privacy Policy</a>
           </div>
 
-          <div
-            class="headerSubMenuHoverBox"
-            id="headerLogout"
-            onclick="logOut()"
-          >
+          <div class="headerSubMenuHoverBox" id="headerLogout" onclick="logOut()">
             <a class="headerSubMenuHoverAnchor">Log out</a>
           </div>
         </div>

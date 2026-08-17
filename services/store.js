@@ -174,9 +174,7 @@ class Store {
    */
   updateContact(contactId, updates) {
     if (this._user?.contacts) {
-      const index = this._user.contacts.findIndex(
-        (c) => c.contactId === contactId
-      );
+      const index = this._user.contacts.findIndex((c) => c.contactId === contactId);
       if (index !== -1) {
         this._user.contacts[index] = {
           ...this._user.contacts[index],
@@ -193,9 +191,7 @@ class Store {
    */
   deleteContact(contactId) {
     if (this._user?.contacts) {
-      this._user.contacts = this._user.contacts.filter(
-        (c) => c.contactId !== contactId
-      );
+      this._user.contacts = this._user.contacts.filter((c) => c.contactId !== contactId);
       this._notify("contacts", this._user.contacts);
     }
   }

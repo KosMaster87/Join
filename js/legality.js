@@ -63,9 +63,7 @@ const setupUnauthenticatedLegalUI = () => {
  */
 const hideLegalUserElements = () => {
   const menuItemBox = document.getElementById("menuItemBox");
-  const userSymbolContainerID = document.getElementById(
-    "userSymbolContainerID"
-  );
+  const userSymbolContainerID = document.getElementById("userSymbolContainerID");
   menuItemBox.style.display = "none";
   userSymbolContainerID.style.display = "none";
 };

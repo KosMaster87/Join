@@ -39,8 +39,7 @@ const getCurrentContact = async (contactId) => {
  * @param {Object} contact - Contact object.
  */
 const setContactName = (contact) => {
-  document.getElementById("singleContactName").innerText =
-    contact.name || "Unbekannt";
+  document.getElementById("singleContactName").innerText = contact.name || "Unbekannt";
 };
 
 /**
@@ -48,11 +47,7 @@ const setContactName = (contact) => {
  * @param {Object} contact - Contact object.
  */
 const setContactPhone = (contact) => {
-  setElementProperty(
-    "singleContactPhone",
-    "innerText",
-    contact.phone || "Keine Nummer"
-  );
+  setElementProperty("singleContactPhone", "innerText", contact.phone || "Keine Nummer");
 };
 
 /**
@@ -60,11 +55,7 @@ const setContactPhone = (contact) => {
  * @param {Object} contact - Contact object.
  */
 const setContactEmail = (contact) => {
-  setElementProperty(
-    "singleContactEmail",
-    "innerText",
-    contact.email || "Keine E-Mail"
-  );
+  setElementProperty("singleContactEmail", "innerText", contact.email || "Keine E-Mail");
 };
 
 /**
@@ -159,10 +150,7 @@ const handleClickOutside = (event) => {
     document.removeEventListener("click", handleClickOutside, true);
     return;
   }
-  if (
-    !selectOptions.contains(event.target) &&
-    !threePointsBtn.contains(event.target)
-  ) {
+  if (!selectOptions.contains(event.target) && !threePointsBtn.contains(event.target)) {
     hideMobileBtnSelectOptions();
     threePointsBtn.style.display = "block";
     document.removeEventListener("click", handleClickOutside, true);
@@ -224,14 +212,9 @@ const deleteContactAtShowSingleContactMobile = async (contactId) => {
 
 window.loadShowSingleContact = loadShowSingleContact;
 window.openEmailProgram = openEmailProgram;
-window.goFromSingleContactToListContactContainer =
-  goFromSingleContactToListContactContainer;
-window.goFromShowSingleContactToEditContact =
-  goFromShowSingleContactToEditContact;
+window.goFromSingleContactToListContactContainer = goFromSingleContactToListContactContainer;
+window.goFromShowSingleContactToEditContact = goFromShowSingleContactToEditContact;
 window.showMobileSelectBtns = showMobileSelectBtns;
-window.deleteContactAtSingleContactDesktop =
-  deleteContactAtSingleContactDesktop;
-window.openEditContactAtSingleContactDesktop =
-  openEditContactAtSingleContactDesktop;
-window.deleteContactAtShowSingleContactMobile =
-  deleteContactAtShowSingleContactMobile;
+window.deleteContactAtSingleContactDesktop = deleteContactAtSingleContactDesktop;
+window.openEditContactAtSingleContactDesktop = openEditContactAtSingleContactDesktop;
+window.deleteContactAtShowSingleContactMobile = deleteContactAtShowSingleContactMobile;

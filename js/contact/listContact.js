@@ -149,8 +149,7 @@ const renderContainerList = () => {
  * @param {string} char - Character to match.
  * @returns {boolean} True if contact matches character.
  */
-const contactMatchesChar = (contact, char) =>
-  contact.name.charAt(0).toUpperCase() === char;
+const contactMatchesChar = (contact, char) => contact.name.charAt(0).toUpperCase() === char;
 
 /**
  * Creates HTML for single contact card.
@@ -284,7 +283,6 @@ const desktopOpenAddContactContainer = async () => {
 };
 
 window.initListContact = initListContact;
-window.goFromListContactToShowSingleContact =
-  goFromListContactToShowSingleContact;
+window.goFromListContactToShowSingleContact = goFromListContactToShowSingleContact;
 window.openAddContactContainer = openAddContactContainer;
 window.desktopOpenAddContactContainer = desktopOpenAddContactContainer;

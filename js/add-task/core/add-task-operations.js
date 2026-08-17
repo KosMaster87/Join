@@ -94,9 +94,7 @@ window.requiredFields = async () => {
  */
 const disableAllFormElements = () => {
   // Disable all input fields
-  const inputs = document.querySelectorAll(
-    "#taskMainContainer input, #taskMainContainer textarea",
-  );
+  const inputs = document.querySelectorAll("#taskMainContainer input, #taskMainContainer textarea");
   inputs.forEach((input) => {
     input.disabled = true;
     input.style.pointerEvents = "none";
@@ -147,9 +145,7 @@ const disableAllFormElements = () => {
  */
 const enableAllFormElements = () => {
   // Enable all input fields
-  const inputs = document.querySelectorAll(
-    "#taskMainContainer input, #taskMainContainer textarea",
-  );
+  const inputs = document.querySelectorAll("#taskMainContainer input, #taskMainContainer textarea");
   inputs.forEach((input) => {
     input.disabled = false;
     input.style.pointerEvents = "auto";

@@ -120,10 +120,7 @@ const handleGuestLogin = async () => {
  * @returns {Promise<void>}
  */
 const handleRegularLogin = async () => {
-  const authUser = await signInWithAuth(
-    loginInputMail.value,
-    loginInputPassword.value,
-  );
+  const authUser = await signInWithAuth(loginInputMail.value, loginInputPassword.value);
   const userData = await getItem("users", authUser.uid);
 
   if (!userData) throw new Error("User data not found");

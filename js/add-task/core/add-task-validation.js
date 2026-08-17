@@ -25,9 +25,7 @@ window.validateAllFields = () => {
  */
 window.areAllFieldsValid = () => {
   return (
-    window.selectedCategory !== "" &&
-    window.selectedDueDate !== "" &&
-    window.selectedTitle !== ""
+    window.selectedCategory !== "" && window.selectedDueDate !== "" && window.selectedTitle !== ""
   );
 };
 

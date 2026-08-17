@@ -16,11 +16,7 @@
  * @requires services/firestore.service
  */
 
-import {
-  getDocument,
-  setDocument,
-  getAllDocuments,
-} from "./firestore.service.js";
+import { getDocument, setDocument, getAllDocuments } from "./firestore.service.js";
 
 /**
  * Updates or creates an item in Firestore.

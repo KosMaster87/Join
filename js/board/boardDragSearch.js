@@ -148,9 +148,7 @@ const togglePrioFilter = (prio) => {
  * @param {number} i - Task index.
  */
 const fillTaskByStatus = (i) => {
-  const container = document.getElementById(
-    getContainerIdByStatus(user.tasks[i].status),
-  );
+  const container = document.getElementById(getContainerIdByStatus(user.tasks[i].status));
   if (!container) return;
   const isAwait = user.tasks[i].status === "await";
   const htmlTemplate = isAwait ? awaitHtmlReturn(i) : HtmlReturn(i);
@@ -184,28 +182,22 @@ const filterTitles = () => {
  * Removes highlights from all containers.
  */
 const removeAllHighlights = () => {
-  [
-    "TodoMainContainer",
-    "progressMainContainer",
-    "awaitMainContainer",
-    "doneMainContainer",
-  ].forEach((id) => {
-    document.getElementById(id).classList.remove("drag-area-highlight");
-  });
+  ["TodoMainContainer", "progressMainContainer", "awaitMainContainer", "doneMainContainer"].forEach(
+    (id) => {
+      document.getElementById(id).classList.remove("drag-area-highlight");
+    }
+  );
 };
 
 /**
  * Clears all container contents.
  */
 const clearAllContainerContents = () => {
-  [
-    "TodoMainContainer",
-    "progressMainContainer",
-    "awaitMainContainer",
-    "doneMainContainer",
-  ].forEach((id) => {
-    document.getElementById(id).innerHTML = "";
-  });
+  ["TodoMainContainer", "progressMainContainer", "awaitMainContainer", "doneMainContainer"].forEach(
+    (id) => {
+      document.getElementById(id).innerHTML = "";
+    }
+  );
 };
 
 /**

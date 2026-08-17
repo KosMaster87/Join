@@ -107,7 +107,6 @@
   padding: 12px 8px;
   border-radius: 10px;
   width: 96px;
-
 }
 
 #mobileBtnSquareEdit:hover {
@@ -118,7 +117,7 @@
 
 #mobileBtnSquareDelete:hover img {
   color: var(--lightBlue);
-  content: url('../../assets/img/contact/deleteBlue.svg');
+  content: url("../../assets/img/contact/deleteBlue.svg");
 }
 
 #mobileBtnSquareDelete:hover {
@@ -126,14 +125,12 @@
   background-color: var(--whiteGray);
   border-radius: 10px;
   width: 100%;
-
 }
 
 #mobileBtnSquareEdit:hover img {
   color: var(--lightBlue);
-  content: url('../../assets/img/contact/editBlue.svg');
+  content: url("../../assets/img/contact/editBlue.svg");
 }
-
 
 /* DESKTOP BUTTON ADD NEW CONTACT */
 .centerDesktopAdd {

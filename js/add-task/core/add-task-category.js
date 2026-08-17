@@ -31,9 +31,7 @@ window.openCategorySelect = () => {
 const prepareContactListForCategory = () => {
   const contactList = document.getElementById("contactList");
   const contactListIcons = document.getElementById("contactListIcons");
-  const contactSelectContainer = document.getElementById(
-    "contactSelectContainer"
-  );
+  const contactSelectContainer = document.getElementById("contactSelectContainer");
 
   if (contactList) contactList.style.display = "block";
   if (contactListIcons) contactListIcons.style.display = "none";

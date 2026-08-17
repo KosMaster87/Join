@@ -106,12 +106,7 @@ const removeFocusBorder = (siteInitial, containerId) => {
  * @param {string} idRemoveFocus - First field to unfocus.
  * @param {string} idDeleteFocus - Second field to unfocus.
  */
-const editFocusBorder = (
-  siteInitial,
-  idFocus,
-  idRemoveFocus,
-  idDeleteFocus
-) => {
+const editFocusBorder = (siteInitial, idFocus, idRemoveFocus, idDeleteFocus) => {
   addFocusBorder(siteInitial, idFocus);
   removeFocusBorder(siteInitial, idRemoveFocus);
   removeFocusBorder(siteInitial, idDeleteFocus);

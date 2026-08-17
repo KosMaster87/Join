@@ -38,7 +38,7 @@ body {
 }
 
 #singleContactNav {
-  margin-top:-40px;
+  margin-top: -40px;
   display: none;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,9 @@ body {
   width: 35px;
   height: 35px;
   border-radius: 50px;
-  transition: background-color 0.3s, transform 0.3s;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
 }
 
 #singleContactNav:hover {
@@ -75,7 +77,9 @@ body {
   align-items: center;
   font-size: 16px;
   gap: 8px;
-  transition: background-color 0.3s, font-weight 0.3s;
+  transition:
+    background-color 0.3s,
+    font-weight 0.3s;
 }
 
 .singleContactDestopBtn:hover {
@@ -85,11 +89,11 @@ body {
 }
 
 #desktopBtnDelete:hover img {
-  content: url('../../assets/img/contact/deleteBlue.svg')
+  content: url("../../assets/img/contact/deleteBlue.svg");
 }
 
 #desktopBtnEdit:hover img {
-  content: url('../../assets/img/contact/editBlue.svg')
+  content: url("../../assets/img/contact/editBlue.svg");
 }
 
 .desktopBtnIcon {
@@ -267,7 +271,7 @@ body {
     padding-left: 0px !important;
   }
 
-  #singleContactNav{
+  #singleContactNav {
     display: flex;
   }
 }
@@ -332,7 +336,6 @@ body {
     line-height: 1.2;
     box-shadow: 0, 0, 4, 0, rgba(0, 0, 0, 0.4);
   }
-
 }
 
 @media screen and (min-width: 1440px) {

@@ -151,11 +151,7 @@ const validateEditInputs = (inputs) =>
  * Callback after contact save completes.
  */
 const afterContactSave = async () => {
-  await navigateToSingleContactAfterSave(
-    currentContactId,
-    loadShowSingleContact,
-    initListContact
-  );
+  await navigateToSingleContactAfterSave(currentContactId, loadShowSingleContact, initListContact);
 };
 
 /**

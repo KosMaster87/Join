@@ -21,12 +21,8 @@ const removePrio = () => {
  * Removes white priority images.
  */
 const removeWhiteImg = () => {
-  const urgent = document
-    .getElementById("prioUrgentContainer")
-    ?.querySelector("img");
-  const medium = document
-    .getElementById("prioMediumContainer")
-    ?.querySelector("img");
+  const urgent = document.getElementById("prioUrgentContainer")?.querySelector("img");
+  const medium = document.getElementById("prioMediumContainer")?.querySelector("img");
   const low = document.getElementById("prioLowContainer")?.querySelector("img");
   if (urgent) urgent.src = "../assets/img/add_task/arrow_top_red.svg";
   if (medium) medium.src = "../assets/img/add_task/line_orange.svg";

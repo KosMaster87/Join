@@ -59,10 +59,7 @@ const checkInputName = (siteInitial, name) => {
  * @param {string} siteInitial - Template identifier.
  */
 const showEmailError = (siteInitial) => {
-  showInputMessage(
-    siteInitial + "ContactMessageEmail",
-    "Please enter a valid e-mail address"
-  );
+  showInputMessage(siteInitial + "ContactMessageEmail", "Please enter a valid e-mail address");
   removeFocusBorder(siteInitial, "Email");
   showAlertBorder(siteInitial + "ContactInputContainerEmail");
 };
@@ -99,10 +96,7 @@ const checkInputEmail = (siteInitial, email) => {
  */
 const showPhoneError = (siteInitial) => {
   removeFocusBorder(siteInitial, "Phone");
-  showInputMessage(
-    siteInitial + "ContactMessagePhone",
-    "Phone number ist not valid"
-  );
+  showInputMessage(siteInitial + "ContactMessagePhone", "Phone number ist not valid");
   showAlertBorder(siteInitial + "ContactInputContainerPhone");
 };
 

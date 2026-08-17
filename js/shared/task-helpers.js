@@ -72,9 +72,5 @@ window.enableTaskButtons = () => {
  * @returns {number} - The screen width in pixels.
  */
 window.getScreenWidth = () => {
-  return (
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth
-  );
+  return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 };

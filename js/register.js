@@ -22,16 +22,12 @@
  */
 
 let passwordContainer = document.getElementById("registerPasswortDevision");
-let confirmPasswordContainer = document.getElementById(
-  "registerConfirmPasswortDevision",
-);
+let confirmPasswordContainer = document.getElementById("registerConfirmPasswortDevision");
 let emailContainer = document.getElementById("registerEmailDivision");
 let registerInputName = document.getElementById("registerInputName");
 let registerInputEmail = document.getElementById("registerInputEmail");
 let registerInputPassword = document.getElementById("registerInputPassword");
-let registerInputPasswordConfirm = document.getElementById(
-  "registerInputPasswordConfirm",
-);
+let registerInputPasswordConfirm = document.getElementById("registerInputPasswordConfirm");
 let errorMessage = document.getElementById("registerError");
 let registerBtn = document.getElementById("registerBtn");
 let colorCode = "#ff3d00";
@@ -91,9 +87,7 @@ async function emailAlreadyTaken() {
 
   if (!users) return false;
 
-  return Object.values(users).some(
-    (user) => user.email === registerInputEmail.value,
-  );
+  return Object.values(users).some((user) => user.email === registerInputEmail.value);
 }
 
 /**
@@ -121,11 +115,7 @@ const registerUser = async () => {
  * @returns {boolean} - True if all inputs are valid, false otherwise.
  */
 const areInputsValid = () => {
-  return (
-    !!registerInputName.value &&
-    !!registerInputEmail.value &&
-    !!registerInputPassword.value
-  );
+  return !!registerInputName.value && !!registerInputEmail.value && !!registerInputPassword.value;
 };
 
 /**
@@ -152,10 +142,7 @@ const registerGuestUser = async () => {
  * @returns {Promise<void>} - A promise that resolves when the user is registered.
  */
 const registerRegularUser = async () => {
-  const authUser = await registerWithAuth(
-    registerInputEmail.value,
-    registerInputPassword.value,
-  );
+  const authUser = await registerWithAuth(registerInputEmail.value, registerInputPassword.value);
   const newUser = createUserObject();
   await setItem("users", authUser.uid, newUser);
   const updatedUsers = [...store.getUsers(), { id: authUser.uid, ...newUser }];
@@ -266,9 +253,7 @@ const handlePrivacyUnchecked = (element) => {
  * @returns {boolean} - `true` if the checkbox is checked, otherwise `false`.
  */
 const privacyPolicyCheckedValidateFn = () => {
-  const privacyPolicyChecked = document
-    .getElementById("privacyCheck")
-    .hasAttribute("checked");
+  const privacyPolicyChecked = document.getElementById("privacyCheck").hasAttribute("checked");
 
   if (!privacyPolicyChecked) {
     errorMessage.innerHTML = "U must accept the privacy policy";

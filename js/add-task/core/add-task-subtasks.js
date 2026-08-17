@@ -73,9 +73,7 @@ window.editSubtaskDone = (i) => {
   const content = document.getElementById("editSubtask" + i);
   if (!content) return;
 
-  content.value.length > 0
-    ? updateSubtask(i, content.value)
-    : window.deleteSubtask(i);
+  content.value.length > 0 ? updateSubtask(i, content.value) : window.deleteSubtask(i);
 };
 
 /**

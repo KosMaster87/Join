@@ -8,9 +8,7 @@
  * Adds border to contact input.
  */
 const addContactInputBorder = () => {
-  document
-    .getElementById(`contactSelectContainer`)
-    .classList.add("borderColor");
+  document.getElementById(`contactSelectContainer`).classList.add("borderColor");
 };
 
 /**
@@ -21,9 +19,7 @@ const clearSubtaskInput = () => {
   input.value = "";
   const container = document.getElementById(`subTaskInputfieldMenu`);
   container.innerHTML = `<img src="../assets/img/add_task/task_add.svg" />`;
-  document
-    .getElementById(`subTaskInputContainer`)
-    .classList.remove("borderColor");
+  document.getElementById(`subTaskInputContainer`).classList.remove("borderColor");
 };
 
 /**

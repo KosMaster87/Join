@@ -107,8 +107,7 @@ const attachInputListeners = () => {
  * @param {Array} colors - Color array.
  * @returns {string} Random color.
  */
-const getRandomColor = (colors) =>
-  colors[Math.floor(Math.random() * colors.length)];
+const getRandomColor = (colors) => colors[Math.floor(Math.random() * colors.length)];
 
 /**
  * Shows contact created overlay with animation.
@@ -145,10 +144,7 @@ const validateAndSaveContact = async () => {
   if (checkAllInputFields("add", name, email, phone)) {
     await saveContact(name, email, phone);
     resetInputFields("add");
-    await navigateFromAddToSingleContact(
-      currentContactId,
-      loadShowSingleContact
-    );
+    await navigateFromAddToSingleContact(currentContactId, loadShowSingleContact);
   }
 };
 

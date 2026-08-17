@@ -68,8 +68,7 @@ export const loadUsers = async () => {
  * @param {string} userId - User ID to find
  * @returns {Object|null} Found user or null
  */
-export const findUserById = (userArray, userId) =>
-  userArray.find((u) => u.id === userId) || null;
+export const findUserById = (userArray, userId) => userArray.find((u) => u.id === userId) || null;
 
 /**
  * Gets current user ID from localStorage

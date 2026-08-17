@@ -51,13 +51,9 @@ const renderAllContacts = (mainDiv) => {
  */
 const renderSingleContact = (mainDiv, i) => {
   const contactName = window.contacts[i].name;
-  const assignedToUser = window.selectedAssignedTo.find(
-    (user) => user.name === contactName
-  );
+  const assignedToUser = window.selectedAssignedTo.find((user) => user.name === contactName);
 
-  assignedToUser
-    ? renderAssignedContact(mainDiv, i)
-    : renderUnassignedContact(mainDiv, i);
+  assignedToUser ? renderAssignedContact(mainDiv, i) : renderUnassignedContact(mainDiv, i);
 };
 
 /**

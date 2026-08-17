@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="./assets/img/login/secondLogo.svg"
-    />
+    <link rel="icon" type="image/x-icon" href="./assets/img/login/secondLogo.svg" />
     <link rel="stylesheet" href="./css/login.css" />
     <link rel="stylesheet" href="./css/register.css" />
     <link rel="stylesheet" href="./style.css" />
@@ -94,12 +90,7 @@
               class="inpIconStyle"
               id="logInPasswordImage"
               src="./assets/img/login/lock.svg"
-              onclick="
-                changeToShowCurrentPassword(
-                  'loginInputPassword',
-                  'logInPasswordImage',
-                )
-              "
+              onclick="changeToShowCurrentPassword('loginInputPassword', 'logInPasswordImage')"
             />
           </div>
 
@@ -137,22 +128,14 @@
 
         <div class="mobileNotUser" id="mobileNotUser">
           <p>Not a Join user?</p>
-          <button
-            class="mobileNotUserBtn"
-            id="mobileNotUserBtn"
-            onclick="redirectToRegister()"
-          >
+          <button class="mobileNotUserBtn" id="mobileNotUserBtn" onclick="redirectToRegister()">
             Sign up
           </button>
         </div>
 
         <div class="mobilePolicyLegal" id="mobilePolicyLegal">
-          <div class="mobilePolicyLegalLink" onclick="offlinePolicy()">
-            Privacy Policy
-          </div>
-          <div class="mobilePolicyLegalLink" onclick="offlineLegality()">
-            Legal notice
-          </div>
+          <div class="mobilePolicyLegalLink" onclick="offlinePolicy()">Privacy Policy</div>
+          <div class="mobilePolicyLegalLink" onclick="offlineLegality()">Legal notice</div>
         </div>
       </div>
     </div>
@@ -163,10 +146,7 @@
       </div>
 
       <div class="firstRegister">
-        <img
-          class="signUpJoinLogo"
-          src="../assets/img/register/secondLogo.svg"
-        />
+        <img class="signUpJoinLogo" src="../assets/img/register/secondLogo.svg" />
 
         <form
           class="registerLayout RegisterBoxShadow"
@@ -237,19 +217,11 @@
               class="inpIconStyle"
               id="signUpPasswordImage"
               src="./assets/img/register/lock.svg"
-              onclick="
-                changeToShowCurrentPassword(
-                  'registerInputPassword',
-                  'signUpPasswordImage',
-                )
-              "
+              onclick="changeToShowCurrentPassword('registerInputPassword', 'signUpPasswordImage')"
             />
           </div>
 
-          <div
-            class="registerConfirmPasswortDevision"
-            id="registerConfirmPasswortDevision"
-          >
+          <div class="registerConfirmPasswortDevision" id="registerConfirmPasswortDevision">
             <input
               class="confirmPasswort"
               id="registerInputPasswordConfirm"
@@ -270,7 +242,7 @@
               onclick="
                 changeToShowCurrentPassword(
                   'registerInputPasswordConfirm',
-                  'signUpConfirmPasswordImage',
+                  'signUpConfirmPasswordImage'
                 )
               "
             />
@@ -287,9 +259,7 @@
             />
             <label class="acceptPolicy" for="privacyCheck"
               >I accept the
-              <p class="acceptPolicyParagraf" onclick="offlinePolicy()">
-                Privacy policy
-              </p></label
+              <p class="acceptPolicyParagraf" onclick="offlinePolicy()">Privacy policy</p></label
             >
           </div>
 
@@ -300,12 +270,8 @@
         </form>
 
         <div class="mobilePolicyLegal" id="mobilePolicyLegal">
-          <div class="mobilePolicyLegalLink" onclick="offlinePolicy()">
-            Privacy Policy
-          </div>
-          <div class="mobilePolicyLegalLink" onclick="offlineLegality()">
-            Legal notice
-          </div>
+          <div class="mobilePolicyLegalLink" onclick="offlinePolicy()">Privacy Policy</div>
+          <div class="mobilePolicyLegalLink" onclick="offlineLegality()">Legal notice</div>
         </div>
       </div>
     </div>

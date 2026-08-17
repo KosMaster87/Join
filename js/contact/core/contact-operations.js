@@ -9,8 +9,7 @@
  * @param {string} contactId - Contact ID to find.
  * @returns {number} Index of contact or -1.
  */
-const findContactIndex = (contactId) =>
-  user.contacts.findIndex((c) => c.contactId === contactId);
+const findContactIndex = (contactId) => user.contacts.findIndex((c) => c.contactId === contactId);
 
 /**
  * Removes contact from array and store.

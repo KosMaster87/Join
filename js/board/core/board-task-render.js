@@ -22,8 +22,7 @@ const renderTaskCategory = (i) => {
     "Technical Task": "var(--turkis)",
     "User Story": "var(--blue)",
   };
-  popUpCategory.style.backgroundColor =
-    colors[user.tasks[i].category] || "var(--blue)";
+  popUpCategory.style.backgroundColor = colors[user.tasks[i].category] || "var(--blue)";
 };
 
 /**
@@ -53,8 +52,7 @@ const getPriorityImagePath = (prio) => {
  */
 const setTaskTitleAndDescription = (i) => {
   document.getElementById(`popUpTitleId`).innerHTML = user.tasks[i].title;
-  document.getElementById(`popUpDescriptionID`).innerHTML =
-    user.tasks[i].description;
+  document.getElementById(`popUpDescriptionID`).innerHTML = user.tasks[i].description;
 };
 
 /**
@@ -98,13 +96,9 @@ const renderTaskValues = (i) => {
 const renderSingleAssigned = (i, n, container) => {
   const assignedContact = user.tasks[i].assignedTo[n];
   container.innerHTML += assigned(n);
-  document.getElementById(`pupUpIcon${n}`).style.backgroundColor =
-    assignedContact.userColor;
-  document.getElementById(`popUpAssignedTo${n}`).innerHTML =
-    assignedContact.name;
-  document.getElementById(`pupUpIcon${n}`).innerHTML = generateSignature(
-    assignedContact.name
-  );
+  document.getElementById(`pupUpIcon${n}`).style.backgroundColor = assignedContact.userColor;
+  document.getElementById(`popUpAssignedTo${n}`).innerHTML = assignedContact.name;
+  document.getElementById(`pupUpIcon${n}`).innerHTML = generateSignature(assignedContact.name);
 };
 
 /**
@@ -155,9 +149,7 @@ const hideSubtaskContainers = ({ subtask, await: awaitC, progress }) => {
  * @returns {string} Image path.
  */
 const getSubtaskImageSource = (isDone) => {
-  return isDone
-    ? "../assets/img/board/board_box_check.svg"
-    : "../assets/img/board/board_box.svg";
+  return isDone ? "../assets/img/board/board_box_check.svg" : "../assets/img/board/board_box.svg";
 };
 
 /**
@@ -186,9 +178,7 @@ const showSubtasksContainer = (i, subtaskContainer) => {
     console.warn("popUpSubtasksContainer not found");
     return;
   }
-  user.tasks[i].subtasks.forEach((_, s) =>
-    renderSingleSubtask(i, s, popUpContainer)
-  );
+  user.tasks[i].subtasks.forEach((_, s) => renderSingleSubtask(i, s, popUpContainer));
 };
 
 /**
@@ -285,9 +275,7 @@ const showProgressContainer = (i, task) => {
 const updateTaskProgressBar = (i) => {
   const task = user.tasks[i];
   if (!task?.subtasks) return;
-  const progressContainer = document.getElementById(
-    `progressMainContainerId${i}`
-  );
+  const progressContainer = document.getElementById(`progressMainContainerId${i}`);
   if (!progressContainer) return;
   if (task.subtasks.length === 0) {
     progressContainer.style.display = "none";

@@ -37,8 +37,7 @@ async function initSummary() {
  * Displays a greeting after login if not already shown.
  */
 async function initGreeting() {
-  showedLoginGreeting =
-    sessionStorage.getItem("showedLoginGreeting") === "true";
+  showedLoginGreeting = sessionStorage.getItem("showedLoginGreeting") === "true";
 
   if (!showedLoginGreeting && window.innerWidth <= 720) {
     await showGreetScreen();
@@ -216,8 +215,7 @@ function getMonthName(month) {
  */
 function formatDateString(date) {
   // Parse date string as UTC to avoid timezone shifts
-  let dateString =
-    typeof date === "string" ? date : date.toISOString().split("T")[0];
+  let dateString = typeof date === "string" ? date : date.toISOString().split("T")[0];
   const [year, month, day] = dateString.split("-");
 
   const monthName = getMonthName(parseInt(month));
@@ -316,9 +314,7 @@ function updateGreetingContainer() {
   greetingNameDesktop = document.getElementById(`greetingNameDesktop`);
   greetingMobile = document.getElementById(`greetingMobile`);
 
-  let displayName = user.name.startsWith("Guest User")
-    ? "Guest User"
-    : user.name;
+  let displayName = user.name.startsWith("Guest User") ? "Guest User" : user.name;
 
   if (window.innerWidth <= 721) {
     greetingsDesktop.innerHTML = greetingText;

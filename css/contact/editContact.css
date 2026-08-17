@@ -219,7 +219,6 @@
 }
 
 @media screen and (min-width: 1200px) {
-
   .editContactHeaderSection {
     margin-top: 0;
   }
@@ -234,7 +233,7 @@
 
   .contactContainerFlexZwei {
     display: flex;
-    background-color:blue;
+    background-color: blue;
   }
 
   #editContactBodySignature {
@@ -272,7 +271,6 @@
     color: var(--lightBlue);
     cursor: pointer;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-
   }
 
   #editContactSaveBtnDesktop {
@@ -426,6 +424,5 @@
       border: 1px solid var(--lightBlue);
       color: var(--lightBlue);
     }
-
   }
 }

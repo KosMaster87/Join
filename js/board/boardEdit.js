@@ -98,8 +98,7 @@ const switchTask = (i) => {
   switchTaskTriggered = true;
   const menu = document.getElementById(`menuForSwitchTask`);
   if (!menu) {
-    document.getElementById(`switchTaskImage${i}`).innerHTML +=
-      createSwitchMenuHTML(i);
+    document.getElementById(`switchTaskImage${i}`).innerHTML += createSwitchMenuHTML(i);
     checkCurrentStatus(i);
     disableBodyScroll();
     setCloseMenuHandler(i);

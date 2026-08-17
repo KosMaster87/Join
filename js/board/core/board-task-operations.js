@@ -161,8 +161,7 @@ const renderDesktopEditLayout = (i) => {
  * @param {number} i - Task index.
  */
 const renderMobileEditLayout = (i) => {
-  document.getElementById(`popUpMainContainer`).innerHTML =
-    editBoardMobileTaskReturn(i);
+  document.getElementById(`popUpMainContainer`).innerHTML = editBoardMobileTaskReturn(i);
 };
 
 /**
@@ -203,8 +202,7 @@ const populateTaskInputs = (task) => {
 const renderEditSubtasks = (i, task) => {
   if (!task.subtasks) return;
   task.subtasks.forEach((subtask, s) => {
-    document.getElementById(`subTasksContainer`).innerHTML +=
-      editBoardTaskReturn(i, s);
+    document.getElementById(`subTasksContainer`).innerHTML += editBoardTaskReturn(i, s);
   });
 };
 
@@ -252,9 +250,7 @@ const selectContacts = (i) => {
   });
 
   user.tasks[i].assignedTo.forEach((assignedPerson) => {
-    const matchingContact = user.contacts.find(
-      (contact) => contact.name === assignedPerson.name
-    );
+    const matchingContact = user.contacts.find((contact) => contact.name === assignedPerson.name);
     if (matchingContact) matchingContact.selected = true;
   });
 };

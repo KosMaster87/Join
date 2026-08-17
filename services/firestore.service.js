@@ -140,10 +140,7 @@ export async function addDocument(collectionName, data) {
  */
 export async function queryDocuments(collectionName, field, operator, value) {
   try {
-    const q = query(
-      collection(db, collectionName),
-      where(field, operator, value),
-    );
+    const q = query(collection(db, collectionName), where(field, operator, value));
     const querySnapshot = await getDocs(q);
     const documents = [];
 

@@ -45,8 +45,7 @@ const getRandomChar = (chars) => {
  * @returns {string} 16-character random ID.
  */
 const generateRandomId = () => {
-  const chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!/%?";
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!/%?";
   let id = "";
   for (let i = 0; i < 16; i++) {
     id += getRandomChar(chars);
