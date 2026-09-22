@@ -64,7 +64,7 @@ jobs:
           mkdir -p ~/.ssh
       - name: Deploy to Staging
         run: |
-          echo "${{ secrets.UNRAID_DEPLOY_SSH_KEY_STAGING }}" > ~/.ssh/id_ed25519
+          echo "${{ secrets.MAC2K_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           cat >> ~/.ssh/config <<EOF
           Host deploy-join.dev2ksoftware.com
@@ -78,7 +78,7 @@ jobs:
 
           rsync -avz --delete \
             --exclude='node_modules' --exclude='.git' --exclude='.github' --exclude='docs' \
-            . root@deploy-join.dev2ksoftware.com:/mnt/nvme/appdata/static-sites/www/join-staging/
+            . gh-deploy@deploy-join.dev2ksoftware.com:/srv/mac2k/data/static-sites/www/join-staging/
       - name: Purge Cloudflare cache
         run: |
           curl -sf -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
@@ -125,7 +125,7 @@ jobs:
           mkdir -p ~/.ssh
       - name: Deploy to Production
         run: |
-          echo "${{ secrets.UNRAID_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          echo "${{ secrets.MAC2K_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           cat >> ~/.ssh/config <<EOF
           Host deploy-join.dev2ksoftware.com
@@ -139,7 +139,7 @@ jobs:
 
           rsync -avz --delete \
             --exclude='node_modules' --exclude='.git' --exclude='.github' --exclude='docs' \
-            . root@deploy-join.dev2ksoftware.com:/mnt/nvme/appdata/static-sites/www/join/
+            . gh-deploy@deploy-join.dev2ksoftware.com:/srv/mac2k/data/static-sites/www/join/
       - name: Purge Cloudflare cache
         run: |
           curl -sf -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
